@@ -1,5 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import React, { useEffect } from 'react';
 import { FaCode, FaMobileAlt, FaSearch, FaSyncAlt, FaCogs, FaCloud, FaPaintBrush, FaRocket } from 'react-icons/fa';
 import { SiReact, SiNextdotjs, SiNodedotjs, SiTailwindcss, SiFigma, SiVercel } from 'react-icons/si';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
@@ -18,6 +17,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import gsap from 'gsap';
 import codeImg from '../assets/code.jpg';
+import { useIsMobile } from '../hooks/useIsMobile';
+import { motion } from 'framer-motion';
 
 const floatingIcons = [
   { icon: <FaCode />, style: 'top-10 left-10 text-blue-400' },
@@ -82,10 +83,11 @@ function playSound(src: string) {
 }
 
 export default function WebDevelopmentPage() {
-  const lottieRef = useRef<LottieRefCurrentProps | null>(null);
-  const [animatedStats, setAnimatedStats] = useState(stats.map(() => 0));
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const heroControls = useAnimation();
+  const isMobile = useIsMobile();
+  // const lottieRef = useRef<LottieRefCurrentProps | null>(null);
+  // const [animatedStats, setAnimatedStats] = useState(stats.map(() => 0));
+  // const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  // const heroControls = useAnimation();
 
   useEffect(() => { AOS.init({ duration: 800, once: true }); }, []);
 
@@ -115,10 +117,10 @@ export default function WebDevelopmentPage() {
         const interval = window.setInterval(() => {
           current += step;
           if (current >= end) {
-            setAnimatedStats(prev => prev.map((v, idx) => idx === i ? end : v));
+            // setAnimatedStats(prev => prev.map((v, idx) => idx === i ? end : v));
             clearInterval(interval);
           } else {
-            setAnimatedStats(prev => prev.map((v, idx) => idx === i ? current : v));
+            // setAnimatedStats(prev => prev.map((v, idx) => idx === i ? current : v));
           }
         }, duration / (end / step));
       }, 400 + i * 200));
@@ -129,156 +131,130 @@ export default function WebDevelopmentPage() {
   // Mouse parallax for hero
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMouse({ x: e.clientX, y: e.clientY });
-      heroControls.start({
-        x: (e.clientX - window.innerWidth / 2) / 30,
-        y: (e.clientY - window.innerHeight / 2) / 30,
-        transition: { type: 'spring', stiffness: 40, damping: 12 }
-      });
+      // setMouse({ x: e.clientX, y: e.clientY });
+      // heroControls.start({
+      //   x: (e.clientX - window.innerWidth / 2) / 30,
+      //   y: (e.clientY - window.innerHeight / 2) / 30,
+      //   transition: { type: 'spring', stiffness: 40, damping: 12 }
+      // });
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [heroControls]);
+  }, []); // Removed heroControls dependency
 
+  // Εισάγω το motion ΜΟΝΟ αν δεν είναι mobile
+  // const Motion = !isMobile ? require('framer-motion').motion : undefined;
   return (
     <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900 font-sans">
       {/* Hero Section (με Unsplash background) */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pb-10 select-none">
-        {/* Animated Gradients/Particles */}
-        <motion.div className="absolute inset-0 z-0 pointer-events-none">
-          <motion.div
-            className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-gradient-to-br from-blue-400/50 via-purple-400/40 to-white/0 rounded-full blur-3xl animate-spin-slow"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          />
-          <motion.div
-            className="absolute bottom-[-10%] right-[-10%] w-[32vw] h-[32vw] bg-gradient-to-br from-purple-400/50 via-blue-400/40 to-white/0 rounded-full blur-3xl animate-spin-slow"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
-          />
-          {/* Soft particles */}
-          <motion.div
-            className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/20 rounded-full blur-3xl"
-            animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/20 rounded-full blur-3xl"
-            animate={{ y: [0, 30, 0], rotate: [0, -5, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          />
-        </motion.div>
+        {/* Animated Gradients/Particles, Floating Icons, Parallax: ΜΟΝΟ σε desktop */}
+        {!isMobile && (
+          <>
+            <motion.div className="absolute inset-0 z-0 pointer-events-none">
+              <motion.div
+                className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-gradient-to-br from-blue-400/50 via-purple-400/40 to-white/0 rounded-full blur-3xl animate-spin-slow"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+              />
+              <motion.div
+                className="absolute bottom-[-10%] right-[-10%] w-[32vw] h-[32vw] bg-gradient-to-br from-purple-400/50 via-blue-400/40 to-white/0 rounded-full blur-3xl animate-spin-slow"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+              />
+              {/* Soft particles */}
+              <motion.div
+                className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/20 rounded-full blur-3xl"
+                animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <motion.div
+                className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/20 rounded-full blur-3xl"
+                animate={{ y: [0, 30, 0], rotate: [0, -5, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+              />
+            </motion.div>
+            {floatingIcons.map((f, i) => (
+              <motion.div
+                key={i}
+                id={`float-icon-${i}`}
+                className={`absolute z-10 text-5xl opacity-20 ${f.style}`}
+                animate={{ y: [0, i % 2 === 0 ? 20 : -20, 0] }}
+                transition={{ duration: 6 + i, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ filter: 'drop-shadow(0 4px 24px rgba(80,80,200,0.12))' }}
+              >
+                {f.icon}
+              </motion.div>
+            ))}
+          </>
+        )}
         {/* Unsplash Hero Background */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img src={unsplashTech} alt="Hero Background" className="w-full h-full object-cover object-center opacity-80" style={{mixBlendMode:'multiply'}} />
           <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-blue-50/80 to-purple-50/80" />
         </div>
-        {/* Parallax Floating Icons */}
-        {floatingIcons.map((f, i) => (
-          <motion.div
-            key={i}
-            id={`float-icon-${i}`}
-            className={`absolute z-10 text-5xl opacity-20 ${f.style}`}
-            animate={{ y: [0, i % 2 === 0 ? 20 : -20, 0] }}
-            transition={{ duration: 6 + i, repeat: Infinity, ease: 'easeInOut' }}
-            style={{ filter: 'drop-shadow(0 4px 24px rgba(80,80,200,0.12))' }}
-          >
-            {f.icon}
-          </motion.div>
-        ))}
         {/* Hero Content */}
-        <motion.div
-          className="relative z-20 max-w-3xl mx-auto px-4 py-32 text-center flex flex-col items-center"
-          animate={heroControls}
-        >
-          <motion.h1
-            className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}
-          >
+        <div className="relative z-20 max-w-3xl mx-auto px-4 py-32 text-center flex flex-col items-center">
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
             Κατασκευή Ιστοσελίδων που Εντυπωσιάζουν
-          </motion.h1>
-          <motion.p
-            className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto">
             Απογειώστε την επιχείρησή σας με μια ιστοσελίδα που ξεχωρίζει για την ταχύτητα, την αισθητική και την αποτελεσματικότητά της. Δημιουργώ premium web εμπειρίες που μετατρέπουν επισκέπτες σε πελάτες.
-          </motion.p>
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <motion.button
+            <button
               className="inline-block px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
-              whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }}
-              whileTap={{ scale: 0.97 }}
-              onMouseEnter={() => playSound(hoverSfx)}
               onClick={() => { window.location.href = '/contactme'; }}
             >
               <span className="relative z-10">Ξεκινήστε το έργο σας</span>
-            </motion.button>
-            <motion.button
+            </button>
+            <button
               className="inline-block px-12 py-5 bg-gradient-to-r from-purple-400 to-blue-600 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-purple-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-purple-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
-              whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }}
-              whileTap={{ scale: 0.97 }}
-              onMouseEnter={() => playSound(hoverSfx)}
               onClick={() => {
                 const showcase = document.getElementById('showcase-section');
                 if (showcase) showcase.scrollIntoView({ behavior: 'smooth' });
               }}
             >
               <span className="relative z-10">Δείγματα Έργων</span>
-            </motion.button>
+            </button>
           </div>
-        </motion.div>
+        </div>
       </section>
-
-      {/* Γιατί να επιλέξετε εμένα (βελτιωμένο UI) */}
+      {/* Γιατί να επιλέξετε εμένα, Χαρακτηριστικά, Δείγματα, Πορεία, Τεχνολογίες, Στατιστικά: όλα χωρίς motion/animation σε κινητό */}
       <section className="max-w-5xl mx-auto py-16 px-4 text-center flex flex-col md:flex-row items-center gap-10">
-        <motion.div className="relative w-full md:w-1/2 flex-shrink-0 flex items-center justify-center">
+        <div className="relative w-full md:w-1/2 flex-shrink-0 flex items-center justify-center">
           <img src={codeImg} alt="Γιατί να επιλέξετε εμένα" className="rounded-3xl shadow-2xl object-cover w-full h-80 md:h-96" style={{objectPosition:'center'}} />
-        </motion.div>
-        <motion.div className="relative bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-10 flex flex-col items-center w-full md:w-1/2" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Γιατί να επιλέξετε εμένα;</motion.h2>
-          <motion.p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-2">Εξειδικεύομαι στη δημιουργία μοντέρνων, γρήγορων και αποδοτικών ιστοσελίδων που προσαρμόζονται απόλυτα στις ανάγκες σας.</motion.p>
-          <motion.p className="text-lg md:text-xl text-blue-700 max-w-2xl mx-auto font-semibold">Από το πρώτο brief μέχρι την τελική παράδοση, προσφέρω <span className='bg-gradient-to-r from-blue-200 to-purple-200 px-2 rounded'>προσωπική υποστήριξη</span>, <span className='bg-gradient-to-r from-blue-100 to-purple-100 px-2 rounded'>διαφάνεια</span> και <span className='bg-gradient-to-r from-blue-300 to-purple-300 px-2 rounded'>κορυφαία ποιότητα</span>.</motion.p>
-        </motion.div>
+        </div>
+        <div className="relative bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-10 flex flex-col items-center w-full md:w-1/2">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Γιατί να επιλέξετε εμένα;</h2>
+          <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-2">Εξειδικεύομαι στη δημιουργία μοντέρνων, γρήγορων και αποδοτικών ιστοσελίδων που προσαρμόζονται απόλυτα στις ανάγκες σας.</p>
+          <p className="text-lg md:text-xl text-blue-700 max-w-2xl mx-auto font-semibold">Από το πρώτο brief μέχρι την τελική παράδοση, προσφέρω <span className='bg-gradient-to-r from-blue-200 to-purple-200 px-2 rounded'>προσωπική υποστήριξη</span>, <span className='bg-gradient-to-r from-blue-100 to-purple-100 px-2 rounded'>διαφάνεια</span> και <span className='bg-gradient-to-r from-blue-300 to-purple-300 px-2 rounded'>κορυφαία ποιότητα</span>.</p>
+        </div>
       </section>
-
-      {/* Χαρακτηριστικά & Οφέλη (βελτιωμένο UI) */}
+      {/* Χαρακτηριστικά & Οφέλη */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Χαρακτηριστικά & Οφέλη</motion.h2>
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Χαρακτηριστικά & Οφέλη</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
           {features.map((f, idx) => (
-            <motion.div
+            <div
               key={f.title}
               className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden"
-              initial={{ opacity: 0, y: 40, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.07 }}
-              onMouseEnter={() => playSound(hoverSfx)}
-              onClick={() => playSound(clickSfx)}
             >
-              <div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">
+              <div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-4 border-blue-200">
                 {f.icon}
               </div>
               <h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">
                 {f.title}
               </h4>
               <p className="text-gray-600 mb-6 text-base leading-relaxed">{f.desc}</p>
-              <motion.div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-focus:border-blue-400 transition-all duration-300" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
-
       {/* Δείγματα Έργων */}
       <section id="showcase-section" className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center">Δείγματα Έργων</motion.h2>
-        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-12" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center">Δείγματα Έργων</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
             {
               img: '/src/assets/architecture.png',
@@ -299,22 +275,16 @@ export default function WebDevelopmentPage() {
               url: 'https://panitoscryptocoin.com/'
             }
           ].map((s, idx) => (
-            <motion.div
+            <div
               key={s.title}
               className="group relative bg-white/80 rounded-3xl shadow-2xl border border-blue-100/40 overflow-hidden flex flex-col hover:scale-105 hover:shadow-3xl transition-all duration-300 cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-200"
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              whileHover={{ scale: 1.04, boxShadow: '0 8px 32px 0 rgba(80, 80, 200, 0.18)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
               <div className="relative h-64 overflow-hidden">
-                <motion.img
+                <img
                   src={s.img}
                   alt={s.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.5 }}
+                  loading="lazy"
                 />
               </div>
               <div className="p-8 flex flex-col flex-1 relative z-10">
@@ -331,15 +301,14 @@ export default function WebDevelopmentPage() {
                   Δείτε το έργο
                 </a>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
-
-      {/* Πορεία Υλοποίησης (βελτιωμένο UI) */}
+      {/* Πορεία Υλοποίησης */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Πορεία Υλοποίησης</motion.h2>
-        <motion.div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-4" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Πορεία Υλοποίησης</h2>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-4">
           {[
             { icon: <FaSearch className="text-blue-500 text-2xl" />, title: 'Ανάλυση', desc: 'Κατανοούμε τις ανάγκες και τους στόχους σας.' },
             { icon: <FaPaintBrush className="text-purple-500 text-2xl" />, title: 'Σχεδίαση', desc: 'Δημιουργούμε wireframes και mockups.' },
@@ -347,22 +316,17 @@ export default function WebDevelopmentPage() {
             { icon: <FaRocket className="text-cyan-500 text-2xl" />, title: 'Παράδοση', desc: 'Παραδίδουμε και υποστηρίζουμε το έργο σας.' },
           ].map((w, idx, arr) => (
             <React.Fragment key={w.title}>
-              <motion.div
+              <div
                 className="bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-2xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center group hover:shadow-2xl transition-all duration-300 relative overflow-hidden min-w-[220px]"
-                initial={{ opacity: 0, y: 40, scale: 0.97 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                whileHover={{ scale: 1.08 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.07 }}
               >
-                <div className="mb-6 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">
+                <div className="mb-6 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-4 border-blue-200">
                   {w.icon}
                 </div>
                 <h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-500 transition-colors duration-300 tracking-tight">
                   {w.title}
                 </h4>
                 <p className="text-gray-600 mb-4 text-base leading-relaxed">{w.desc}</p>
-              </motion.div>
+              </div>
               {/* Small arrow between bricks except after the last */}
               {idx < arr.length - 1 && (
                 <div className="flex justify-center items-center w-full md:w-auto my-2 md:my-0">
@@ -371,58 +335,42 @@ export default function WebDevelopmentPage() {
               )}
             </React.Fragment>
           ))}
-        </motion.div>
+        </div>
       </section>
-
       {/* Τεχνολογίες */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center">Τεχνολογίες & Εργαλεία</motion.h2>
-        <motion.div className="flex flex-wrap justify-center gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center">Τεχνολογίες & Εργαλεία</h2>
+        <div className="flex flex-wrap justify-center gap-10">
           {techStack.map((t, idx) => (
-            <motion.div
+            <div
               key={t.name}
               className="flex flex-col items-center gap-2 bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-blue-100/40 group"
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              whileHover={{ scale: 1.1, boxShadow: '0 0 24px 0 #a5b4fc' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              onMouseEnter={() => playSound(hoverSfx)}
-              onClick={() => playSound(clickSfx)}
             >
               {t.icon}
               <span className="text-base text-blue-900 font-semibold mt-2">{t.name}</span>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
-
       {/* Στατιστικά */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Αριθμοί που Μετράνε</motion.h2>
-        <motion.div className="grid grid-cols-2 md:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Αριθμοί που Μετράνε</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
           {stats.map((s, idx) => (
-            <motion.div
+            <div
               key={s.label}
               className="flex flex-col items-center bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-blue-100/40 p-12 group hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.09, boxShadow: '0 8px 32px 0 #a5b4fc' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: idx * 0.1 }}
-              onMouseEnter={() => playSound(hoverSfx)}
             >
-              <div className="mb-4 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">
+              <div className="mb-4 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-4 border-blue-200">
                 {s.icon}
               </div>
               <span className="text-5xl font-extrabold text-blue-700 mb-2 animate-pulse">
-                {animatedStats[idx]}{s.suffix}
+                {s.value}{s.suffix}
               </span>
               <span className="text-blue-900 font-semibold text-lg text-center tracking-tight">{s.label}</span>
-              <motion.div className="absolute inset-0 rounded-2xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-focus:border-blue-400 transition-all duration-300" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
     </div>
   );

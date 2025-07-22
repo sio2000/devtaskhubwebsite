@@ -14,6 +14,7 @@ import ui3Img from '../assets/ui3.jpg';
 import ui4Img from '../assets/ui4.jpg';
 import ui5Img from '../assets/ui5.jpg';
 import ui6Img from '../assets/ui6.png';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 function playSound(src: string) {
   if (!src) return;
@@ -52,6 +53,7 @@ const testimonials = [
 ];
 
 export default function UXUIDesignPage() {
+  const isMobile = useIsMobile();
   const [typed, setTyped] = useState('');
   const [currentGallery, setCurrentGallery] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -72,60 +74,75 @@ export default function UXUIDesignPage() {
     <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900 font-sans">
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none">
-        {/* Floating Wireframes / Layers */}
-        <motion.div className="absolute inset-0 z-0 pointer-events-none">
-          {["UI", "Figma", "Wireframe", "Button", "Card", "Modal", "Sketch", "Mobile", "Web", "Flow"].map((kw, i) => (
-            <motion.div
-              key={kw}
-              className="absolute z-10 opacity-20 text-lg md:text-2xl font-bold text-purple-400"
-              style={{
-                top: `${10 + 60 * Math.sin((i / 10) * 2 * Math.PI)}%`,
-                left: `${10 + 80 * Math.cos((i / 10) * 2 * Math.PI)}%`,
-                filter: 'drop-shadow(0 4px 24px rgba(160,80,200,0.10))',
-              }}
-              animate={{ y: [0, i % 2 === 0 ? 20 : -20, 0] }}
-              transition={{ duration: 7 + i, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              {kw}
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Floating Wireframes / Layers: ΜΟΝΟ σε desktop */}
+        {!isMobile && (
+          <motion.div className="absolute inset-0 z-0 pointer-events-none">
+            {["UI", "Figma", "Wireframe", "Button", "Card", "Modal", "Sketch", "Mobile", "Web", "Flow"].map((kw, i) => (
+              <motion.div
+                key={kw}
+                className="absolute z-10 opacity-20 text-lg md:text-2xl font-bold text-purple-400"
+                style={{
+                  top: `${10 + 60 * Math.sin((i / 10) * 2 * Math.PI)}%`,
+                  left: `${10 + 80 * Math.cos((i / 10) * 2 * Math.PI)}%`,
+                  filter: 'drop-shadow(0 4px 24px rgba(160,80,200,0.10))',
+                }}
+                animate={{ y: [0, i % 2 === 0 ? 20 : -20, 0] }}
+                transition={{ duration: 7 + i, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                {kw}
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
         {/* Hero Content */}
-        <motion.div className="relative z-20 max-w-3xl mx-auto px-4 py-32 text-center flex flex-col items-center">
-          <motion.h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-purple-700 to-blue-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
-            {typed}
-          </motion.h1>
-          <motion.p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+        <div className="relative z-20 max-w-3xl mx-auto px-4 py-32 text-center flex flex-col items-center">
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-purple-700 to-blue-600 bg-clip-text text-transparent" style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
+            UX/UI Design
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto">
             Σχεδιάζω φιλικά προς τον χρήστη και αποδοτικά interfaces με έμφαση στη χρηστικότητα και την εμπειρία.
-          </motion.p>
-          <motion.button className="inline-block px-12 py-5 bg-gradient-to-r from-purple-600 to-blue-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-purple-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-purple-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζητήστε Προσφορά</span></motion.button>
-        </motion.div>
+          </p>
+          <button className="inline-block px-12 py-5 bg-gradient-to-r from-purple-600 to-blue-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-purple-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-purple-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζητήστε Προσφορά</span></button>
+        </div>
       </section>
 
       {/* Υπηρεσίες UX/UI */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-purple-700 mb-12 text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">Υπηρεσίες UX/UI</motion.h2>
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-purple-700 mb-12 text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">Υπηρεσίες UX/UI</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           {services.map((s, idx) => (
-            <motion.div key={s.title} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-purple-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-purple-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(160, 80, 200, 0.18)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => playSound(clickSfx)}><div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-purple-200 group-hover:border-blue-300">{s.icon}</div><h4 className="text-xl font-bold text-purple-900 mb-2 group-hover:text-purple-700 transition-colors duration-300 tracking-tight">{s.title}</h4><p className="text-gray-600 mb-6 text-base leading-relaxed">{s.desc}</p><motion.div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-purple-400 group-focus:border-purple-400 transition-all duration-300" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} /></motion.div>
+            <div key={s.title} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-purple-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-purple-200 relative overflow-hidden">
+              <div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 shadow-inner border-4 border-purple-200">
+                {s.icon}
+              </div>
+              <h4 className="text-xl font-bold text-purple-900 mb-2 group-hover:text-purple-700 transition-colors duration-300 tracking-tight">{s.title}</h4>
+              <p className="text-gray-600 mb-6 text-base leading-relaxed">{s.desc}</p>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Μεθοδολογία / Ροή Εργασίας */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-purple-700 mb-12 text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">Μεθοδολογία</motion.h2>
-        <motion.div className="flex flex-col md:flex-row justify-center items-center gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-purple-700 mb-12 text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">Μεθοδολογία</h2>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-10">
           {methodology.map((step, idx) => (
-            <motion.div key={step.title} className="flex flex-col items-center bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-purple-100/40 p-10 group hover:shadow-2xl transition-all duration-300 relative overflow-hidden min-w-[180px]" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }}><div className="mb-4 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-purple-200 group-hover:border-blue-300">{step.icon}</div><h4 className="text-base font-bold text-purple-900 mb-2 group-hover:text-purple-500 transition-colors duration-300 tracking-tight">{step.title}</h4><p className="text-gray-600 mb-4 text-sm leading-relaxed">{step.desc}</p>{idx < methodology.length - 1 && <div className="w-1 h-10 bg-gradient-to-b from-purple-300 to-blue-200 mx-auto my-2 rounded-full" />}</motion.div>
+            <div key={step.title} className="flex flex-col items-center bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-purple-100/40 p-10 group hover:shadow-2xl transition-all duration-300 relative overflow-hidden min-w-[180px]">
+              <div className="mb-4 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 shadow-inner border-4 border-purple-200">
+                {step.icon}
+              </div>
+              <h4 className="text-base font-bold text-purple-900 mb-2 group-hover:text-purple-500 transition-colors duration-300 tracking-tight">{step.title}</h4>
+              <p className="text-gray-600 mb-4 text-sm leading-relaxed">{step.desc}</p>
+              {idx < methodology.length - 1 && <div className="w-1 h-10 bg-gradient-to-b from-purple-300 to-blue-200 mx-auto my-2 rounded-full" />}
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
-      {/* 1) Αντικατάσταση Gallery με νέο section Trends & Inspiration */}
+      {/* Trends & Inspiration */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">UX/UI Design Trends & Inspiration</motion.h2>
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">UX/UI Design Trends & Inspiration</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {[
             {
               title: 'Minimalism & Clarity',
@@ -158,23 +175,23 @@ export default function UXUIDesignPage() {
               img: ui6Img,
             },
           ].map((trend, idx) => (
-            <motion.div key={trend.title} className="bg-white/90 rounded-3xl shadow-xl border border-blue-100/40 p-0 flex flex-col items-center text-center hover:shadow-2xl transition-all duration-300 overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }}>
+            <div key={trend.title} className="bg-white/90 rounded-3xl shadow-xl border border-blue-100/40 p-0 flex flex-col items-center text-center overflow-hidden">
               <img src={trend.img} alt={trend.title} className="w-full h-48 object-cover" />
               <div className="p-8 flex flex-col flex-1">
                 <h4 className="text-xl font-bold text-blue-900 mb-2">{trend.title}</h4>
                 <p className="text-gray-600 mb-4 text-base leading-relaxed">{trend.desc}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Τελικό CTA */}
       <section className="max-w-7xl mx-auto py-24 px-4 flex flex-col items-center text-center">
-        <motion.div className="relative bg-gradient-to-br from-purple-100 via-white to-blue-100/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-purple-100/40 p-12 flex flex-col items-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+        <div className="relative bg-gradient-to-br from-purple-100 via-white to-blue-100/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-purple-100/40 p-12 flex flex-col items-center">
           <h2 className="text-3xl md:text-4xl font-extrabold text-purple-900 mb-6 tracking-tight">Θέλετε να εντυπωσιάσετε τους χρήστες σας με άψογο design;</h2>
-          <motion.button className="inline-block px-12 py-5 bg-gradient-to-r from-purple-600 to-blue-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-purple-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-purple-400 animate-fade-in flex items-center gap-2 relative overflow-hidden mt-6" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζητήστε Δωρεάν Συμβουλευτική</span></motion.button>
-        </motion.div>
+          <button className="inline-block px-12 py-5 bg-gradient-to-r from-purple-600 to-blue-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-purple-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-purple-400 animate-fade-in flex items-center gap-2 relative overflow-hidden mt-6" onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζητήστε Δωρεάν Συμβουλευτική</span></button>
+        </div>
       </section>
     </div>
   );

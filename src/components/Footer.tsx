@@ -4,11 +4,13 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
 import { useNavigate } from 'react-router-dom';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const Footer: React.FC = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -45,182 +47,118 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white py-12 relative overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-10 right-10 w-32 h-32 bg-white/5 rounded-full blur-xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute bottom-10 left-10 w-40 h-40 bg-white/5 rounded-full blur-xl"
-        />
-      </div>
-
+      {/* Background Decorations: ΜΟΝΟ σε desktop */}
+      {!isMobile && (
+        <>
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 30,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute top-10 right-10 w-32 h-32 bg-white/5 rounded-full blur-xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              rotate: [360, 180, 0],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute bottom-10 left-10 w-40 h-40 bg-white/5 rounded-full blur-xl"
+          />
+        </>
+      )}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <motion.h3 
-              className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              DevTaskHub
-            </motion.h3>
-            <p className="text-gray-300 leading-relaxed mb-4">
-              {t.footer.description}
-            </p>
-            <motion.div 
-              className="flex items-center space-x-2 text-sm text-gray-400"
-              whileHover={{ scale: 1.02 }}
-            >
+          <div>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">DevTaskHub</h3>
+            <p className="text-gray-300 leading-relaxed mb-4">{t.footer.description}</p>
+            <div className="flex items-center space-x-2 text-sm text-gray-400">
               <span>Made with</span>
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                <Heart className="h-4 w-4 text-red-500" />
-              </motion.div>
+              <span>❤️</span>
               <span>in Thessaloniki</span>
-            </motion.div>
-          </motion.div>
-
+            </div>
+          </div>
           {/* Services Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h4 className="text-lg font-semibold mb-4 text-blue-300">{t.nav.services}</h4>
             <ul className="grid grid-cols-2 gap-x-8 gap-y-2 text-gray-300">
-              {/* 2 uniform columns */}
               {col1.map((service, index) => (
-                <motion.li
+                <li
                   key={service.slug + service.label}
                   className="hover:text-blue-300 transition-colors duration-300 cursor-pointer"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.07 }}
-                  viewport={{ once: true }}
-                  whileHover={{ x: 5 }}
                   onClick={() => navigate(`/services/${service.slug}`)}
                   tabIndex={0}
                   aria-label={service.label}
                 >
                   {service.label}
-                </motion.li>
+                </li>
               ))}
               {col2.map((service, index) => (
-                <motion.li 
+                <li
                   key={service.slug + service.label}
                   className="hover:text-blue-300 transition-colors duration-300 cursor-pointer"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + (index + col1.length) * 0.07 }}
-                  viewport={{ once: true }}
-                  whileHover={{ x: 5 }}
                   onClick={() => navigate(`/services/${service.slug}`)}
                   tabIndex={0}
                   aria-label={service.label}
                 >
                   {service.label}
-                </motion.li>
+                </li>
               ))}
             </ul>
             <div className="mt-8 flex justify-center">
-              <motion.button
+              <button
                 onClick={() => navigate('/terms')}
                 className="text-blue-300 hover:text-blue-100 underline font-medium transition-colors duration-300 text-base px-0 py-0 bg-transparent shadow-none rounded-none focus:outline-none"
-                whileHover={{ x: 5 }}
-                whileTap={{ scale: 0.97 }}
               >
                 Όροι & Προϋποθέσεις
-              </motion.button>
+              </button>
             </div>
-          </motion.div>
-
+          </div>
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h4 className="text-lg font-semibold mb-4 text-purple-300">{t.nav.contact}</h4>
             <div className="text-gray-300 space-y-2">
-              <motion.p 
-                className="hover:text-blue-300 transition-colors duration-300"
-                whileHover={{ x: 5 }}
-              >
-                Thessaloniki, Greece
-              </motion.p>
-              <motion.a
+              <p className="hover:text-blue-300 transition-colors duration-300">Thessaloniki, Greece</p>
+              <a
                 href="tel:+306971982563"
                 className="block hover:text-green-300 transition-colors duration-300"
-                whileHover={{ x: 5, scale: 1.02 }}
               >
                 +306971982563
-              </motion.a>
-              <motion.a
+              </a>
+              <a
                 href="mailto:info@devtaskhub.com"
                 className="block hover:text-orange-300 transition-colors duration-300"
-                whileHover={{ x: 5, scale: 1.02 }}
               >
                 info@devtaskhub.com
-              </motion.a>
+              </a>
             </div>
-          </motion.div>
+          </div>
         </div>
-
         {/* Copyright */}
-        <motion.div 
-          className="border-t border-gray-700 mt-8 pt-8 text-center relative"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
+        <div className="border-t border-gray-700 mt-8 pt-8 text-center relative">
           <p className="text-gray-400 flex items-center justify-center space-x-2 mb-4">
             <span>© 2024 DevTaskHub - Theocharis Siozos. {t.footer.rights}</span>
           </p>
-
-          {/* Scroll to Top Button */}
-          <motion.button
-            onClick={scrollToTop}
-            className="absolute right-0 top-4 p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-            whileHover={{ scale: 1.1, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <ArrowUp className="h-5 w-5" />
-          </motion.button>
-        </motion.div>
+          {/* Scroll to Top Button: ΜΟΝΟ σε desktop */}
+          {!isMobile && (
+            <button
+              onClick={scrollToTop}
+              className="absolute right-0 top-4 p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              <span>↑</span>
+            </button>
+          )}
+        </div>
       </div>
     </footer>
   );
