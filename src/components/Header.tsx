@@ -3,12 +3,16 @@ import { Menu, X, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { language, toggleLanguage } = useLanguage();
   const t = translations[language];
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [pendingSection, setPendingSection] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,7 +22,23 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (pendingSection && location.pathname === '/') {
+      const el = document.getElementById(pendingSection);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+      setPendingSection(null);
+    }
+  }, [location.pathname, pendingSection]);
+
   const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      setPendingSection(sectionId);
+      navigate('/');
+      setIsMenuOpen(false);
+      return;
+    }
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -46,7 +66,7 @@ const Header: React.FC = () => {
             transition={{ duration: 0.2 }}
           >
             <motion.button
-              onClick={() => scrollToSection('hero')}
+              onClick={() => navigate('/')}
               className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

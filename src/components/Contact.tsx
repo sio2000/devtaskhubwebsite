@@ -3,6 +3,9 @@ import { MapPin, Phone, Mail, Send, Linkedin, Github, CheckCircle } from 'lucide
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
+import { FaLinkedin, FaGithub, FaEnvelope, FaUserCircle, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact: React.FC = () => {
   const { language } = useLanguage();
@@ -10,23 +13,43 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: ''
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState({ name: false, email: false, message: false });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-    setFormData({ name: '', email: '', message: '' });
+  const validate = () => {
+    const newErrors = {
+      name: !formData.name.trim(),
+      email: !formData.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(formData.email),
+      message: !formData.message.trim(),
+    };
+    setErrors(newErrors);
+    return !Object.values(newErrors).some(Boolean);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: false });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setSuccess(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSuccess(false), 3000);
+    }, 1500);
+  };
+
+  const handleCopy = (value: string) => {
+    navigator.clipboard.writeText(value);
+    toast.info(language === 'el' ? 'Το email αντιγράφηκε!' : 'Email copied!');
   };
 
   const contactInfo = [
@@ -49,6 +72,14 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
+      value: 'xsiwzos@gmail.com',
+      color: 'from-pink-500 to-red-500',
+      bgColor: 'bg-pink-50',
+      link: 'mailto:xsiwzos@gmail.com'
+    },
+    {
+      icon: Mail,
+      title: 'Business Email',
       value: t.contact.info.email,
       color: 'from-orange-500 to-orange-600',
       bgColor: 'bg-orange-50',
@@ -57,262 +88,153 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden">
+    <section id="contact" className="relative py-24 bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden">
+      {/* Hero Section */}
         <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-20 left-20 w-32 h-32 bg-blue-200/20 rounded-full blur-2xl"
-        />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute bottom-20 right-20 w-40 h-40 bg-purple-200/20 rounded-full blur-2xl"
-        />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+        className="max-w-3xl mx-auto text-center mb-16 relative z-20"
+        initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <motion.h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+        <div className="flex flex-col items-center justify-center gap-4">
+          <div className="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 shadow-lg mb-2 animate-bounce-slow">
+            <FaEnvelope className="text-white text-4xl drop-shadow" />
+          </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent mb-2">Επικοινωνία</h2>
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+            Είστε έτοιμοι να ξεκινήσουμε το επόμενο project σας ή έχετε απορίες;<br />
+            Συμπληρώστε τη φόρμα ή επικοινωνήστε απευθείας μαζί μου για άμεση ανταπόκριση και τεχνική αξιοπιστία.
+          </p>
+        </div>
+      </motion.div>
+      {/* Icon background */}
+      <motion.div
+        className="absolute -top-20 -left-20 w-96 h-96 z-0"
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.12, scale: 1 }}
+        transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            {t.contact.title}
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-gray-600 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            {t.contact.subtitle}
-          </motion.p>
+        <FaEnvelope className="w-full h-full text-blue-300" />
         </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, x: -50 }}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white/80 rounded-3xl shadow-2xl border border-blue-100 p-8 md:p-14 flex flex-col md:flex-row gap-12 items-stretch">
+          {/* Form */}
+          <motion.form
+            onSubmit={handleSubmit}
+            className="flex-1 flex flex-col gap-8 justify-center"
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7 }}
             viewport={{ once: true }}
+            autoComplete="off"
           >
-            <motion.div 
-              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-500"
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    {t.contact.form.name}
-                  </label>
-                  <motion.input
+            {/* Όνομα */}
+            <div className="relative">
+              <input
                     type="text"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-400"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    {t.contact.form.email}
+                className={`peer w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-transparent placeholder-transparent ${errors.name ? 'border-red-400' : 'border-gray-300'}`}
+                placeholder="Όνομα"
+                autoComplete="off"
+              />
+              <label htmlFor="name" className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm bg-white/80 px-1 rounded pointer-events-none">
+                Όνομα
                   </label>
-                  <motion.input
+              {errors.name && <span className="text-xs text-red-500 absolute right-2 top-2">Απαιτείται</span>}
+            </div>
+            {/* Email */}
+            <div className="relative">
+              <input
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-400"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }}
-                >
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    {t.contact.form.message}
+                className={`peer w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-transparent placeholder-transparent ${errors.email ? 'border-red-400' : 'border-gray-300'}`}
+                placeholder="Email"
+                autoComplete="off"
+              />
+              <label htmlFor="email" className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm bg-white/80 px-1 rounded pointer-events-none">
+                Email
+              </label>
+              {errors.email && <span className="text-xs text-red-500 absolute right-2 top-2">Έγκυρο email</span>}
+            </div>
+            {/* Θέμα */}
+            <div className="relative">
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="peer w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-transparent placeholder-transparent border-gray-300"
+                placeholder="Θέμα (προαιρετικό)"
+                autoComplete="off"
+              />
+              <label htmlFor="subject" className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm bg-white/80 px-1 rounded pointer-events-none">
+                Θέμα (προαιρετικό)
                   </label>
-                  <motion.textarea
+            </div>
+            {/* Μήνυμα */}
+            <div className="relative">
+              <textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none hover:border-gray-400"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </motion.div>
-
+                className={`peer w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-transparent placeholder-transparent resize-none ${errors.message ? 'border-red-400' : 'border-gray-300'}`}
+                placeholder="Μήνυμα"
+              />
+              <label htmlFor="message" className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm bg-white/80 px-1 rounded pointer-events-none">
+                Μήνυμα
+              </label>
+              {errors.message && <span className="text-xs text-red-500 absolute right-2 top-2">Απαιτείται</span>}
+            </div>
                 <motion.button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
-                  whileHover={{ scale: 1.02 }}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-xl font-semibold flex items-center justify-center space-x-2 shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              whileHover={{ scale: 1.04, boxShadow: '0 8px 32px 0 rgba(80, 80, 200, 0.18)' }}
                   whileTap={{ scale: 0.98 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  viewport={{ once: true }}
-                >
-                  <Send className="h-5 w-5" />
-                  <span>{t.contact.form.send}</span>
+              disabled={loading}
+            >
+              {loading ? (
+                <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+              ) : (
+                <FaEnvelope className="h-5 w-5" />
+              )}
+              <span>{loading ? 'Αποστολή...' : 'Αποστολή'}</span>
                 </motion.button>
-              </form>
-
-              {/* Success Message */}
-              <AnimatePresence>
-                {isSubmitted && (
+            {success && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-600 text-center mt-2">Το μήνυμά σας στάλθηκε!</motion.div>}
+          </motion.form>
+          {/* Info */}
                   <motion.div 
-                    className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center space-x-2"
-                    initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                    <span className="text-green-800">{t.contact.success}</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Information */}
-          <motion.div 
-            className="space-y-8"
-            initial={{ opacity: 0, x: 50 }}
+            className="flex-1 flex flex-col gap-8 justify-center items-start md:pl-8 border-t md:border-t-0 md:border-l border-blue-100 mt-10 md:mt-0 pt-10 md:pt-0"
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
-            {/* Contact Details */}
-            <motion.div 
-              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-500"
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="space-y-6">
-                {contactInfo.map(({ icon: Icon, title, value, color, bgColor, link }, index) => (
-                  <motion.div 
-                    key={title}
-                    className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors duration-300"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                    viewport={{ once: true }}
-                    whileHover={{ x: 5 }}
-                  >
-                    <motion.div 
-                      className={`flex-shrink-0 p-3 ${bgColor} rounded-xl`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Icon className={`h-6 w-6 bg-gradient-to-r ${color} bg-clip-text text-transparent`} />
-                    </motion.div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">{title}</h3>
-                      {link ? (
-                        <motion.a
-                          href={link}
-                          className={`bg-gradient-to-r ${color} bg-clip-text text-transparent hover:opacity-80 transition-opacity`}
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {value}
-                        </motion.a>
-                      ) : (
-                        <p className="text-gray-600">{value}</p>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
+            <a href="mailto:Devtaskhub@gmail.com" className="flex items-center gap-4 text-blue-700 text-lg font-semibold hover:text-blue-500 transition-colors group">
+              <FaEnvelope className="h-5 w-5 text-blue-500 group-hover:text-blue-700 transition-colors" />
+              <span>Devtaskhub@gmail.com</span>
+            </a>
+            <a href="tel:+306971982563" className="flex items-center gap-4 text-green-700 text-lg font-semibold hover:text-green-500 transition-colors group">
+              <FaPhoneAlt className="h-5 w-5 text-green-500 group-hover:text-green-700 transition-colors" />
+              <span>+30 6971982563</span>
+            </a>
+            <div className="flex items-center gap-4 text-red-700 text-lg font-semibold">
+              <FaMapMarkerAlt className="h-5 w-5 text-red-500" />
+              <span>Θεσσαλονίκη, Ελλάδα</span>
               </div>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div 
-              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-500"
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3 }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="font-semibold text-gray-900 mb-6">Social Media</h3>
-              <div className="flex space-x-4">
-                <motion.a
-                  href="https://linkedin.com/in/theocharis-siozos"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors duration-300 group"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Linkedin className="h-6 w-6 text-blue-600 group-hover:text-blue-700" />
-                </motion.a>
-                <motion.a
-                  href="https://github.com/theocharis-siozos"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors duration-300 group"
-                  whileHover={{ scale: 1.1, rotate: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Github className="h-6 w-6 text-gray-700 group-hover:text-gray-900" />
-                </motion.a>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>

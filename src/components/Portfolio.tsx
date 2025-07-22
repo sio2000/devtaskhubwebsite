@@ -3,6 +3,11 @@ import { ExternalLink, Smartphone, Monitor, BarChart3, Gamepad2 } from 'lucide-r
 import { motion } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
+import architectureImg from '../assets/architecture.png';
+import hydrogenImg from '../assets/hydrogen.png';
+import videoImg from '../assets/video.jpg';
+import cryptoImg from '../assets/crypto.png';
+import hotelImg from '../assets/hotel.png';
 
 const Portfolio: React.FC = () => {
   const { language } = useLanguage();
@@ -10,32 +15,44 @@ const Portfolio: React.FC = () => {
 
   const projects = [
     {
-      key: 'ecommerce',
+      key: 'architecture',
       icon: Monitor,
-      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['React', 'Node.js', 'Stripe'],
-      gradient: 'from-blue-500 to-purple-600'
+      image: architectureImg,
+      technologies: ['React', 'Tailwind', 'SEO'],
+      gradient: 'from-blue-500 to-purple-600',
+      title: 'Αρχιτεκτονικό & Κατασκευαστικό Γραφείο',
+      description: 'Σύγχρονη παρουσίαση υπηρεσιών και portfolio για τεχνικό γραφείο.',
+      url: 'https://in-mavridis.gr/'
     },
     {
-      key: 'restaurant',
+      key: 'wellness',
       icon: Smartphone,
-      image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['React Native', 'Firebase', 'Maps API'],
-      gradient: 'from-green-500 to-teal-600'
+      image: hydrogenImg,
+      technologies: ['Next.js', 'Booking', 'CMS'],
+      gradient: 'from-green-500 to-teal-600',
+      title: 'Κέντρο Ευεξίας',
+      description: 'Ιστοσελίδα για wellness center με online κρατήσεις και δυναμικό περιεχόμενο.',
+      url: 'https://hydrogenlife.eu/'
     },
     {
-      key: 'dashboard',
+      key: 'hotel',
+      icon: Monitor,
+      image: hotelImg,
+      technologies: ['React', 'Gallery', 'Booking'],
+      gradient: 'from-blue-400 to-indigo-500',
+      title: 'Ξενοδοχείο',
+      description: 'Προωθητικό site ξενοδοχείου με gallery και φόρμα επικοινωνίας.',
+      url: 'https://684ad438cfcdad7a5e3a8db8--serenity-hotel-lux.netlify.app/'
+    },
+    {
+      key: 'crypto',
       icon: BarChart3,
-      image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['Vue.js', 'D3.js', 'PostgreSQL'],
-      gradient: 'from-orange-500 to-red-600'
-    },
-    {
-      key: 'game',
-      icon: Gamepad2,
-      image: 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['Three.js', 'WebGL', 'TypeScript'],
-      gradient: 'from-purple-500 to-pink-600'
+      image: cryptoImg,
+      technologies: ['React', 'Landing', 'Animation'],
+      gradient: 'from-yellow-500 to-pink-500',
+      title: 'Προώθηση Custom CryptoCoin',
+      description: 'Landing page για την προώθηση custom κρυπτονομίσματος.',
+      url: 'https://panitoscryptocoin.com/'
     }
   ];
 
@@ -56,8 +73,7 @@ const Portfolio: React.FC = () => {
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.6
       }
     }
   };
@@ -136,7 +152,7 @@ const Portfolio: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {projects.map(({ key, icon: Icon, image, technologies, gradient }) => (
+          {projects.map(({ key, icon: Icon, image, technologies, gradient, title, description, url }) => (
             <motion.div
               key={key}
               variants={itemVariants}
@@ -155,7 +171,7 @@ const Portfolio: React.FC = () => {
                 <div className="relative h-64 overflow-hidden">
                   <motion.img
                     src={image}
-                    alt={t.portfolio.projects[key as keyof typeof t.portfolio.projects].title}
+                    alt={title}
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
@@ -184,14 +200,17 @@ const Portfolio: React.FC = () => {
                     initial={{ scale: 0.8 }}
                     whileHover={{ scale: 1 }}
                   >
-                    <motion.button 
+                    <motion.a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="bg-white text-gray-900 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors duration-300 flex items-center space-x-2 shadow-xl"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <ExternalLink className="h-4 w-4" />
-                      <span>{t.portfolio.viewProject}</span>
-                    </motion.button>
+                      <span>Δείτε το έργο</span>
+                    </motion.a>
                   </motion.div>
                 </div>
 
@@ -204,10 +223,10 @@ const Portfolio: React.FC = () => {
                   viewport={{ once: true }}
                 >
                   <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                    {t.portfolio.projects[key as keyof typeof t.portfolio.projects].title}
+                    {title}
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    {t.portfolio.projects[key as keyof typeof t.portfolio.projects].description}
+                    {description}
                   </p>
 
                   {/* Technologies */}

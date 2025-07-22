@@ -13,14 +13,14 @@ const Hero: React.FC = () => {
     {
       title: language === 'el' ? 'Κατασκευή Μοντέρνων Ιστοσελίδων' : 'Modern Website Development',
       subtitle: language === 'el' 
-        ? 'Δημιουργώ responsive ιστοσελίδες με εστίαση στην απόδοση και UX' 
-        : 'Creating responsive websites with focus on performance and UX',
+        ? 'Δημιουργούμε responsive ιστοσελίδες με εστίαση στην απόδοση και UX' 
+        : 'We create responsive websites with focus on performance and UX',
       gradient: 'from-blue-600 via-purple-600 to-teal-600',
       bgPattern: 'opacity-20'
     },
     {
       title: language === 'el' 
-        ? 'Mobile-first Εφαρμογές για Επιχειρήσεις & Startups' 
+        ? 'Mobile Εφαρμογές για Επιχειρήσεις & Startups' 
         : 'Mobile-first Apps for Businesses & Startups',
       subtitle: language === 'el' 
         ? 'Native και cross-platform λύσεις για Android & iOS' 
@@ -30,12 +30,12 @@ const Hero: React.FC = () => {
     },
     {
       title: language === 'el' 
-        ? 'devtaskhub.com – Ο προγραμματιστής σου στην εποχή της τεχνολογίας' 
-        : 'devtaskhub.com – Your developer in the age of technology',
+        ? 'Ο προγραμματιστής σας στην εποχή της τεχνολογίας' 
+        : 'devtaskhub.com – Your developers in the age of technology',
       subtitle: language === 'el' 
         ? 'AI λύσεις, e-commerce και παιχνίδια που εντυπωσιάζουν' 
         : 'AI solutions, e-commerce and games that impress',
-      gradient: 'from-orange-600 via-red-600 to-pink-600',
+      gradient: 'from-blue-700 via-purple-700 to-teal-500', // πιο κοντά στα πρώτα δύο slides
       bgPattern: 'opacity-25'
     }
   ];

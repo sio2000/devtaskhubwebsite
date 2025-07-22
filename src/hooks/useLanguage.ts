@@ -12,6 +12,10 @@ export const useLanguage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
   const toggleLanguage = () => {
     const newLanguage = language === 'el' ? 'en' : 'el';
     setLanguage(newLanguage);

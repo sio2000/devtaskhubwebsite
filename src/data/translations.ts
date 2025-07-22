@@ -10,11 +10,11 @@ export const translations = {
     },
     // Hero Section
     hero: {
-      title: 'Κατασκευάζω μοντέρνες και λειτουργικές',
+      title: 'Κατασκευάζουμε μοντέρνες και λειτουργικές',
       titleHighlight: 'ιστοσελίδες',
-      subtitle: 'Full-Stack Developer στη Θεσσαλονίκη με εξειδίκευση σε web εφαρμογές, mobile apps και AI λύσεις',
-      cta: 'Δες τις Υπηρεσίες μου',
-      contact: 'Επικοινώνησε'
+      subtitle: 'Full-Stack Developers στη Θεσσαλονίκη με εξειδίκευση σε web εφαρμογές, mobile apps και AI λύσεις',
+      cta: 'Δες τις Υπηρεσίες μας',
+      contact: 'Επικοινωνήστε'
     },
     // Services
     services: {
@@ -61,9 +61,9 @@ export const translations = {
     },
     // About
     about: {
-      title: 'Σχετικά με Εμένα',
-      subtitle: 'Θεοχάρης Σιώζος - Full-Stack Developer',
-      description: 'Με πάθος για την τεχνολογία και χρόνια εμπειρία στην ανάπτυξη λογισμικού, δημιουργώ ψηφιακές λύσεις που συνδυάζουν καινοτομία με λειτουργικότητα. Εδρεύω στη Θεσσαλονίκη και εργάζομαι με πελάτες από όλη την Ελλάδα και το εξωτερικό.',
+      title: 'Σχετικά με Εμάς',
+      subtitle: 'Η ομάδα DevTaskHub - Full-Stack Developers',
+      description: 'Με πάθος για την τεχνολογία και χρόνια εμπειρία στην ανάπτυξη λογισμικού, δημιουργούμε ψηφιακές λύσεις που συνδυάζουν καινοτομία με λειτουργικότητα. Εδρεύουμε στη Θεσσαλονίκη και συνεργαζόμαστε με πελάτες από όλη την Ελλάδα και το εξωτερικό.',
       experience: 'Εξειδίκευση',
       experienceItems: [
         'Modern JavaScript/TypeScript & React',
@@ -132,11 +132,11 @@ export const translations = {
     },
     // Hero Section
     hero: {
-      title: 'I build modern and functional',
+      title: 'We build modern and functional',
       titleHighlight: 'websites',
-      subtitle: 'Full-Stack Developer in Thessaloniki specializing in web applications, mobile apps, and AI solutions',
-      cta: 'View My Services',
-      contact: 'Get In Touch'
+      subtitle: 'Full-Stack Developers in Thessaloniki specializing in web applications, mobile apps, and AI solutions',
+      cta: 'View Our Services',
+      contact: 'Contact Us'
     },
     // Services
     services: {
@@ -183,9 +183,9 @@ export const translations = {
     },
     // About
     about: {
-      title: 'About Me',
-      subtitle: 'Theocharis Siozos - Full-Stack Developer',
-      description: 'With a passion for technology and years of experience in software development, I create digital solutions that combine innovation with functionality. Based in Thessaloniki, I work with clients from Greece and internationally.',
+      title: 'About Us',
+      subtitle: 'DevTaskHub Team - Full-Stack Developers',
+      description: 'With a passion for technology and years of experience in software development, we create digital solutions that combine innovation with functionality. Based in Thessaloniki, we work with clients from Greece and internationally.',
       experience: 'Expertise',
       experienceItems: [
         'Modern JavaScript/TypeScript & React',

@@ -1,0 +1,185 @@
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaRobot, FaChartLine, FaBrain, FaMagic, FaCogs, FaUserFriends, FaChevronLeft, FaChevronRight, FaMicrochip, FaPython, FaDatabase, FaCodeBranch, FaRegLightbulb, FaCheckCircle } from 'react-icons/fa';
+import { SiTensorflow, SiPytorch, SiOpenai, SiLangchain, SiFlask, SiDjango, SiGraphql } from 'react-icons/si';
+// import aiLottie from '../assets/lottie-ai.json';
+const aiLottie = {};
+const hoverSfx = '';
+const clickSfx = '';
+// @ts-ignore: No types for aos
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+function playSound(src: string) {
+  if (!src) return;
+  const audio = new Audio(src);
+  audio.volume = 0.15;
+  audio.play();
+}
+
+const services = [
+  { icon: <FaChartLine className="text-blue-500 text-3xl" />, title: 'Ανάλυση Δεδομένων & Προβλέψεις', desc: 'Machine learning για ανάλυση, προβλέψεις, trends.' },
+  { icon: <FaMagic className="text-purple-500 text-3xl" />, title: 'Ανίχνευση Προτύπων & Αυτοματισμοί', desc: 'Αναγνώριση patterns, αυτοματοποιημένες ροές.' },
+  { icon: <FaBrain className="text-pink-500 text-3xl" />, title: 'Ενσωμάτωση GPT & NLP Μοντέλων', desc: 'Chatbots, φυσική γλώσσα, AI agents.' },
+  { icon: <FaRegLightbulb className="text-yellow-500 text-3xl" />, title: 'Custom Recommendation Engines', desc: 'Συστάσεις προϊόντων, εξατομίκευση.' },
+  { icon: <FaUserFriends className="text-green-500 text-3xl" />, title: 'Εξατομίκευση Περιεχομένου', desc: 'AI personalization για κάθε χρήστη.' },
+  { icon: <FaRobot className="text-cyan-500 text-3xl" />, title: 'Real-time Chatbots & AI Agents', desc: 'Συνομιλία, υποστήριξη, αυτοματοποίηση.' },
+];
+
+const techTabs = [
+  {
+    label: 'AI Frameworks',
+    icons: [
+      { icon: <SiTensorflow className="text-yellow-500 text-4xl" />, name: 'TensorFlow' },
+      { icon: <SiPytorch className="text-red-500 text-4xl" />, name: 'PyTorch' },
+      { icon: <SiOpenai className="text-blue-500 text-4xl" />, name: 'OpenAI' },
+      { icon: <SiLangchain className="text-purple-500 text-4xl" />, name: 'LangChain' },
+    ]
+  },
+  {
+    label: 'Backend',
+    icons: [
+      { icon: <FaPython className="text-blue-400 text-4xl" />, name: 'Python' },
+      { icon: <SiFlask className="text-gray-700 text-4xl" />, name: 'Flask' },
+      { icon: <SiDjango className="text-green-700 text-4xl" />, name: 'Django' },
+      { icon: <FaDatabase className="text-blue-700 text-4xl" />, name: 'Databases' },
+    ]
+  },
+  {
+    label: 'APIs',
+    icons: [
+      { icon: <FaCodeBranch className="text-pink-500 text-4xl" />, name: 'REST' },
+      { icon: <SiGraphql className="text-purple-500 text-4xl" />, name: 'GraphQL' },
+    ]
+  }
+];
+
+const workflow = [
+  { icon: <FaCheckCircle className="text-blue-500 text-2xl" />, title: 'Ανάλυση Αναγκών', desc: 'Κατανόηση στόχων, απαιτήσεων, δεδομένων.' },
+  { icon: <FaDatabase className="text-green-500 text-2xl" />, title: 'Συλλογή & Καθαρισμός Δεδομένων', desc: 'Data gathering, cleaning, προετοιμασία.' },
+  { icon: <FaBrain className="text-purple-500 text-2xl" />, title: 'Εκπαίδευση Μοντέλων', desc: 'ML training, επιλογή αλγορίθμων.' },
+  { icon: <FaMagic className="text-pink-500 text-2xl" />, title: 'Πειραματισμός & Testing', desc: 'Evaluation, testing, fine-tuning.' },
+  { icon: <FaCogs className="text-cyan-500 text-2xl" />, title: 'Ενσωμάτωση σε UI', desc: 'API integration, frontend σύνδεση.' },
+  { icon: <FaChartLine className="text-blue-400 text-2xl" />, title: 'Monitoring & Updates', desc: 'Συνεχής παρακολούθηση, βελτιώσεις.' },
+];
+
+const caseStudies = [
+  { client: 'E-shop', use: 'AI Προτάσεις προϊόντων', tech: 'TensorFlow, Python', kpi: '+25% conversion' },
+  { client: 'Fintech', use: 'Ανίχνευση απάτης', tech: 'PyTorch, REST API', kpi: '-40% fraud rate' },
+  { client: 'Media', use: 'Αυτόματη δημιουργία περιεχομένου', tech: 'OpenAI, LangChain', kpi: '+60% content output' },
+];
+
+export default function AIIntegrationApplicationsPage() {
+  const [typed, setTyped] = useState('');
+  const [currentTab, setCurrentTab] = useState(0);
+  const [currentCase, setCurrentCase] = useState(0);
+  useEffect(() => { AOS.init({ duration: 900, once: true }); }, []);
+  // Typing effect για το hero
+  useEffect(() => {
+    const full = 'AI στις Εφαρμογές σας — Από το Όραμα στην Υλοποίηση';
+    let i = 0;
+    setTyped('');
+    const interval = setInterval(() => {
+      setTyped(full.slice(0, i + 1));
+      i++;
+      if (i === full.length) clearInterval(interval);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+  return (
+    <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900 font-sans">
+      {/* Hero Section */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none">
+        {/* AI-inspired Background */}
+        <motion.div className="absolute inset-0 z-0 pointer-events-none">
+          {["AI", "ML", "GPT", "Neural", "Data", "Python", "API", "NLP", "Vision", "Nodes", "Chip", "LangChain"].map((kw, i) => (
+            <motion.div
+              key={kw}
+              className="absolute z-10 opacity-20 text-lg md:text-2xl font-bold text-blue-400"
+              style={{
+                top: `${10 + 60 * Math.sin((i / 12) * 2 * Math.PI)}%`,
+                left: `${10 + 80 * Math.cos((i / 12) * 2 * Math.PI)}%`,
+                filter: 'drop-shadow(0 4px 24px rgba(80,80,200,0.10))',
+              }}
+              animate={{ y: [0, i % 2 === 0 ? 20 : -20, 0] }}
+              transition={{ duration: 7 + i, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              {kw}
+            </motion.div>
+          ))}
+        </motion.div>
+        {/* Hero Content */}
+        <motion.div className="relative z-20 max-w-3xl mx-auto px-4 py-32 text-center flex flex-col items-center">
+          <motion.h1 className="text-4xl md:text-5xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
+            {typed}
+          </motion.h1>
+          <motion.p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+            Χρησιμοποιώ τεχνικές machine learning για ανάλυση δεδομένων, προβλέψεις ή δημιουργία έξυπνων λειτουργιών σε εφαρμογές.
+          </motion.p>
+          <motion.button className="inline-block px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζητήστε Προσφορά</span></motion.button>
+        </motion.div>
+      </section>
+
+      {/* AI Υπηρεσίες */}
+      <section className="max-w-7xl mx-auto py-24 px-4">
+        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">AI Υπηρεσίες</motion.h2>
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+          {services.map((s, idx) => (
+            <motion.div key={s.title} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => playSound(clickSfx)}><div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">{s.icon}</div><h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">{s.title}</h4><p className="text-gray-600 mb-6 text-base leading-relaxed">{s.desc}</p><motion.div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-focus:border-blue-400 transition-all duration-300" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} /></motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* Τεχνολογίες & Πλατφόρμες */}
+      <section className="max-w-7xl mx-auto py-24 px-4">
+        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Τεχνολογίες & Πλατφόρμες</motion.h2>
+        <div className="flex justify-center mb-8 gap-4">
+          {techTabs.map((tab, idx) => (
+            <button key={tab.label} className={`px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 ${currentTab === idx ? 'bg-gradient-to-r from-blue-600 to-purple-400 text-white shadow-lg' : 'bg-white text-blue-700 border border-blue-100'}`} onClick={() => setCurrentTab(idx)}>{tab.label}</button>
+          ))}
+        </div>
+        <motion.div className="flex flex-wrap justify-center gap-10 mb-12" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}>
+          {techTabs[currentTab].icons.map((t, idx) => (
+            <motion.div key={t.name} className="flex flex-col items-center gap-2 bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-blue-100/40 group" initial={{ opacity: 0, y: 30, scale: 0.95 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.1, boxShadow: '0 0 24px 0 #a5b4fc' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.1 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => playSound(clickSfx)}>{t.icon}<span className="text-base text-blue-900 font-semibold mt-2">{t.name}</span></motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* Πώς Εργάζομαι / AI Workflow */}
+      <section className="max-w-7xl mx-auto py-24 px-4">
+        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Πώς Εργάζομαι</motion.h2>
+        <motion.div className="flex flex-col md:flex-row justify-center items-center gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
+          {workflow.map((step, idx) => (
+            <motion.div key={step.title} className="flex flex-col items-center bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-blue-100/40 p-10 group hover:shadow-2xl transition-all duration-300 relative overflow-hidden min-w-[180px]" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }}><div className="mb-4 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">{step.icon}</div><h4 className="text-base font-bold text-blue-900 mb-2 group-hover:text-blue-500 transition-colors duration-300 tracking-tight">{step.title}</h4><p className="text-gray-600 mb-4 text-sm leading-relaxed">{step.desc}</p>{idx < workflow.length - 1 && <div className="w-1 h-10 bg-gradient-to-b from-blue-300 to-purple-200 mx-auto my-2 rounded-full" />}</motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* Πραγματικά Παραδείγματα */}
+      <section className="max-w-7xl mx-auto py-24 px-4">
+        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Πραγματικά Παραδείγματα</motion.h2>
+        <div className="relative flex items-center justify-center">
+          <button className="absolute left-0 z-10 p-3 bg-white/80 rounded-full shadow hover:bg-blue-100 transition-all" onClick={() => setCurrentCase((currentCase - 1 + caseStudies.length) % caseStudies.length)}><FaChevronLeft className="text-blue-500 text-2xl" /></button>
+          <motion.div className="w-full max-w-lg mx-auto group bg-white/90 rounded-3xl shadow-2xl border border-blue-100/40 overflow-hidden flex flex-col hover:scale-105 hover:shadow-3xl transition-all duration-300 cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-200" key={caseStudies[currentCase].client} initial={{ opacity: 0, y: 50, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.5 }}>
+            <div className="flex flex-col items-center p-8">
+              <FaMicrochip className="text-purple-400 text-5xl mb-4" />
+              <h4 className="text-2xl font-bold text-blue-900 mb-2">{caseStudies[currentCase].client}</h4>
+              <p className="text-blue-700 text-base mb-2">Χρήση AI: <span className="font-semibold">{caseStudies[currentCase].use}</span></p>
+              <p className="text-gray-700 text-base mb-2">Τεχνολογίες: <span className="font-semibold">{caseStudies[currentCase].tech}</span></p>
+              <p className="text-green-600 text-lg font-bold">{caseStudies[currentCase].kpi}</p>
+            </div>
+          </motion.div>
+          <button className="absolute right-0 z-10 p-3 bg-white/80 rounded-full shadow hover:bg-blue-100 transition-all" onClick={() => setCurrentCase((currentCase + 1) % caseStudies.length)}><FaChevronRight className="text-blue-500 text-2xl" /></button>
+        </div>
+      </section>
+
+      {/* Τελικό CTA */}
+      <section className="max-w-7xl mx-auto py-24 px-4 flex flex-col items-center text-center">
+        <motion.div className="relative bg-gradient-to-br from-blue-100 via-white to-purple-100/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-12 flex flex-col items-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6 tracking-tight">Δώστε νοημοσύνη στην εφαρμογή σας</h2>
+          <motion.button className="inline-block px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden mt-6" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ξεκινήστε τώρα</span></motion.button>
+        </motion.div>
+      </section>
+    </div>
+  );
+} 

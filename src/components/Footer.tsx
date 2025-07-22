@@ -3,10 +3,12 @@ import { Heart, ArrowUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
+import { useNavigate } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const navigate = useNavigate();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -18,6 +20,28 @@ const Footer: React.FC = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Ορισμός υπηρεσιών με slug για routing (όλα στα ελληνικά, ισορροπημένη ταξινόμηση)
+  const servicesList = [
+    { label: 'Κατασκευή Ιστοσελίδων', slug: 'web-development' },
+    { label: 'Web App Development', slug: 'web-development' },
+    { label: 'Mobile Εφαρμογές', slug: 'mobile-app-development' },
+    { label: 'E-shop & Ηλεκτρονικό Εμπόριο', slug: 'ecommerce-development' },
+    { label: 'SEO – Βελτιστοποίηση Ιστοσελίδων', slug: 'seo-website-optimization' },
+    { label: 'UX/UI Design', slug: 'ux-ui-design' },
+    { label: 'Βίντεο & Animation', slug: 'video-animation-production' },
+    { label: 'Διαχείριση Social Media', slug: 'social-media-management' },
+    { label: 'Chatbots & AI Agents', slug: 'chatbots-ai-agents' },
+    { label: 'AI Ενσωμάτωση σε Εφαρμογές', slug: 'ai-integration-applications' },
+    { label: 'Δημιουργία Multimedia Περιεχομένου', slug: 'multimedia-content-creation' },
+    { label: 'Βάσεις Δεδομένων & Cloud', slug: 'database-cloud-infrastructure' },
+    { label: 'Game Development', slug: 'game-development' },
+  ];
+
+  // Υπολογισμός για balanced 2 columns
+  const mid = Math.ceil(servicesList.length / 2);
+  const col1 = servicesList.slice(0, mid);
+  const col2 = servicesList.slice(mid);
 
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white py-12 relative overflow-hidden">
@@ -91,22 +115,51 @@ const Footer: React.FC = () => {
             viewport={{ once: true }}
           >
             <h4 className="text-lg font-semibold mb-4 text-blue-300">{t.nav.services}</h4>
-            <ul className="space-y-2 text-gray-300">
-              {['Web Development', 'Mobile Apps', 'AI Solutions', 'E-Commerce'].map((service, index) => (
-                <motion.li 
-                  key={service}
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-2 text-gray-300">
+              {/* 2 uniform columns */}
+              {col1.map((service, index) => (
+                <motion.li
+                  key={service.slug + service.label}
                   className="hover:text-blue-300 transition-colors duration-300 cursor-pointer"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.07 }}
                   viewport={{ once: true }}
                   whileHover={{ x: 5 }}
-                  onClick={() => scrollToSection('services')}
+                  onClick={() => navigate(`/services/${service.slug}`)}
+                  tabIndex={0}
+                  aria-label={service.label}
                 >
-                  {service}
+                  {service.label}
+                </motion.li>
+              ))}
+              {col2.map((service, index) => (
+                <motion.li 
+                  key={service.slug + service.label}
+                  className="hover:text-blue-300 transition-colors duration-300 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + (index + col1.length) * 0.07 }}
+                  viewport={{ once: true }}
+                  whileHover={{ x: 5 }}
+                  onClick={() => navigate(`/services/${service.slug}`)}
+                  tabIndex={0}
+                  aria-label={service.label}
+                >
+                  {service.label}
                 </motion.li>
               ))}
             </ul>
+            <div className="mt-8 flex justify-center">
+              <motion.button
+                onClick={() => navigate('/terms')}
+                className="text-blue-300 hover:text-blue-100 underline font-medium transition-colors duration-300 text-base px-0 py-0 bg-transparent shadow-none rounded-none focus:outline-none"
+                whileHover={{ x: 5 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Όροι & Προϋποθέσεις
+              </motion.button>
+            </div>
           </motion.div>
 
           {/* Contact Info */}
@@ -125,11 +178,11 @@ const Footer: React.FC = () => {
                 Thessaloniki, Greece
               </motion.p>
               <motion.a
-                href="tel:+306949719825"
+                href="tel:+306971982563"
                 className="block hover:text-green-300 transition-colors duration-300"
                 whileHover={{ x: 5, scale: 1.02 }}
               >
-                +30 694 971 982 563
+                +306971982563
               </motion.a>
               <motion.a
                 href="mailto:info@devtaskhub.com"

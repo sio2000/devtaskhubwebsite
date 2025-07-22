@@ -1,203 +1,126 @@
 import React from 'react';
-import { 
-  Code, 
-  Smartphone, 
-  Bot, 
-  ShoppingCart, 
-  Gamepad2, 
-  Palette, 
-  Video, 
-  Search, 
-  Database 
-} from 'lucide-react';
 import { motion } from 'framer-motion';
+import { servicesData } from '../services/servicesData';
 import { useLanguage } from '../hooks/useLanguage';
-import { translations } from '../data/translations';
+import {
+  FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaVideo, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad
+} from 'react-icons/fa';
+
+const iconColorMap: Record<string, string> = {
+  'web-development': 'text-sky-400',
+  'mobile-app-development': 'text-violet-400',
+  'chatbots-ai-agents': 'text-pink-400',
+  'social-media-management': 'text-emerald-400',
+  'video-animation-production': 'text-orange-300',
+  'seo-website-optimization': 'text-yellow-300',
+  'multimedia-content-creation': 'text-fuchsia-400',
+  'ux-ui-design': 'text-cyan-400',
+  'database-cloud-infrastructure': 'text-indigo-400',
+  'ai-integration-applications': 'text-pink-300',
+  'ecommerce-development': 'text-green-400',
+  'game-development': 'text-violet-300',
+};
+
+const iconMap: Record<string, React.ElementType> = {
+  'web-development': FaGlobe,
+  'mobile-app-development': FaMobileAlt,
+  'chatbots-ai-agents': FaRobot,
+  'social-media-management': FaUsers,
+  'video-animation-production': FaVideo,
+  'seo-website-optimization': FaSearch,
+  'multimedia-content-creation': FaPhotoVideo,
+  'ux-ui-design': FaPalette,
+  'database-cloud-infrastructure': FaDatabase,
+  'ai-integration-applications': FaBrain,
+  'ecommerce-development': FaShoppingCart,
+  'game-development': FaGamepad,
+};
+
+const cardVariants = {
+  initial: { opacity: 0, y: 40, scale: 0.97 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  hover: { scale: 1.04, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' },
+};
 
 const Services: React.FC = () => {
   const { language } = useLanguage();
-  const t = translations[language];
-
-  const services = [
-    {
-      icon: Code,
-      key: 'web',
-      color: 'from-blue-500 to-blue-600',
-      shadowColor: 'shadow-blue-500/25'
-    },
-    {
-      icon: Smartphone,
-      key: 'mobile',
-      color: 'from-green-500 to-green-600',
-      shadowColor: 'shadow-green-500/25'
-    },
-    {
-      icon: Bot,
-      key: 'ai',
-      color: 'from-purple-500 to-purple-600',
-      shadowColor: 'shadow-purple-500/25'
-    },
-    {
-      icon: ShoppingCart,
-      key: 'ecommerce',
-      color: 'from-orange-500 to-orange-600',
-      shadowColor: 'shadow-orange-500/25'
-    },
-    {
-      icon: Gamepad2,
-      key: 'games',
-      color: 'from-red-500 to-red-600',
-      shadowColor: 'shadow-red-500/25'
-    },
-    {
-      icon: Palette,
-      key: 'uiux',
-      color: 'from-pink-500 to-pink-600',
-      shadowColor: 'shadow-pink-500/25'
-    },
-    {
-      icon: Video,
-      key: 'content',
-      color: 'from-indigo-500 to-indigo-600',
-      shadowColor: 'shadow-indigo-500/25'
-    },
-    {
-      icon: Search,
-      key: 'seo',
-      color: 'from-teal-500 to-teal-600',
-      shadowColor: 'shadow-teal-500/25'
-    },
-    {
-      icon: Database,
-      key: 'database',
-      color: 'from-gray-500 to-gray-600',
-      shadowColor: 'shadow-gray-500/25'
-    }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-teal-200/10 rounded-full blur-3xl"></div>
-      </div>
-
-      {/* Section Divider */}
-      <div className="absolute top-0 left-0 right-0">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-16 fill-white">
-          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
-        </svg>
-      </div>
+    <section
+      id="services"
+      className="relative py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen"
+      aria-label="Υπηρεσίες"
+    >
+      {/* Animated background shapes */}
+      <motion.div
+        className="absolute -top-32 -left-32 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl z-0"
+        animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+      />
+      <motion.div
+        className="absolute bottom-0 right-0 w-80 h-80 bg-purple-200/30 rounded-full blur-2xl z-0"
+        animate={{ scale: [1.1, 0.9, 1.1], rotate: [360, 180, 0] }}
+        transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div 
-          className="text-center mb-16"
+        <motion.h2
+          className="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <motion.h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            {t.services.title}
+          Υπηρεσίες
           </motion.h2>
           <motion.p 
-            className="text-lg text-gray-600 max-w-3xl mx-auto"
+          className="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            {t.services.subtitle}
-          </motion.p>
-        </motion.div>
-
-        {/* Services Grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          {services.map(({ icon: Icon, key, color, shadowColor }) => (
-            <motion.div
-              key={key}
-              variants={itemVariants}
-              className="group relative"
-            >
-              <motion.div
-                className={`p-8 bg-white rounded-2xl border border-gray-100 hover:border-gray-200 shadow-lg hover:shadow-2xl ${shadowColor} transition-all duration-500 transform hover:-translate-y-2 h-full`}
-                whileHover={{ 
-                  scale: 1.02,
-                  rotateY: 5,
-                  rotateX: 5,
-                }}
-                transition={{ duration: 0.3 }}
+          Εξειδικευμένες λύσεις για επιχειρήσεις και επαγγελματίες που απαιτούν κορυφαία ποιότητα, τεχνογνωσία και σύγχρονο design.
+        </motion.p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {servicesData.map((service, i) => {
+            const Icon = iconMap[service.slug];
+            const color = iconColorMap[service.slug] || 'text-sky-400';
+            return (
+              <motion.a
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="group relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 p-8 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200"
+                variants={cardVariants}
+                initial="initial"
+                whileInView="animate"
+                whileHover="hover"
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                tabIndex={0}
+                aria-label={service.title[language]}
               >
-                {/* Icon */}
-                <motion.div 
-                  className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${color} text-white mb-6 shadow-lg ${shadowColor}`}
-                  whileHover={{ 
-                    scale: 1.1,
-                    rotate: 5,
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Icon className="h-8 w-8" />
-                </motion.div>
-
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
-                  {t.services.items[key as keyof typeof t.services.items].title}
+                <div className={`mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-white to-blue-50 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
+                  {Icon && <Icon className={`text-4xl mb-1 drop-shadow ${color}`} />}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+                  {service.title[language]}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {t.services.items[key as keyof typeof t.services.items].description}
-                </p>
-
-                {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
+                <p className="text-gray-600 mb-6">{service.shortDescription[language]}</p>
+                <span className="inline-flex items-center gap-1 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 text-base group-hover:scale-105 group-hover:shadow-xl">
+                  Περισσότερα →
+                </span>
+                {/* Animated border effect */}
+                <motion.div 
+                  className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-focus:border-blue-400 transition-all duration-300"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.a>
+            );
+          })}
       </div>
-
-      {/* Bottom Section Divider */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-16 fill-white transform rotate-180">
-          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
-        </svg>
       </div>
     </section>
   );
