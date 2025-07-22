@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCode, FaMobileAlt, FaSearch, FaSyncAlt, FaCogs, FaCloud, FaPaintBrush, FaRocket } from 'react-icons/fa';
 import { SiReact, SiNextdotjs, SiNodedotjs, SiTailwindcss, SiFigma, SiVercel } from 'react-icons/si';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
@@ -146,6 +146,20 @@ export default function WebDevelopmentPage() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []); // Removed heroControls dependency
 
+  // Parallax state για τίτλο/σχόλιο
+  const [parallax, setParallax] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (isMobile) return;
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX - window.innerWidth / 2) / 30;
+      const y = (e.clientY - window.innerHeight / 2) / 30;
+      setParallax({ x, y });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isMobile]);
+
   // Εισάγω το motion ΜΟΝΟ αν δεν είναι mobile
   // const Motion = !isMobile ? require('framer-motion').motion : undefined;
   return (
@@ -199,12 +213,36 @@ export default function WebDevelopmentPage() {
         </div>
         {/* Hero Content */}
         <div className="relative z-20 max-w-3xl mx-auto px-4 py-32 text-center flex flex-col items-center">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
-            Κατασκευή Ιστοσελίδων που Εντυπωσιάζουν
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto">
-            Απογειώστε την επιχείρησή σας με μια ιστοσελίδα που ξεχωρίζει για την ταχύτητα, την αισθητική και την αποτελεσματικότητά της. Δημιουργούμε premium web εμπειρίες που μετατρέπουν επισκέπτες σε πελάτες.
-          </p>
+          {!isMobile ? (
+            <>
+              <motion.h1
+                className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent"
+                style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, x: parallax.x, y: parallax.y }}
+                transition={{ duration: 0.7, type: 'spring', stiffness: 60, damping: 18 }}
+              >
+                Κατασκευή Ιστοσελίδων που Εντυπωσιάζουν
+              </motion.h1>
+              <motion.p
+                className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, x: parallax.x, y: parallax.y }}
+                transition={{ duration: 0.7, type: 'spring', stiffness: 60, damping: 18 }}
+              >
+                Απογειώστε την επιχείρησή σας με μια ιστοσελίδα που ξεχωρίζει για την ταχύτητα, την αισθητική και την αποτελεσματικότητά της. Δημιουργούμε premium web εμπειρίες που μετατρέπουν επισκέπτες σε πελάτες.
+              </motion.p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
+                Κατασκευή Ιστοσελίδων που Εντυπωσιάζουν
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto">
+                Απογειώστε την επιχείρησή σας με μια ιστοσελίδα που ξεχωρίζει για την ταχύτητα, την αισθητική και την αποτελεσματικότητά της. Δημιουργούμε premium web εμπειρίες που μετατρέπουν επισκέπτες σε πελάτες.
+              </p>
+            </>
+          )}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               className="inline-block px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
