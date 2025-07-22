@@ -19,6 +19,7 @@ import gsap from 'gsap';
 import codeImg from '../assets/code.jpg';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { motion } from 'framer-motion';
+import hotelImg from '../assets/Hotel.png';
 
 const floatingIcons = [
   { icon: <FaCode />, style: 'top-10 left-10 text-blue-400' },
@@ -273,6 +274,12 @@ export default function WebDevelopmentPage() {
               title: 'Προώθηση Custom CryptoCoin',
               desc: 'Landing page για την προώθηση custom κρυπτονομίσματος.',
               url: 'https://panitoscryptocoin.com/'
+            },
+            {
+              img: hotelImg,
+              title: 'Ξενοδοχείο',
+              desc: 'Προωθητικό site ξενοδοχείου με gallery και φόρμα επικοινωνίας.',
+              url: 'https://684ad438cfcdad7a5e3a8db8--serenity-hotel-lux.netlify.app/'
             }
           ].map((s, idx) => (
             <div
