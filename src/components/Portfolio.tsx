@@ -7,7 +7,7 @@ import architectureImg from '../assets/architecture.png';
 import hydrogenImg from '../assets/hydrogen.png';
 import videoImg from '../assets/video.jpg';
 import cryptoImg from '../assets/crypto.png';
-import hotelImg from '../assets/hotel.png';
+import hotelImg from '../assets/Hotel.png';
 
 const Portfolio: React.FC = () => {
   const { language } = useLanguage();
