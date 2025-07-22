@@ -9,6 +9,8 @@ const clickSfx = '';
 // @ts-ignore: No types for aos
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+// Εισαγωγές εικόνων/εικονιδίων αν χρειάζεται
+import cartImg from '../assets/apps.jpg';
 
 function playSound(src: string) {
   if (!src) return;
@@ -97,16 +99,19 @@ export default function EcommerceDevelopmentPage() {
   return (
     <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900 font-sans">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none">
-        {/* Animated Background */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        {/* Animated Background Gradients/Particles */}
         <motion.div className="absolute inset-0 z-0 pointer-events-none">
-          {["Cart", "Shop", "Order", "Checkout", "E-shop", "Sale", "Product", "Stock", "Payment", "SEO"].map((kw, i) => (
+          <motion.div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-gradient-to-br from-blue-400/40 via-purple-400/30 to-white/0 rounded-full blur-3xl animate-spin-slow" animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }} />
+          <motion.div className="absolute bottom-[-10%] right-[-10%] w-[32vw] h-[32vw] bg-gradient-to-br from-purple-400/40 via-blue-400/30 to-white/0 rounded-full blur-3xl animate-spin-slow" animate={{ rotate: -360 }} transition={{ duration: 60, repeat: Infinity, ease: 'linear' }} />
+          {/* Floating e-commerce keywords */}
+          {['E-shop', 'Cart', 'Checkout', 'ERP', 'CRM', 'WooCommerce', 'Shopify', 'Magento', 'Stripe', 'PayPal', 'Viva', 'SEO'].map((kw, i) => (
             <motion.div
               key={kw}
               className="absolute z-10 opacity-20 text-lg md:text-2xl font-bold text-blue-400"
               style={{
-                top: `${10 + 60 * Math.sin((i / 10) * 2 * Math.PI)}%`,
-                left: `${10 + 80 * Math.cos((i / 10) * 2 * Math.PI)}%`,
+                top: `${10 + 60 * Math.sin((i / 12) * 2 * Math.PI)}%`,
+                left: `${10 + 80 * Math.cos((i / 12) * 2 * Math.PI)}%`,
                 filter: 'drop-shadow(0 4px 24px rgba(80,80,200,0.10))',
               }}
               animate={{ y: [0, i % 2 === 0 ? 20 : -20, 0] }}
@@ -116,19 +121,42 @@ export default function EcommerceDevelopmentPage() {
             </motion.div>
           ))}
         </motion.div>
-        {/* Hero Content */}
-        <motion.div className="relative z-20 max-w-3xl mx-auto px-4 py-32 text-center flex flex-col items-center">
-          <motion.h1 className="text-4xl md:text-5xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
-            Το Ηλεκτρονικό σας Κατάστημα, Όπως το Ονειρευτήκατε
-          </motion.h1>
-          <motion.p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
-            {typed}
-          </motion.p>
-          <motion.div className="mb-8 flex items-center justify-center">
-            <FaShoppingCart className="text-blue-500 text-7xl animate-bounce-slow drop-shadow-lg" />
+        {/* HERO CONTENT SPLIT LAYOUT */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 py-24 w-full flex flex-col md:flex-row items-center justify-between gap-10">
+          {/* Left: Text */}
+          <motion.div className="flex-1 flex flex-col items-start md:items-start text-left" initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
+            <motion.h1 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
+              Το Ηλεκτρονικό σας Κατάστημα, Όπως το Ονειρευτήκατε
+            </motion.h1>
+            <motion.p className="text-lg md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+              Custom E-shops για κάθε ανάγκη και συσκευή
+            </motion.p>
+            <motion.button
+              className="inline-block px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-lg shadow-2xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
+              whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => { window.location.href = '/contactme'; }}
+            >
+              <span className="relative z-10">Ζητήστε Προσφορά</span>
+            </motion.button>
           </motion.div>
-          <motion.button className="inline-block px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζητήστε Προσφορά</span></motion.button>
-        </motion.div>
+          {/* Right: Animated Cart Image */}
+          <motion.div
+            className="flex-1 flex items-center justify-center w-full md:w-auto mt-12 md:mt-0"
+            initial={{ opacity: 0, x: 60, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            <motion.img
+              src={cartImg}
+              alt="Eshop Hero"
+              className="w-[320px] h-[320px] md:w-[400px] md:h-[400px] object-cover rounded-3xl shadow-2xl border-4 border-blue-100/60 bg-white/80"
+              animate={{ y: [0, -18, 0, 18, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ boxShadow: '0 8px 48px 0 rgba(80,80,200,0.13)' }}
+            />
+          </motion.div>
+        </div>
       </section>
 
       {/* Τι Προσφέρω */}

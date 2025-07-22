@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaCloud, FaDatabase, FaLock, FaChartLine, FaSyncAlt, FaCogs, FaClipboardList, FaTools, FaSearch, FaBolt, FaUsers, FaBuilding, FaChevronLeft, FaChevronRight, FaCheckCircle, FaHome } from 'react-icons/fa';
+import { FaCloud, FaDatabase, FaLock, FaServer, FaCheckCircle, FaChartLine } from 'react-icons/fa';
+import { SiPostgresql, SiMysql, SiMongodb, SiFirebase, SiSupabase, SiAmazon, SiGooglecloud } from 'react-icons/si';
 import { useLanguage } from '../hooks/useLanguage';
 // import cloudLottie from '../assets/lottie-cloud.json';
 const cloudLottie = {};
@@ -9,6 +10,11 @@ const clickSfx = '';
 // @ts-ignore: No types for aos
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+// Εισαγωγές εικόνων/εικονιδίων/animations
+import cloudImg from '../assets/internet.jpg';
+import dbImg from '../assets/code.jpg';
+import securityImg from '../assets/crypto.png';
+import architectureImg from '../assets/architecture.png';
 
 function playSound(src: string) {
   if (!src) return;
@@ -39,40 +45,30 @@ const services = [
     en: 'Scalability & Performance Optimization',
   },
   {
-    icon: <FaSyncAlt className="text-green-500 text-3xl" />,
-    gr: 'Μεταφορά σε Cloud',
-    en: 'Cloud Migration',
-  },
-  {
-    icon: <FaCogs className="text-yellow-500 text-3xl" />,
-    gr: 'DevOps & Αυτοματισμοί',
-    en: 'DevOps & Automation',
+    icon: <FaServer className="text-green-500 text-3xl" />,
+    gr: 'Υποστήριξη & Παρακολούθηση',
+    en: 'Monitoring & Support',
   },
 ];
 
 const workflow = [
-  {
-    icon: <FaClipboardList className="text-blue-500 text-2xl" />,
-    gr: 'Αξιολόγηση Αναγκών',
-    en: 'Needs Assessment',
-  },
   {
     icon: <FaCloud className="text-purple-500 text-2xl" />,
     gr: 'Σχεδιασμός Υποδομής',
     en: 'Infrastructure Design',
   },
   {
-    icon: <FaTools className="text-pink-500 text-2xl" />,
+    icon: <FaDatabase className="text-blue-500 text-2xl" />,
     gr: 'Υλοποίηση & Παραμετροποίηση',
     en: 'Implementation & Configuration',
   },
   {
-    icon: <FaSearch className="text-cyan-500 text-2xl" />,
+    icon: <FaLock className="text-pink-500 text-2xl" />,
     gr: 'Έλεγχος Ασφαλείας',
     en: 'Security Auditing',
   },
   {
-    icon: <FaBolt className="text-green-500 text-2xl" />,
+    icon: <FaServer className="text-green-500 text-2xl" />,
     gr: 'Παρακολούθηση & Υποστήριξη',
     en: 'Monitoring & Support',
   },
@@ -80,17 +76,17 @@ const workflow = [
 
 const clients = [
   {
-    icon: <FaBuilding className="text-blue-500 text-3xl" />,
+    icon: <SiAmazon className="text-blue-500 text-3xl" />,
     gr: 'Επιχειρήσεις με μεγάλες ανάγκες δεδομένων',
     en: 'Businesses with large data needs',
   },
   {
-    icon: <FaUsers className="text-purple-500 text-3xl" />,
+    icon: <FaCloud className="text-purple-500 text-3xl" />,
     gr: 'Startups που απαιτούν ευέλικτες λύσεις',
     en: 'Startups needing flexible solutions',
   },
   {
-    icon: <FaCogs className="text-pink-500 text-3xl" />,
+    icon: <SiGooglecloud className="text-pink-500 text-3xl" />,
     gr: 'Προγραμματιστές & DevOps teams',
     en: 'Developers & DevOps teams',
   },
@@ -211,7 +207,7 @@ export default function DatabaseCloudInfrastructurePage() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6 tracking-tight">{language === 'el' ? 'Χρειάζεστε ασφαλείς, επεκτάσιμες λύσεις βάσεων δεδομένων και cloud; Επικοινωνήστε μαζί μας!' : 'Need secure, scalable database and cloud solutions? Contact us!'}</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
             <motion.button className="inline-block px-10 py-4 bg-gradient-to-r from-blue-600 to-gray-400 text-white rounded-full font-bold text-lg shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">{language === 'el' ? 'Ζητήστε Προσφορά' : 'Request a Quote'}</span></motion.button>
-            <motion.button className="inline-block px-10 py-4 bg-gradient-to-r from-gray-400 to-blue-600 text-white rounded-full font-bold text-lg shadow-3xl border-2 border-transparent hover:border-gray-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/'; }}><FaHome className="mr-2" />{language === 'el' ? 'Επιστροφή στην Αρχική' : 'Back to Home'}</motion.button>
+            <motion.button className="inline-block px-10 py-4 bg-gradient-to-r from-gray-400 to-blue-600 text-white rounded-full font-bold text-lg shadow-3xl border-2 border-transparent hover:border-gray-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/'; }}><FaCloud className="mr-2" />{language === 'el' ? 'Επιστροφή στην Αρχική' : 'Back to Home'}</motion.button>
           </div>
         </motion.div>
       </section>

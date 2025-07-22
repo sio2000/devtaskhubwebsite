@@ -168,25 +168,36 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <motion.button
-              onClick={() => scrollToSection('services')}
-              className="group bg-white text-gray-900 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center space-x-2 shadow-2xl hover:shadow-3xl transform hover:scale-105"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>{t.hero.cta}</span>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
-
-            <motion.button
-              onClick={() => scrollToSection('contact')}
-              className="group bg-transparent text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 border-2 border-white/30 hover:border-white/50 flex items-center space-x-2 backdrop-blur-sm"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Phone className="h-5 w-5" />
-              <span>{t.hero.contact}</span>
-            </motion.button>
+            <AnimatePresence mode="wait">
+              <motion.button
+                key={currentSlide + '-cta'}
+                onClick={() => scrollToSection('services')}
+                className="group bg-white text-gray-900 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center space-x-2 shadow-2xl hover:shadow-3xl transform hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <span>{t.hero.cta}</span>
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+              <motion.button
+                key={currentSlide + '-contact'}
+                onClick={() => scrollToSection('contact')}
+                className="group bg-transparent text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 border-2 border-white/30 hover:border-white/50 flex items-center space-x-2 backdrop-blur-sm"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <Phone className="h-5 w-5" />
+                <span>{t.hero.contact}</span>
+              </motion.button>
+            </AnimatePresence>
           </motion.div>
 
           {/* Carousel Navigation */}

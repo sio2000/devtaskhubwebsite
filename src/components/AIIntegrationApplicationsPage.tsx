@@ -9,6 +9,9 @@ const clickSfx = '';
 // @ts-ignore: No types for aos
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+// Εισαγωγές εικόνων/εικονιδίων αν χρειάζεται
+import aiImg from '../assets/AI.jpg';
+import codeImg from '../assets/code.jpg';
 
 function playSound(src: string) {
   if (!src) return;
@@ -76,7 +79,7 @@ export default function AIIntegrationApplicationsPage() {
   useEffect(() => { AOS.init({ duration: 900, once: true }); }, []);
   // Typing effect για το hero
   useEffect(() => {
-    const full = 'AI στις Εφαρμογές σας — Από το Όραμα στην Υλοποίηση';
+    const full = 'AI στις Εφαρμογές σας. Από το Όραμα στην Υλοποίηση';
     let i = 0;
     setTyped('');
     const interval = setInterval(() => {
@@ -89,16 +92,19 @@ export default function AIIntegrationApplicationsPage() {
   return (
     <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900 font-sans">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none">
-        {/* AI-inspired Background */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        {/* Animated AI-inspired Background */}
         <motion.div className="absolute inset-0 z-0 pointer-events-none">
-          {["AI", "ML", "GPT", "Neural", "Data", "Python", "API", "NLP", "Vision", "Nodes", "Chip", "LangChain"].map((kw, i) => (
+          <motion.div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-gradient-to-br from-blue-400/40 via-purple-400/30 to-white/0 rounded-full blur-3xl animate-spin-slow" animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }} />
+          <motion.div className="absolute bottom-[-10%] right-[-10%] w-[32vw] h-[32vw] bg-gradient-to-br from-purple-400/40 via-blue-400/30 to-white/0 rounded-full blur-3xl animate-spin-slow" animate={{ rotate: -360 }} transition={{ duration: 60, repeat: Infinity, ease: 'linear' }} />
+          {/* Floating AI keywords */}
+          {['AI', 'ML', 'Neural Net', 'GPT', 'Python', 'TensorFlow', 'Data', 'NLP', 'Vision', 'Automation'].map((kw, i) => (
             <motion.div
               key={kw}
               className="absolute z-10 opacity-20 text-lg md:text-2xl font-bold text-blue-400"
               style={{
-                top: `${10 + 60 * Math.sin((i / 12) * 2 * Math.PI)}%`,
-                left: `${10 + 80 * Math.cos((i / 12) * 2 * Math.PI)}%`,
+                top: `${10 + 60 * Math.sin((i / 10) * 2 * Math.PI)}%`,
+                left: `${10 + 80 * Math.cos((i / 10) * 2 * Math.PI)}%`,
                 filter: 'drop-shadow(0 4px 24px rgba(80,80,200,0.10))',
               }}
               animate={{ y: [0, i % 2 === 0 ? 20 : -20, 0] }}
@@ -108,24 +114,61 @@ export default function AIIntegrationApplicationsPage() {
             </motion.div>
           ))}
         </motion.div>
-        {/* Hero Content */}
-        <motion.div className="relative z-20 max-w-3xl mx-auto px-4 py-32 text-center flex flex-col items-center">
-          <motion.h1 className="text-4xl md:text-5xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
-            {typed}
-          </motion.h1>
-          <motion.p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
-            Χρησιμοποιώ τεχνικές machine learning για ανάλυση δεδομένων, προβλέψεις ή δημιουργία έξυπνων λειτουργιών σε εφαρμογές.
-          </motion.p>
-          <motion.button className="inline-block px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζητήστε Προσφορά</span></motion.button>
-        </motion.div>
+        {/* HERO CONTENT SPLIT LAYOUT */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 py-24 w-full flex flex-col md:flex-row items-center justify-between gap-10">
+          {/* Left: Text */}
+          <motion.div className="flex-1 flex flex-col items-start md:items-start text-left" initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
+            <motion.h1 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
+              AI στις Εφαρμογές σας — Από το Όραμα στην Υλοποίηση
+            </motion.h1>
+            <motion.p className="text-lg md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+              Χρησιμοποιώ τεχνικές machine learning για ανάλυση δεδομένων, προβλέψεις ή δημιουργία έξυπνων λειτουργιών σε εφαρμογές.
+            </motion.p>
+            <motion.button
+              className="inline-block px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-lg shadow-2xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
+              whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => { window.location.href = '/contactme'; }}
+            >
+              <span className="relative z-10">Ζητήστε Προσφορά</span>
+            </motion.button>
+          </motion.div>
+          {/* Right: AI Image */}
+          <motion.div
+            className="flex-1 flex items-center justify-center w-full md:w-auto mt-12 md:mt-0"
+            initial={{ opacity: 0, x: 60, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            <motion.img
+              src={aiImg}
+              alt="AI Hero"
+              className="w-[320px] h-[320px] md:w-[400px] md:h-[400px] object-cover rounded-3xl shadow-2xl border-4 border-blue-100/60 bg-white/80"
+              animate={{ y: [0, -18, 0, 18, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ boxShadow: '0 8px 48px 0 rgba(80,80,200,0.13)' }}
+            />
+          </motion.div>
+        </div>
       </section>
 
       {/* AI Υπηρεσίες */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">AI Υπηρεσίες</motion.h2>
+        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">AI Υπηρεσίες</motion.h2>
         <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
-          {services.map((s, idx) => (
-            <motion.div key={s.title} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => playSound(clickSfx)}><div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">{s.icon}</div><h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">{s.title}</h4><p className="text-gray-600 mb-6 text-base leading-relaxed">{s.desc}</p><motion.div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-focus:border-blue-400 transition-all duration-300" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} /></motion.div>
+          {[
+            { icon: '📊', title: 'Ανάλυση Δεδομένων & Προβλέψεις με ML', desc: 'Εξαγωγή insights και προβλέψεων από τα δεδομένα σας.' },
+            { icon: '🔍', title: 'Ανίχνευση Προτύπων & Αυτοματισμοί', desc: 'Αναγνώριση patterns και αυτοματοποίηση διαδικασιών.' },
+            { icon: '🤖', title: 'Ενσωμάτωση GPT & NLP Μοντέλων', desc: 'AI συνομιλίες, κατανόηση κειμένου, αυτόματη παραγωγή περιεχομένου.' },
+            { icon: '🎯', title: 'Custom Recommendation Engines', desc: 'Συστάσεις προϊόντων/υπηρεσιών με AI.' },
+            { icon: '✨', title: 'Εξατομίκευση Περιεχομένου', desc: 'AI personalization για κάθε χρήστη.' },
+            { icon: '💬', title: 'Real-time Chatbots & AI Agents', desc: 'Έξυπνα bots για υποστήριξη, πωλήσεις, κρατήσεις.' },
+          ].map((s, idx) => (
+            <motion.div key={s.title} className="group bg-white/90 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }}>
+              <div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300 text-4xl">{s.icon}</div>
+              <h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">{s.title}</h4>
+              <p className="text-gray-600 mb-6 text-base leading-relaxed">{s.desc}</p>
+            </motion.div>
           ))}
         </motion.div>
       </section>

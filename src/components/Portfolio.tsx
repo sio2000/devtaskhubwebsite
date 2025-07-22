@@ -177,14 +177,6 @@ const Portfolio: React.FC = () => {
                     transition={{ duration: 0.5 }}
                   />
                   
-                  {/* Gradient Overlay */}
-                  <motion.div 
-                    className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-60`}
-                    initial={{ opacity: 0.6 }}
-                    whileHover={{ opacity: 0.3 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  
                   {/* Project Icon */}
                   <motion.div 
                     className="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg"

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
 import { useNavigate, useLocation } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,19 +60,21 @@ const Header: React.FC = () => {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Logo + Name */}
           <motion.div 
-            className="flex-shrink-0"
+            className="flex-shrink-0 flex items-center gap-3"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
             <motion.button
               onClick={() => navigate('/')}
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+              className="flex items-center gap-3 focus:outline-none"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              style={{ padding: 0, background: 'none', border: 'none' }}
             >
-              DevTaskHub
+              <img src={logo} alt="DevTaskHub Logo" className="h-12 w-auto max-w-[120px] rounded-xl shadow-md transition-all duration-300 hover:shadow-xl" />
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300">DevTaskHub</span>
             </motion.button>
           </motion.div>
 
@@ -102,22 +105,7 @@ const Header: React.FC = () => {
 
           {/* Language Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <motion.button
-              onClick={toggleLanguage}
-              className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors duration-300 p-2 rounded-lg hover:bg-gray-100"
-              aria-label="Change language"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                whileHover={{ rotate: 180 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Globe className="h-4 w-4" />
-              </motion.div>
-              <span className="text-sm font-medium">{language.toUpperCase()}</span>
-            </motion.button>
-
+            {/* Το κουμπί αλλαγής γλώσσας αφαιρείται */}
             {/* Mobile menu button */}
             <div className="md:hidden">
               <motion.button

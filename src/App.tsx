@@ -21,6 +21,7 @@ import AIIntegrationApplicationsPage from './components/AIIntegrationApplication
 import EcommerceDevelopmentPage from './components/EcommerceDevelopmentPage';
 import GameDevelopmentPage from './components/GameDevelopmentPage';
 import VideoAnimationProductionPage from './components/VideoAnimationProductionPage';
+import DatabaseCloudInfrastructurePage from './components/DatabaseCloudInfrastructurePage';
 // Προσθήκη placeholders για όλες τις υπηρεσίες
 const Placeholder = ({ name }: { name: string }) => <div style={{padding:40, textAlign:'center', color:'#555'}}>Η σελίδα "{name}" δεν έχει υλοποιηθεί ακόμα.</div>;
 
@@ -39,7 +40,6 @@ function App() {
         <Services />
         <About />
         <Portfolio />
-        <Contact />
               </>
             } />
             <Route path="/services" element={<Services />} />
@@ -52,11 +52,13 @@ function App() {
             <Route path="/services/seo-website-optimization" element={<SEOWebsiteOptimizationPage />} />
             <Route path="/services/multimedia-content-creation" element={<Placeholder name="Multimedia Content Creation" />} />
             <Route path="/services/ux-ui-design" element={<UXUIDesignPage />} />
-            <Route path="/services/database-cloud-infrastructure" element={<Placeholder name="Database & Cloud Infrastructure" />} />
+            <Route path="/services/database-cloud-infrastructure" element={<DatabaseCloudInfrastructurePage />} />
             <Route path="/services/ai-integration-applications" element={<AIIntegrationApplicationsPage />} />
             <Route path="/services/ecommerce-development" element={<EcommerceDevelopmentPage />} />
             <Route path="/services/game-development" element={<GameDevelopmentPage />} />
             {/* <Route path="/services/:slug" element={<ServiceDetails />} /> */}
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/contactme" element={<Contact />} />
             <Route path="/terms" element={<TermsAndConditions />} />
           </Routes>
       </main>
