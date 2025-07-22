@@ -40,6 +40,7 @@ function App() {
         <Services />
         <About />
         <Portfolio />
+        <Contact />
               </>
             } />
             <Route path="/services" element={<Services />} />

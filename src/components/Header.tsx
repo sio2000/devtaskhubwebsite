@@ -34,16 +34,15 @@ const Header: React.FC = () => {
   }, [location.pathname, pendingSection]);
 
   const scrollToSection = (sectionId: string) => {
+    setIsMenuOpen(false); // Κλείνει πάντα το μενού
     if (location.pathname !== '/') {
       setPendingSection(sectionId);
       navigate('/');
-      setIsMenuOpen(false);
       return;
     }
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
     }
   };
 
