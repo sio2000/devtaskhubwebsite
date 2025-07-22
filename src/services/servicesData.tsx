@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
-import { FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaVideo, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad, IconType } from 'react-icons/fa';
+import { FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaVideo, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad } from 'react-icons/fa';
 
 export interface Service {
   slug: string;
   title: string;
   shortDescription: string;
   description: string;
-  icon: IconType;
+  icon: any; // Changed from IconType to any as IconType is no longer imported
   breadcrumbs: string[];
 }
 
@@ -15,7 +15,7 @@ const servicesData: Service[] = [
     slug: 'web-development',
     title: 'Website & Web App Development',
     shortDescription: 'Responsive websites & web apps with modern tech.',
-    description: 'I design and implement fully responsive websites and web applications using modern front-end and back-end technologies.',
+    description: 'We design and implement fully responsive websites and web applications using modern front-end and back-end technologies.',
     icon: FaGlobe,
     breadcrumbs: ['Services', 'Website & Web App Development']
   },
@@ -58,14 +58,6 @@ const servicesData: Service[] = [
     description: 'Improve site ranking in search engines (e.g., Google) through technical SEO and content strategies.',
     icon: FaSearch,
     breadcrumbs: ['Services', 'SEO – Website Optimization']
-  },
-  {
-    slug: 'multimedia-content-creation',
-    title: 'Multimedia Content Creation',
-    shortDescription: 'Interactive content, animations & videos.',
-    description: 'I create interactive content, animations, and videos for websites, campaigns, and social media.',
-    icon: FaPhotoVideo,
-    breadcrumbs: ['Services', 'Multimedia Content Creation']
   },
   {
     slug: 'ux-ui-design',

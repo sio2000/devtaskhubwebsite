@@ -150,7 +150,7 @@ export default function DatabaseCloudInfrastructurePage() {
             {language === 'el' ? 'Βάσεις Δεδομένων & Cloud Υποδομές' : 'Database & Cloud Infrastructure'}
           </motion.h1>
           <motion.p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
-            {language === 'el' ? 'Διαχειρίζομαι βάσεις δεδομένων και υλοποιώ ασφαλείς, επεκτάσιμες cloud-based λύσεις.' : 'I manage databases and implement secure, scalable cloud-based solutions.'}
+            {language === 'el' ? 'Διαχειρίζομαι βάσεις δεδομένων και υλοποιούμε ασφαλείς, επεκτάσιμες cloud-based λύσεις.' : 'We manage databases and implement secure, scalable cloud-based solutions.'}
           </motion.p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <motion.button className="inline-block px-10 py-4 bg-gradient-to-r from-blue-600 to-gray-400 text-white rounded-full font-bold text-lg shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">{language === 'el' ? 'Ζητήστε Προσφορά' : 'Request a Quote'}</span></motion.button>

@@ -101,7 +101,7 @@ export default function SocialMediaManagementPage() {
             {typed}
           </motion.h1>
           <motion.p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
-            Στρατηγική & καθημερινή διαχείριση social προφίλ για επαγγελματίες και επιχειρήσεις. Παρέχουμε δημιουργικό περιεχόμενο, προγραμματισμένες δημοσιεύσεις, στρατηγική, κοινότητα, analytics και διαφήμιση — όλα με σκοπό την <b>ανάπτυξη του brand σας</b> και <b>αύξηση της αλληλεπίδρασης</b>.
+            Στρατηγική & καθημερινή διαχείριση social προφίλ για επαγγελματίες και επιχειρήσεις. Παρέχουμε δημιουργικό περιεχόμενο, προγραμματισμένες δημοσιεύσεις, στρατηγική, κοινότητα, analytics και διαφήμιση — όλα με σκοπό την ανάπτυξη του brand σας και αύξηση της αλληλεπίδρασης.
           </motion.p>
           <motion.button className="inline-block px-12 py-5 bg-gradient-to-r from-pink-600 to-blue-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-pink-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-pink-400 animate-fade-in flex items-center gap-2 relative overflow-hidden" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζητήστε Πρόταση</span></motion.button>
         </motion.div>

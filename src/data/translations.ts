@@ -77,7 +77,7 @@ export const translations = {
     // Portfolio
     portfolio: {
       title: 'Δείγματα Εργασιών',
-      subtitle: 'Μερικά από τα πρόσφατα projects που έχω υλοποιήσει',
+      subtitle: 'Μερικά από τα πρόσφατα projects που έχουμε υλοποιήσει',
       viewProject: 'Δες το Project',
       projects: {
         ecommerce: {
@@ -199,7 +199,7 @@ export const translations = {
     // Portfolio
     portfolio: {
       title: 'Portfolio',
-      subtitle: 'Some of the recent projects I have implemented',
+      subtitle: 'Some of the recent projects we have implemented',
       viewProject: 'View Project',
       projects: {
         ecommerce: {

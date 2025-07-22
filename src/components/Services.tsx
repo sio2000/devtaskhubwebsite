@@ -46,7 +46,8 @@ const cardVariants = {
 const Services: React.FC = () => {
   const { language } = useLanguage();
   const isMobile = useIsMobile();
-
+  // Φιλτράρω το servicesData ώστε να μην εμφανίζεται το multimedia-content-creation
+  const filteredServices = servicesData.filter(service => service.slug !== 'multimedia-content-creation');
   return (
     <section
       id="services"
@@ -74,7 +75,7 @@ const Services: React.FC = () => {
           Εξειδικευμένες λύσεις για επιχειρήσεις και επαγγελματίες που απαιτούν κορυφαία ποιότητα, τεχνογνωσία και σύγχρονο design.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {servicesData.map((service, i) => {
+          {filteredServices.map((service, i) => {
             const Icon = iconMap[service.slug];
             const color = iconColorMap[service.slug] || 'text-sky-400';
             return (

@@ -38,13 +38,10 @@ const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setSuccess(false), 3000);
-    }, 1500);
+    // Δημιουργώ το mailto link
+    const subject = encodeURIComponent(formData.subject || 'Επικοινωνία μέσω DevTaskHub');
+    const body = encodeURIComponent(`Όνομα: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
+    window.location.href = `mailto:Devtaskhub@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleCopy = (value: string) => {
@@ -104,7 +101,7 @@ const Contact: React.FC = () => {
         <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent mb-2">Επικοινωνία</h2>
         <p className="text-lg text-gray-700 max-w-2xl mx-auto">
           Είστε έτοιμοι να ξεκινήσουμε το επόμενο project σας ή έχετε απορίες;<br />
-          Συμπληρώστε τη φόρμα ή επικοινωνήστε απευθείας μαζί μου για άμεση ανταπόκριση και τεχνική αξιοπιστία.
+          Συμπληρώστε τη φόρμα ή επικοινωνήστε απευθείας μαζί μας για άμεση ανταπόκριση και τεχνική αξιοπιστία.
         </p>
       </div>
     </motion.div>

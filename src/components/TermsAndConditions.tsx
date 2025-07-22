@@ -19,7 +19,7 @@ const TermsAndConditions: React.FC = () => {
           Όροι & Προϋποθέσεις Χρήσης
         </motion.h1>
         <motion.p className="text-lg text-gray-700 mb-8 text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-          Καλώς ήρθατε στο DevTaskHub (https://devtaskhub.com). Η παρούσα ιστοσελίδα δημιουργήθηκε και διαχειρίζεται από τον <b>Θεοχάρη Παναγιώτη Σιώζο</b>. Η ονομασία "DevTaskHub" αποτελεί προσωπικό brand και όχι νομική εταιρεία ή νομική οντότητα. Όλο το περιεχόμενο, οι υπηρεσίες και οι πληροφορίες που παρουσιάζονται στον παρόντα ιστότοπο διατίθενται αποκλειστικά από τον ιδιοκτήτη του domain.
+          Καλώς ήρθατε στο DevTaskHub (https://devtaskhub.com). Η παρούσα ιστοσελίδα δημιουργήθηκε και διαχειρίζεται από την ομάδα DevTaskHub. Η ονομασία "DevTaskHub" αποτελεί εταιρικό brand. Όλο το περιεχόμενο, οι υπηρεσίες και οι πληροφορίες που παρουσιάζονται στον παρόντα ιστότοπο διατίθενται από την ομάδα μας.
         </motion.p>
         <div className="space-y-8 text-gray-800 text-base md:text-lg">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>

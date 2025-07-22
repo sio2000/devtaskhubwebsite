@@ -203,7 +203,7 @@ export default function WebDevelopmentPage() {
             Κατασκευή Ιστοσελίδων που Εντυπωσιάζουν
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl mx-auto">
-            Απογειώστε την επιχείρησή σας με μια ιστοσελίδα που ξεχωρίζει για την ταχύτητα, την αισθητική και την αποτελεσματικότητά της. Δημιουργώ premium web εμπειρίες που μετατρέπουν επισκέπτες σε πελάτες.
+            Απογειώστε την επιχείρησή σας με μια ιστοσελίδα που ξεχωρίζει για την ταχύτητα, την αισθητική και την αποτελεσματικότητά της. Δημιουργούμε premium web εμπειρίες που μετατρέπουν επισκέπτες σε πελάτες.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
@@ -231,8 +231,8 @@ export default function WebDevelopmentPage() {
         </div>
         <div className="relative bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-10 flex flex-col items-center w-full md:w-1/2">
           <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Γιατί να επιλέξετε εμένα;</h2>
-          <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-2">Εξειδικεύομαι στη δημιουργία μοντέρνων, γρήγορων και αποδοτικών ιστοσελίδων που προσαρμόζονται απόλυτα στις ανάγκες σας.</p>
-          <p className="text-lg md:text-xl text-blue-700 max-w-2xl mx-auto font-semibold">Από το πρώτο brief μέχρι την τελική παράδοση, προσφέρω <span className='bg-gradient-to-r from-blue-200 to-purple-200 px-2 rounded'>προσωπική υποστήριξη</span>, <span className='bg-gradient-to-r from-blue-100 to-purple-100 px-2 rounded'>διαφάνεια</span> και <span className='bg-gradient-to-r from-blue-300 to-purple-300 px-2 rounded'>κορυφαία ποιότητα</span>.</p>
+          <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-2">Εξειδικευόμαστε στη δημιουργία μοντέρνων, γρήγορων και αποδοτικών ιστοσελίδων που προσαρμόζονται απόλυτα στις ανάγκες σας.</p>
+          <p className="text-lg md:text-xl text-blue-700 max-w-2xl mx-auto font-semibold">Από το πρώτο brief μέχρι την τελική παράδοση, προσφέρουμε <span className='bg-gradient-to-r from-blue-200 to-purple-200 px-2 rounded'>ομαδική υποστήριξη</span>, <span className='bg-gradient-to-r from-blue-100 to-purple-100 px-2 rounded'>διαφάνεια</span> και <span className='bg-gradient-to-r from-blue-300 to-purple-300 px-2 rounded'>κορυφαία ποιότητα</span>.</p>
         </div>
       </section>
       {/* Χαρακτηριστικά & Οφέλη */}
