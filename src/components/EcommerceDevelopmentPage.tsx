@@ -11,6 +11,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 // Εισαγωγές εικόνων/εικονιδίων αν χρειάζεται
 import cartImg from '../assets/apps.jpg';
+import appsImg from '../assets/e-shop.jpg';
 
 function playSound(src: string) {
   if (!src) return;
@@ -148,7 +149,7 @@ export default function EcommerceDevelopmentPage() {
             transition={{ duration: 1, delay: 0.2 }}
           >
             <motion.img
-              src={cartImg}
+              src={appsImg}
               alt="Eshop Hero"
               className="w-[320px] h-[320px] md:w-[400px] md:h-[400px] object-cover rounded-3xl shadow-2xl border-4 border-blue-100/60 bg-white/80"
               animate={{ y: [0, -18, 0, 18, 0] }}

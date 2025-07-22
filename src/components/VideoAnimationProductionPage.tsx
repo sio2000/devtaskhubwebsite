@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaVideo, FaMagic, FaPaintBrush, FaBullhorn, FaGraduationCap, FaShoppingCart, FaMobileAlt, FaSyncAlt, FaPhoneAlt, FaChevronLeft, FaChevronRight, FaCheckCircle, FaPlayCircle, FaQuoteRight } from 'react-icons/fa';
 import { useLanguage } from '../hooks/useLanguage';
+import { useIsMobile } from '../hooks/useIsMobile';
 // import reelLottie from '../assets/lottie-reel.json';
 const reelLottie = {};
 const hoverSfx = '';
@@ -156,9 +157,11 @@ const portfolio = [
 ];
 
 export default function VideoAnimationProductionPage() {
-  const { language, toggleLanguage } = useLanguage();
+  const { language } = useLanguage();
+  // const { toggleLanguage } = useLanguage(); // Αφαιρώ το toggleLanguage
   const [typed, setTyped] = useState('');
   const [currentPortfolio, setCurrentPortfolio] = useState(0);
+  const isMobile = useIsMobile();
   useEffect(() => { AOS.init({ duration: 900, once: true }); }, []);
   // Typing effect για το hero subtitle
   useEffect(() => {
@@ -175,74 +178,81 @@ export default function VideoAnimationProductionPage() {
     return () => clearInterval(interval);
   }, [language]);
   return (
-    <div className="bg-gradient-to-br from-white via-blue-50 to-gray-50 min-h-screen text-gray-900 font-sans">
-      {/* Sticky Language Toggle */}
-      <div className="fixed top-6 right-6 z-50">
-        <button onClick={toggleLanguage} className="bg-white/90 border border-blue-100 px-4 py-2 rounded-full shadow hover:bg-blue-50 font-semibold text-blue-700 transition-all duration-200">
-          {language === 'el' ? 'EN' : 'GR'}
-        </button>
-      </div>
+    <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900 font-sans">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        {/* Animated Background Gradients/Particles */}
-        <motion.div className="absolute inset-0 z-0 pointer-events-none">
-          <motion.div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-gradient-to-br from-blue-400/40 via-purple-400/30 to-white/0 rounded-full blur-3xl animate-spin-slow" animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }} />
-          <motion.div className="absolute bottom-[-10%] right-[-10%] w-[32vw] h-[32vw] bg-gradient-to-br from-purple-400/40 via-blue-400/30 to-white/0 rounded-full blur-3xl animate-spin-slow" animate={{ rotate: -360 }} transition={{ duration: 60, repeat: Infinity, ease: 'linear' }} />
-          <motion.div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/20 rounded-full blur-3xl" animate={{ y: [0, -20, 0, -12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
-          <motion.div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/20 rounded-full blur-3xl" animate={{ y: [0, 30, 0, 12, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 1 }} />
-          {/* Decorative images */}
-          <motion.img src={video2Img} alt="Video 2" className="absolute top-10 right-32 w-40 h-28 object-cover rounded-2xl shadow-xl opacity-70" animate={{ y: [0, 12, 0, -12, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} />
-          <motion.img src={video3Img} alt="Video 3" className="absolute bottom-10 left-32 w-40 h-28 object-cover rounded-2xl shadow-xl opacity-70" animate={{ y: [0, -12, 0, 12, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }} />
-        </motion.div>
-        {/* HERO CONTENT SPLIT LAYOUT */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 py-24 w-full flex flex-col md:flex-row items-center justify-between gap-10">
-          {/* Left: Text */}
-          <motion.div className="flex-1 flex flex-col items-start md:items-start text-left" initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-            <motion.h1 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
-              Παραγωγή Video & Animation που Εντυπωσιάζουν
-            </motion.h1>
-            <motion.p className="text-lg md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
-              Δημιουργούμε επαγγελματικά βίντεο, animations και motion graphics που απογειώνουν το brand σας και μαγνητίζουν το κοινό σας. Από προωθητικά clips μέχρι εκπαιδευτικά animations, η εικόνα σας γίνεται εμπειρία.
-            </motion.p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.button
-                className="inline-block px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-lg shadow-2xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
-                whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => { window.location.href = '/contactme'; }}
+      <section className={`relative min-h-[60vh] flex items-center justify-center overflow-hidden ${isMobile ? 'bg-purple-100' : ''}`}>
+        {/* Σε mobile: χωρίς motion/animation, διαφορετικό background */}
+        {isMobile ? (
+          <div className="relative z-10 max-w-4xl mx-auto px-4 py-24 text-center flex flex-col items-center">
+            <h1 className="text-3xl md:text-5xl font-extrabold mb-6 drop-shadow-lg tracking-wide text-purple-900">Παραγωγή Video & Animation που Εντυπωσιάζουν</h1>
+            <p className="text-lg md:text-2xl text-purple-700 mb-10 font-medium">Δημιουργούμε επαγγελματικά βίντεο, animations και motion graphics που απογειώνουν το brand σας και μαγνητίζουν το κοινό σας.</p>
+            <a href="/contact" className="inline-block px-10 py-5 bg-gradient-to-r from-purple-600 to-blue-400 text-white rounded-full font-bold text-lg shadow-3xl hover:from-purple-700 hover:to-blue-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-400 animate-fade-in flex items-center gap-2">Επικοινωνήστε</a>
+          </div>
+        ) : (
+          // ... existing desktop hero ...
+          <>
+            {/* (κρατάω το motion/animation μόνο για desktop) */}
+            {/* Animated Background Gradients/Particles */}
+            <motion.div className="absolute inset-0 z-0 pointer-events-none">
+              <motion.div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-gradient-to-br from-blue-400/40 via-purple-400/30 to-white/0 rounded-full blur-3xl animate-spin-slow" animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }} />
+              <motion.div className="absolute bottom-[-10%] right-[-10%] w-[32vw] h-[32vw] bg-gradient-to-br from-purple-400/40 via-blue-400/30 to-white/0 rounded-full blur-3xl animate-spin-slow" animate={{ rotate: -360 }} transition={{ duration: 60, repeat: Infinity, ease: 'linear' }} />
+              <motion.div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/20 rounded-full blur-3xl" animate={{ y: [0, -20, 0, -12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
+              <motion.div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/20 rounded-full blur-3xl" animate={{ y: [0, 30, 0, 12, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 1 }} />
+              {/* Decorative images */}
+              <motion.img src={video2Img} alt="Video 2" className="absolute top-10 right-32 w-40 h-28 object-cover rounded-2xl shadow-xl opacity-70" animate={{ y: [0, 12, 0, -12, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} />
+              <motion.img src={video3Img} alt="Video 3" className="absolute bottom-10 left-32 w-40 h-28 object-cover rounded-2xl shadow-xl opacity-70" animate={{ y: [0, -12, 0, 12, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }} />
+            </motion.div>
+            {/* HERO CONTENT SPLIT LAYOUT */}
+            <div className="relative z-20 max-w-7xl mx-auto px-4 py-24 w-full flex flex-col md:flex-row items-center justify-between gap-10">
+              {/* Left: Text */}
+              <motion.div className="flex-1 flex flex-col items-start md:items-start text-left" initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
+                <motion.h1 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ fontFamily: "'IBM Plex Sans', 'Inter', sans-serif" }}>
+                  Παραγωγή Video & Animation που Εντυπωσιάζουν
+                </motion.h1>
+                <motion.p className="text-lg md:text-2xl text-gray-700 mb-10 font-medium max-w-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+                  Δημιουργούμε επαγγελματικά βίντεο, animations και motion graphics που απογειώνουν το brand σας και μαγνητίζουν το κοινό σας. Από προωθητικά clips μέχρι εκπαιδευτικά animations, η εικόνα σας γίνεται εμπειρία.
+                </motion.p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <motion.button
+                    className="inline-block px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-lg shadow-2xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
+                    whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => { window.location.href = '/contactme'; }}
+                  >
+                    <span className="relative z-10">Ζητήστε Προσφορά</span>
+                  </motion.button>
+                  <motion.button
+                    className="inline-block px-10 py-4 bg-gradient-to-r from-purple-400 to-blue-600 text-white rounded-full font-bold text-lg shadow-2xl border-2 border-transparent hover:border-purple-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-purple-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
+                    whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => {
+                      const section = document.getElementById('project-examples-section');
+                      if (section) section.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    <span className="relative z-10">Παραδείγματα Έργων</span>
+                  </motion.button>
+                </div>
+              </motion.div>
+              {/* Right: Decorative Video Image */}
+              <motion.div
+                className="flex-1 flex items-center justify-center w-full md:w-auto mt-12 md:mt-0"
+                initial={{ opacity: 0, x: 60, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 1, delay: 0.2 }}
               >
-                <span className="relative z-10">Ζητήστε Προσφορά</span>
-              </motion.button>
-              <motion.button
-                className="inline-block px-10 py-4 bg-gradient-to-r from-purple-400 to-blue-600 text-white rounded-full font-bold text-lg shadow-2xl border-2 border-transparent hover:border-purple-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-purple-400 animate-fade-in flex items-center gap-2 relative overflow-hidden"
-                whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => {
-                  const section = document.getElementById('project-examples-section');
-                  if (section) section.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                <span className="relative z-10">Παραδείγματα Έργων</span>
-              </motion.button>
+                <motion.img
+                  src={video2Img}
+                  alt="Video Hero"
+                  className="w-[320px] h-[220px] md:w-[400px] md:h-[320px] object-cover rounded-3xl shadow-2xl border-4 border-blue-100/60 bg-white/80"
+                  animate={{ y: [0, -18, 0, 18, 0] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ boxShadow: '0 8px 48px 0 rgba(80,80,200,0.13)' }}
+                />
+              </motion.div>
             </div>
-          </motion.div>
-          {/* Right: Decorative Video Image */}
-          <motion.div
-            className="flex-1 flex items-center justify-center w-full md:w-auto mt-12 md:mt-0"
-            initial={{ opacity: 0, x: 60, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
-            <motion.img
-              src={video2Img}
-              alt="Video Hero"
-              className="w-[320px] h-[220px] md:w-[400px] md:h-[320px] object-cover rounded-3xl shadow-2xl border-4 border-blue-100/60 bg-white/80"
-              animate={{ y: [0, -18, 0, 18, 0] }}
-              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ boxShadow: '0 8px 48px 0 rgba(80,80,200,0.13)' }}
-            />
-          </motion.div>
-        </div>
+          </>
+        )}
       </section>
 
       {/* What We Offer */}

@@ -116,15 +116,13 @@ const whyUs = [
 ];
 
 export default function DatabaseCloudInfrastructurePage() {
-  const { language, toggleLanguage } = useLanguage();
+  const { language } = useLanguage();
   useEffect(() => { AOS.init({ duration: 900, once: true }); }, []);
   return (
     <div className="bg-gradient-to-br from-white via-blue-50 to-gray-50 min-h-screen text-gray-900 font-sans">
       {/* Sticky Language Toggle */}
       <div className="fixed top-6 right-6 z-50">
-        <button onClick={toggleLanguage} className="bg-white/90 border border-blue-100 px-4 py-2 rounded-full shadow hover:bg-blue-50 font-semibold text-blue-700 transition-all duration-200">
-          {language === 'el' ? 'EN' : 'GR'}
-        </button>
+        {/* Αφαιρώ το κουμπί αλλαγής γλώσσας */}
       </div>
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none">
