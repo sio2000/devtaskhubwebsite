@@ -20,6 +20,9 @@ import codeImg from '../assets/code.jpg';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { motion } from 'framer-motion';
 import hotelImg from '../assets/Hotel.png';
+import architectureImg from '../assets/architecture.png';
+import hydrogenImg from '../assets/hydrogen.png';
+import cryptoImg from '../assets/crypto.png';
 
 const floatingIcons = [
   { icon: <FaCode />, style: 'top-10 left-10 text-blue-400' },
@@ -258,19 +261,19 @@ export default function WebDevelopmentPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
             {
-              img: '/src/assets/architecture.png',
+              img: architectureImg,
               title: 'Αρχιτεκτονικό & Κατασκευαστικό Γραφείο',
               desc: 'Σύγχρονη παρουσίαση υπηρεσιών και portfolio για τεχνικό γραφείο.',
               url: 'https://in-mavridis.gr/'
             },
             {
-              img: '/src/assets/hydrogen.png',
+              img: hydrogenImg,
               title: 'Κέντρο Ευεξίας',
               desc: 'Ιστοσελίδα για wellness center με online κρατήσεις και δυναμικό περιεχόμενο.',
               url: 'https://hydrogenlife.eu/'
             },
             {
-              img: '/src/assets/crypto.png',
+              img: cryptoImg,
               title: 'Προώθηση Custom CryptoCoin',
               desc: 'Landing page για την προώθηση custom κρυπτονομίσματος.',
               url: 'https://panitoscryptocoin.com/'
