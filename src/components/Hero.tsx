@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className={`relative min-h-screen flex items-center justify-center overflow-hidden ${isMobile ? 'bg-gradient-to-br from-blue-600 via-purple-600 to-teal-600' : ''}`}>
       {/* Animated Background, Floating Elements, Geometric Patterns, Scroll Indicator: ΜΟΝΟ σε desktop */}
       {!isMobile && (
         <>
