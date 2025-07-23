@@ -103,7 +103,6 @@ const Portfolio: React.FC = () => {
                     src={image}
                     alt={title}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                   {/* Project Icon */}
                   <div className="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg">

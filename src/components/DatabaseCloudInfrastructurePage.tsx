@@ -182,13 +182,13 @@ export default function DatabaseCloudInfrastructurePage() {
             <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-4 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">{language === 'el' ? 'Οι Υπηρεσίες Μας' : 'Our Services'}</h2>
             <p className="text-lg text-gray-700 mb-6 max-w-xl">{language === 'el' ? 'Υλοποιούμε cloud υποδομές, βάσεις δεδομένων και λύσεις ασφάλειας για κάθε ανάγκη.' : 'We deliver cloud infrastructure, database and security solutions for every need.'}</p>
             {/* Badges/Icons row */}
-            <div className={`flex flex-row gap-3 w-full py-2 justify-center md:justify-start ${window.innerWidth < 768 ? 'overflow-x-auto scrollbar-thin scrollbar-thumb-blue-200 scrollbar-track-transparent' : 'flex-wrap'}`}>
+            <div className="grid grid-cols-2 gap-4 w-full py-2 justify-center md:justify-start md:flex md:flex-row md:flex-wrap md:gap-3">
               {services.map((s, idx) => (
-                <div key={s.gr} className="flex flex-col items-center bg-white/80 rounded-2xl shadow-md border border-blue-100/40 px-4 py-3 min-w-[120px] max-w-[160px] flex-shrink-0 hover:shadow-xl transition-all duration-300">
-                  <div className="mb-2 flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-2 border-blue-200">
+                <div key={s.gr} className="flex flex-col items-center bg-white/80 rounded-2xl shadow-md border border-blue-100/40 px-5 py-4 min-w-[120px] max-w-[180px] flex-shrink-0 hover:shadow-xl transition-all duration-300">
+                  <div className="mb-2 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-2 border-blue-200">
                     {s.icon}
                   </div>
-                  <span className="text-xs font-semibold text-blue-900 mb-1 text-center leading-tight">{language === 'el' ? s.gr : s.en}</span>
+                  <span className="text-sm font-semibold text-blue-900 mb-1 text-center leading-tight">{language === 'el' ? s.gr : s.en}</span>
                 </div>
               ))}
             </div>

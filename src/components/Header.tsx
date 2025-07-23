@@ -40,18 +40,24 @@ const Header: React.FC = () => {
       navigate('/');
       return;
     }
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      // Αν δεν βρεθεί, δοκίμασε ξανά μετά από λίγο (για edge case)
-      setTimeout(() => {
-        const el2 = document.getElementById(sectionId);
-        if (el2) {
-          el2.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 300);
-    }
+    // Αν είμαστε ήδη στην αρχική, κάνε scroll και force reflow αν χρειάζεται
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        // Ενημέρωσε το hash για να δουλεύει και σε mobile browsers
+        window.location.hash = `#${sectionId}`;
+      } else {
+        // Αν δεν βρεθεί, δοκίμασε ξανά μετά από λίγο (για edge case)
+        setTimeout(() => {
+          const el2 = document.getElementById(sectionId);
+          if (el2) {
+            el2.scrollIntoView({ behavior: 'smooth' });
+            window.location.hash = `#${sectionId}`;
+          }
+        }, 300);
+      }
+    }, 0);
   };
 
   return (

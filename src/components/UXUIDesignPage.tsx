@@ -126,14 +126,14 @@ export default function UXUIDesignPage() {
             <h2 className="text-3xl md:text-4xl font-extrabold text-purple-700 mb-4 bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">Υπηρεσίες UX/UI</h2>
             <p className="text-lg text-gray-700 mb-6 max-w-xl">Σχεδιάζουμε premium interfaces για web & mobile, με έμφαση στη χρηστικότητα, την αισθητική και το αποτέλεσμα.</p>
             {/* Badges/Icons row */}
-            <div className={`flex flex-row gap-3 w-full py-2 justify-center md:justify-start ${isMobile ? 'overflow-x-auto scrollbar-thin scrollbar-thumb-purple-200 scrollbar-track-transparent' : 'flex-wrap'}`}>
+            <div className={`grid grid-cols-2 gap-4 w-full py-2 justify-center md:justify-start md:flex md:flex-row md:flex-wrap md:gap-3`}>
               {services.map((s, idx) => (
-                <div key={s.title} className="flex flex-col items-center bg-white/80 rounded-2xl shadow-md border border-purple-100/40 px-4 py-3 min-w-[120px] max-w-[160px] flex-shrink-0 hover:shadow-xl transition-all duration-300">
-                  <div className="mb-2 flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 shadow-inner border-2 border-purple-200">
+                <div key={s.title} className="flex flex-col items-center bg-white/80 rounded-2xl shadow-md border border-purple-100/40 px-5 py-4 min-w-[120px] max-w-[180px] flex-shrink-0 hover:shadow-xl transition-all duration-300">
+                  <div className="mb-2 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 shadow-inner border-2 border-purple-200">
                     {s.icon}
                   </div>
-                  <span className="text-xs font-semibold text-purple-900 mb-1 text-center leading-tight">{s.title}</span>
-                  <span className="text-[11px] text-gray-500 text-center leading-tight">{s.desc}</span>
+                  <span className="text-sm font-semibold text-purple-900 mb-1 text-center leading-tight">{s.title}</span>
+                  <span className="text-xs text-gray-500 text-center leading-tight">{s.desc}</span>
                 </div>
               ))}
             </div>
