@@ -137,10 +137,10 @@ const Footer: React.FC = () => {
                 +306971982563
               </a>
               <a
-                href="mailto:info@devtaskhub.com"
+                href="mailto:Devtaskhub@gmail.com"
                 className="block hover:text-orange-300 transition-colors duration-300"
               >
-                info@devtaskhub.com
+                DevTaskHub@gmail.com
               </a>
               <a
                 href="https://www.instagram.com/devtaskhub/"
