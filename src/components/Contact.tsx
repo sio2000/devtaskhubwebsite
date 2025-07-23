@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Send, Linkedin, Github, CheckCircle } from 'lucide
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
-import { FaLinkedin, FaGithub, FaEnvelope, FaUserCircle, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaUserCircle, FaMapMarkerAlt, FaPhoneAlt, FaInstagram } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -228,10 +228,14 @@ const Contact: React.FC = () => {
           <FaPhoneAlt className="h-5 w-5 text-green-500 group-hover:text-green-700 transition-colors" />
           <span>+30 6971982563</span>
         </a>
+        <a href="https://www.instagram.com/devtaskhub/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-pink-600 text-lg font-semibold hover:text-pink-400 transition-colors group">
+          <FaInstagram className="h-5 w-5 text-pink-500 group-hover:text-pink-600 transition-colors" />
+          <span>Instagram</span>
+        </a>
         <div className="flex items-center gap-4 text-red-700 text-lg font-semibold">
           <FaMapMarkerAlt className="h-5 w-5 text-red-500" />
           <span>Θεσσαλονίκη, Ελλάδα</span>
-          </div>
+        </div>
       </motion.div>
     </div>
   </div>
