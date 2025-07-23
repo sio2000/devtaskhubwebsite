@@ -199,22 +199,26 @@ export default function AIIntegrationApplicationsPage() {
       </section>
 
       {/* Πραγματικά Παραδείγματα */}
-      <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Πραγματικά Παραδείγματα</motion.h2>
-        <div className="relative flex items-center justify-center">
-          <button className="absolute left-0 z-10 p-3 bg-white/80 rounded-full shadow hover:bg-blue-100 transition-all" onClick={() => setCurrentCase((currentCase - 1 + caseStudies.length) % caseStudies.length)}><FaChevronLeft className="text-blue-500 text-2xl" /></button>
-          <motion.div className="w-full max-w-lg mx-auto group bg-white/90 rounded-3xl shadow-2xl border border-blue-100/40 overflow-hidden flex flex-col hover:scale-105 hover:shadow-3xl transition-all duration-300 cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-200" key={caseStudies[currentCase].client} initial={{ opacity: 0, y: 50, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.5 }}>
-            <div className="flex flex-col items-center p-8">
-              <FaMicrochip className="text-purple-400 text-5xl mb-4" />
-              <h4 className="text-2xl font-bold text-blue-900 mb-2">{caseStudies[currentCase].client}</h4>
-              <p className="text-blue-700 text-base mb-2">Χρήση AI: <span className="font-semibold">{caseStudies[currentCase].use}</span></p>
-              <p className="text-gray-700 text-base mb-2">Τεχνολογίες: <span className="font-semibold">{caseStudies[currentCase].tech}</span></p>
-              <p className="text-green-600 text-lg font-bold">{caseStudies[currentCase].kpi}</p>
+      <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-4 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Πραγματικά Παραδείγματα</motion.h2>
+      <span className="uppercase tracking-widest text-xs font-bold text-blue-400 mb-8 block text-center">AI Case Studies</span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full">
+        {caseStudies.map((c, idx) => (
+          <div key={c.client} className={`group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden min-h-[260px] ${idx % 2 === 0 ? 'bg-gradient-to-br from-blue-50 to-purple-100' : 'bg-gradient-to-br from-purple-50 to-blue-100'} w-full`}>
+            <div className="mb-4 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 via-purple-300 to-cyan-400 shadow-inner border-4 border-blue-200 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+              <FaMicrochip className="text-purple-400 text-5xl" />
             </div>
-          </motion.div>
-          <button className="absolute right-0 z-10 p-3 bg-white/80 rounded-full shadow hover:bg-blue-100 transition-all" onClick={() => setCurrentCase((currentCase + 1) % caseStudies.length)}><FaChevronRight className="text-blue-500 text-2xl" /></button>
-        </div>
-      </section>
+            <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-base shadow-md mb-2 mt-2 tracking-wide">{c.client}</span>
+            <p className="text-blue-700 text-base mb-2">Χρήση AI: <span className="font-semibold">{c.use}</span></p>
+            <p className="text-gray-700 text-base mb-2">Τεχνολογίες: <span className="font-semibold">{c.tech}</span></p>
+            <p className="text-green-600 text-lg font-bold">{c.kpi}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex gap-2 mt-6 justify-center">
+        {caseStudies.map((_, idx) => (
+          <span key={idx} className="w-3 h-3 rounded-full bg-blue-300 opacity-60"></span>
+        ))}
+      </div>
 
       {/* Τελικό CTA */}
       <section className="max-w-7xl mx-auto py-24 px-4 flex flex-col items-center text-center">

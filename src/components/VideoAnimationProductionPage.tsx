@@ -15,6 +15,9 @@ import video3Img from '../assets/video3.jpg';
 import hotelVideo from '../assets/HotelVideo.mp4';
 import hotelVideo2 from '../assets/HotelVideo2.mp4';
 import hotelVideo3 from '../assets/HotelVideo3.mp4';
+import trippyAnimation from '../assets/trippy_animation.mp4';
+import flowersMen from '../assets/flowers_men.mp4';
+import sharks from '../assets/sharks.mp4';
 
 function playSound(src: string) {
   if (!src) return;
@@ -303,6 +306,22 @@ export default function VideoAnimationProductionPage() {
             <video src={hotelVideo3} controls className="rounded-2xl shadow-xl w-full h-64 object-cover mb-4" />
             <h4 className="text-lg font-bold text-blue-900 mb-2">Animation Design</h4>
             <p className="text-gray-600 text-base text-center">Δημιουργία custom animation για προώθηση υπηρεσιών και προϊόντων με σύγχρονη αισθητική.</p>
+          </div>
+          {/* Νέα videos */}
+          <div className="flex flex-col items-center">
+            <video src={trippyAnimation} controls className="rounded-2xl shadow-xl w-full h-64 object-cover mb-4" />
+            <h4 className="text-lg font-bold text-blue-900 mb-2">Animation Design</h4>
+            <p className="text-gray-600 text-base text-center">Ψυχεδελικό animation με έντονα χρώματα και εφέ.</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <video src={flowersMen} controls className="rounded-2xl shadow-xl w-full h-64 object-cover mb-4" />
+            <h4 className="text-lg font-bold text-blue-900 mb-2">Animation Design</h4>
+            <p className="text-gray-600 text-base text-center">Καλλιτεχνικό animation με λουλούδια και ανθρώπινες μορφές.</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <video src={sharks} controls className="rounded-2xl shadow-xl w-full h-64 object-cover mb-4" />
+            <h4 className="text-lg font-bold text-blue-900 mb-2">Animation Design</h4>
+            <p className="text-gray-600 text-base text-center">Δυναμικό animation με καρχαρίες σε κίνηση.</p>
           </div>
         </div>
       </section>

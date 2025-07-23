@@ -15,6 +15,7 @@ import cloudImg from '../assets/internet.jpg';
 import dbImg from '../assets/code.jpg';
 import securityImg from '../assets/crypto.png';
 import architectureImg from '../assets/architecture.png';
+import databaseImg from '../assets/database.jpg';
 
 function playSound(src: string) {
   if (!src) return;
@@ -126,9 +127,19 @@ export default function DatabaseCloudInfrastructurePage() {
       </div>
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pb-10 select-none">
+        {/* Background image + overlay */}
+        <div className="absolute inset-0 z-0">
+          <img src={databaseImg} alt="Database Background" className="w-full h-full object-cover object-center opacity-60" style={{mixBlendMode:'multiply'}} />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-400/70 via-purple-400/60 to-teal-400/60" />
+          <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-blue-400 via-purple-400 to-teal-400 opacity-40 rounded-full blur-3xl" style={{filter:'blur(80px)'}}></div>
+          <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-tr from-teal-400 via-blue-300 to-purple-400 opacity-30 rounded-full blur-2xl" style={{filter:'blur(60px)'}}></div>
+          <div className="absolute top-1/2 left-1/3 w-1/4 h-1/4 bg-gradient-to-br from-yellow-300 via-blue-200 to-teal-400 opacity-20 rounded-full blur-2xl" style={{filter:'blur(40px)'}}></div>
+        </div>
         {/* Animated Background */}
         <motion.div className="absolute inset-0 z-0 pointer-events-none">
-          {["Cloud", "DB", "SQL", "NoSQL", "AWS", "Azure", "GCP", "Scale", "Secure", "Infra"].map((kw, i) => (
+          {[
+            "Cloud", "DB", "SQL", "NoSQL", "AWS", "Azure", "GCP", "Scale", "Secure", "Infra"
+          ].map((kw, i) => (
             <motion.div
               key={kw}
               className="absolute z-10 opacity-20 text-lg md:text-2xl font-bold text-blue-400"
@@ -160,23 +171,58 @@ export default function DatabaseCloudInfrastructurePage() {
       </section>
 
       {/* Our Services */}
-      <section id="services-section" className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-gray-500 bg-clip-text text-transparent drop-shadow-lg">{language === 'el' ? 'Οι Υπηρεσίες Μας' : 'Our Services'}</motion.h2>
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
-          {services.map((s, idx) => (
-            <motion.div key={s.gr} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => playSound(clickSfx)}><div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-gray-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-gray-300">{s.icon}</div><h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">{language === 'el' ? s.gr : s.en}</h4></motion.div>
-          ))}
-        </motion.div>
+      <section id="services-section" className="max-w-4xl mx-auto py-24 px-4">
+        <div className="relative bg-gradient-to-br from-blue-100 via-white to-purple-100/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-10 flex flex-col md:flex-row items-center gap-10 overflow-hidden">
+          {/* Εικόνα/Γραφικό Cloud */}
+          <div className="flex-shrink-0 flex items-center justify-center w-full md:w-1/3 mb-8 md:mb-0">
+            <img src={cloudImg} alt="Cloud Design" className="w-40 h-40 md:w-56 md:h-56 object-contain rounded-2xl shadow-xl bg-white/80" />
+          </div>
+          {/* Περιεχόμενο */}
+          <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-4 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">{language === 'el' ? 'Οι Υπηρεσίες Μας' : 'Our Services'}</h2>
+            <p className="text-lg text-gray-700 mb-6 max-w-xl">{language === 'el' ? 'Υλοποιούμε cloud υποδομές, βάσεις δεδομένων και λύσεις ασφάλειας για κάθε ανάγκη.' : 'We deliver cloud infrastructure, database and security solutions for every need.'}</p>
+            {/* Badges/Icons row */}
+            <div className={`flex flex-row gap-3 w-full py-2 justify-center md:justify-start ${window.innerWidth < 768 ? 'overflow-x-auto scrollbar-thin scrollbar-thumb-blue-200 scrollbar-track-transparent' : 'flex-wrap'}`}>
+              {services.map((s, idx) => (
+                <div key={s.gr} className="flex flex-col items-center bg-white/80 rounded-2xl shadow-md border border-blue-100/40 px-4 py-3 min-w-[120px] max-w-[160px] flex-shrink-0 hover:shadow-xl transition-all duration-300">
+                  <div className="mb-2 flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-2 border-blue-200">
+                    {s.icon}
+                  </div>
+                  <span className="text-xs font-semibold text-blue-900 mb-1 text-center leading-tight">{language === 'el' ? s.gr : s.en}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* How We Work */}
-      <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-gray-500 bg-clip-text text-transparent drop-shadow-lg">{language === 'el' ? 'Πώς Δουλεύουμε' : 'How We Work'}</motion.h2>
-        <motion.div className="flex flex-col md:flex-row justify-center items-center gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
-          {workflow.map((step, idx) => (
-            <motion.div key={step.gr} className="flex flex-col items-center bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-blue-100/40 p-10 group hover:shadow-2xl transition-all duration-300 relative overflow-hidden min-w-[180px]" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }}><div className="mb-4 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-gray-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-gray-300">{step.icon}</div><h4 className="text-base font-bold text-blue-900 mb-2 group-hover:text-blue-500 transition-colors duration-300 tracking-tight">{language === 'el' ? step.gr : step.en}</h4>{idx < workflow.length - 1 && <div className="w-1 h-10 bg-gradient-to-b from-blue-300 to-gray-200 mx-auto my-2 rounded-full" />}</motion.div>
-          ))}
-        </motion.div>
+      <section className="max-w-4xl mx-auto py-24 px-4">
+        <div className="relative bg-gradient-to-br from-blue-100 via-white to-purple-100/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-10 flex flex-col items-center gap-10 overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-8 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">{language === 'el' ? 'Πώς Δουλεύουμε' : 'How We Work'}</h2>
+          <p className="text-lg text-gray-700 mb-10 max-w-xl text-center">{language === 'el' ? 'Ακολουθούμε μια δομημένη διαδικασία για να διασφαλίσουμε την επιτυχία κάθε έργου.' : 'We follow a structured process to ensure project success.'}</p>
+          {/* Timeline */}
+          <div className="relative flex flex-col items-center w-full max-w-2xl mx-auto">
+            {workflow.map((step, idx) => (
+              <div key={step.gr} className="flex items-center w-full mb-8 last:mb-0">
+                <div className="flex flex-col items-center mr-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center text-white text-2xl font-bold shadow-lg border-4 border-white">
+                    {idx + 1}
+                  </div>
+                  {idx < workflow.length - 1 && (
+                    <div className="w-1 h-12 bg-gradient-to-b from-blue-300 to-purple-200 mx-auto"></div>
+                  )}
+                </div>
+                <div className="flex-1 bg-white/80 rounded-2xl shadow-md border border-blue-100/40 px-6 py-5 flex flex-col md:flex-row items-center md:items-start gap-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-2 border-blue-200">
+                    {step.icon}
+                  </div>
+                  <span className="text-base font-semibold text-blue-900 text-center md:text-left">{language === 'el' ? step.gr : step.en}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Who We Serve */}

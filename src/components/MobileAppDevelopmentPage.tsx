@@ -12,7 +12,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import smartphoneImg from '../assets/smartphone.jpg';
 import codeImg from '../assets/code.jpg';
-import ui2Img from '../assets/ui2.png';
+import ui2Img from '../assets/ui2.jpg';
 import ui3Img from '../assets/ui3.jpg';
 import video2Img from '../assets/video2.jpg';
 import video3Img from '../assets/video3.jpg';
@@ -142,13 +142,50 @@ export default function MobileAppDevelopmentPage() {
       </section>
 
       {/* Types of Mobile App Development */}
-      <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Τύποι Mobile Εφαρμογών</motion.h2>
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
-          {appTypes.map((t, idx) => (
-            <motion.div key={t.title} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => playSound(clickSfx)}><div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">{t.icon}</div><h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">{t.title}</h4><p className="text-gray-600 mb-6 text-base leading-relaxed">{t.desc}</p><motion.div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-focus:border-blue-400 transition-all duration-300" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} /></motion.div>
-          ))}
-        </motion.div>
+      <section className="relative max-w-xl mx-auto py-20 px-4">
+        {/* Floating gradient shapes */}
+        <div className="absolute -top-16 -left-16 w-60 h-60 bg-gradient-to-br from-blue-200 via-purple-200 to-white opacity-40 rounded-full blur-3xl z-0"></div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tr from-purple-200 via-blue-100 to-white opacity-30 rounded-full blur-2xl z-0"></div>
+        <div className="relative z-10 bg-white/70 backdrop-blur-2xl rounded-3xl shadow-2xl border border-blue-100/60 p-8 flex flex-col items-center gap-8 overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-500 to-blue-400 bg-clip-text text-transparent mb-2 drop-shadow-lg text-center">Τύποι Mobile Εφαρμογών</h2>
+          <div className="h-1 w-24 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mb-6 mx-auto animate-pulse"></div>
+          <p className="text-base text-gray-700 mb-6 text-center max-w-lg">Διάλεξε τον τύπο εφαρμογής που ταιριάζει καλύτερα στις ανάγκες σου. Κάθε επιλογή έχει τα δικά της πλεονεκτήματα και είναι ιδανική για διαφορετικές περιπτώσεις.</p>
+          <div className="flex flex-col gap-8 w-full">
+            {/* iPhone & iPad Apps */}
+            <div className="group bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-blue-200/60 p-6 flex flex-col items-center text-center transition-all duration-300 hover:shadow-3xl hover:scale-105 hover:-rotate-1 focus:outline-none focus:ring-4 focus:ring-blue-100 relative overflow-hidden w-full">
+              <div className="absolute -top-6 -right-6 w-16 h-16 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full blur-2xl z-0"></div>
+              <div className="relative z-10 mb-3 flex items-center justify-center w-14 h-14 rounded-full bg-blue-200 shadow-inner border-2 border-blue-300">
+                <FaApple className="text-blue-700 text-3xl" />
+              </div>
+              <h3 className="text-lg font-bold text-blue-900 mb-1 relative z-10">iPhone & iPad Apps</h3>
+              <span className="inline-block px-2 py-1 rounded bg-blue-100 text-blue-700 text-xs font-semibold mb-2 relative z-10">Best for Apple users</span>
+              <p className="text-gray-700 text-base mb-1 relative z-10">Ιδανικό αν το κοινό σου χρησιμοποιεί κυρίως iPhone ή iPad. Προσφέρει την πιο ομαλή εμπειρία και αξιοποιεί πλήρως τις δυνατότητες της Apple.</p>
+              <p className="text-gray-500 text-sm relative z-10">Εύκολη διανομή μέσω App Store.</p>
+            </div>
+            {/* Android Apps */}
+            <div className="group bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-green-200/60 p-6 flex flex-col items-center text-center transition-all duration-300 hover:shadow-3xl hover:scale-105 hover:rotate-1 focus:outline-none focus:ring-4 focus:ring-green-100 relative overflow-hidden w-full">
+              <div className="absolute -top-6 -left-6 w-16 h-16 bg-gradient-to-br from-green-200 to-blue-200 opacity-20 rounded-full blur-2xl z-0"></div>
+              <div className="relative z-10 mb-3 flex items-center justify-center w-14 h-14 rounded-full bg-green-200 shadow-inner border-2 border-green-300">
+                <FaAndroid className="text-green-700 text-3xl" />
+              </div>
+              <h3 className="text-lg font-bold text-green-900 mb-1 relative z-10">Android Apps</h3>
+              <span className="inline-block px-2 py-1 rounded bg-green-100 text-green-700 text-xs font-semibold mb-2 relative z-10">Best for Android users</span>
+              <p className="text-gray-700 text-base mb-1 relative z-10">Η καλύτερη επιλογή αν το κοινό σου έχει Android συσκευές. Προσφέρει εξαιρετική απόδοση και εμπειρία χρήστη σε όλα τα Android κινητά και tablets.</p>
+              <p className="text-gray-500 text-sm relative z-10">Διανομή μέσω Google Play Store.</p>
+            </div>
+            {/* Progressive Web Apps */}
+            <div className="group bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-purple-200/60 p-6 flex flex-col items-center text-center transition-all duration-300 hover:shadow-3xl hover:scale-105 hover:-rotate-1 focus:outline-none focus:ring-4 focus:ring-purple-100 relative overflow-hidden w-full">
+              <div className="absolute -bottom-6 right-6 w-16 h-16 bg-gradient-to-br from-purple-200 to-blue-200 opacity-20 rounded-full blur-2xl z-0"></div>
+              <div className="relative z-10 mb-3 flex items-center justify-center w-14 h-14 rounded-full bg-purple-200 shadow-inner border-2 border-purple-300">
+                <FaCloud className="text-purple-700 text-3xl" />
+              </div>
+              <h3 className="text-lg font-bold text-purple-900 mb-1 relative z-10">Progressive Web Apps</h3>
+              <span className="inline-block px-2 py-1 rounded bg-purple-100 text-purple-700 text-xs font-semibold mb-2 relative z-10">Best for all devices</span>
+              <p className="text-gray-700 text-base mb-1 relative z-10">Λειτουργεί σε κάθε κινητό ή υπολογιστή, χωρίς εγκατάσταση. Ιδανικό για απλή πρόσβαση και χαμηλό κόστος ανάπτυξης.</p>
+              <p className="text-gray-500 text-sm relative z-10">Ανοίγει από browser, προστίθεται στην αρχική οθόνη.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Tools & Technologies */}
@@ -176,42 +213,41 @@ export default function MobileAppDevelopmentPage() {
       </section>
 
       {/* App Development Process */}
-      <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Διαδικασία Ανάπτυξης Εφαρμογής</motion.h2>
-        <motion.div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-4" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
-          {[
-            { icon: <FaSearch className="text-blue-500 text-2xl" />, title: 'Ανακάλυψη Ιδέας', desc: 'Συζήτηση, ανάλυση αναγκών και στόχων.' },
-            { icon: <FaPaintBrush className="text-purple-500 text-2xl" />, title: 'UI/UX Design', desc: 'Wireframes, mockups και σχεδιασμός εμπειρίας.' },
-            { icon: <FaCode className="text-pink-500 text-2xl" />, title: 'Υλοποίηση', desc: 'Ανάπτυξη native ή cross-platform εφαρμογής.' },
-            { icon: <FaRocket className="text-cyan-500 text-2xl" />, title: 'Λανσάρισμα', desc: 'Δημοσίευση σε App Store/Google Play & υποστήριξη.' },
-            { icon: <FaSyncAlt className="text-green-500 text-2xl" />, title: 'Υποστήριξη', desc: 'Συνεχής βελτίωση, updates και τεχνική υποστήριξη.' },
-          ].map((step, idx, arr) => (
-            <React.Fragment key={step.title}>
-              <motion.div
-                className="bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-2xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center group hover:shadow-2xl transition-all duration-300 relative overflow-hidden min-w-[220px]"
-                initial={{ opacity: 0, y: 40, scale: 0.97 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                whileHover={{ scale: 1.08 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.07 }}
-              >
-                <div className="mb-6 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">
-                  {step.icon}
+      <section className="max-w-4xl mx-auto py-24 px-4">
+        <div className="relative bg-gradient-to-br from-blue-100 via-white to-purple-100/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-10 flex flex-col items-center gap-10 overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-8 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Διαδικασία Ανάπτυξης Εφαρμογής</h2>
+          <p className="text-lg text-gray-700 mb-10 max-w-xl text-center">Ακολουθούμε μια δομημένη διαδικασία για να διασφαλίσουμε την επιτυχία κάθε mobile app.</p>
+          {/* Timeline */}
+          <div className="relative flex flex-col items-center w-full max-w-2xl mx-auto">
+            {[
+              { icon: <FaPalette className="text-blue-400 text-2xl" />, title: 'Ανακάλυψη Ιδέας', desc: 'Συζήτηση, ανάλυση, στόχοι.' },
+              { icon: <FaPalette className="text-pink-400 text-2xl" />, title: 'UI/UX Design', desc: 'Wireframes, πρωτότυπα, design.' },
+              { icon: <FaCode className="text-purple-400 text-2xl" />, title: 'Υλοποίηση', desc: 'Development, testing, βελτιστοποίηση.' },
+              { icon: <FaRocket className="text-yellow-400 text-2xl" />, title: 'Λανσάρισμα', desc: 'App Store, Google Play, υποστήριξη.' },
+              { icon: <FaCloud className="text-blue-400 text-2xl" />, title: 'Υποστήριξη', desc: 'Συνεχής βελτίωση & updates.' },
+            ].map((step, idx, arr) => (
+              <div key={step.title} className="flex items-center w-full mb-8 last:mb-0">
+                <div className="flex flex-col items-center mr-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center text-white text-2xl font-bold shadow-lg border-4 border-white">
+                    {idx + 1}
+                  </div>
+                  {idx < arr.length - 1 && (
+                    <div className="w-1 h-12 bg-gradient-to-b from-blue-300 to-purple-200 mx-auto"></div>
+                  )}
                 </div>
-                <h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-500 transition-colors duration-300 tracking-tight">
-                  {step.title}
-                </h4>
-                <p className="text-gray-600 mb-4 text-base leading-relaxed">{step.desc}</p>
-              </motion.div>
-              {/* Small arrow between bricks except after the last */}
-              {idx < arr.length - 1 && (
-                <div className="flex justify-center items-center w-full md:w-auto my-2 md:my-0">
-                  <span className="text-blue-400 text-3xl md:text-4xl font-bold select-none">→</span>
+                <div className="flex-1 bg-white/80 rounded-2xl shadow-md border border-blue-100/40 px-6 py-5 flex flex-col md:flex-row items-center md:items-start gap-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-2 border-blue-200">
+                    {step.icon}
+                  </div>
+                  <div>
+                    <span className="text-base font-semibold text-blue-900 text-center md:text-left block">{step.title}</span>
+                    <span className="text-sm text-gray-600 text-center md:text-left block mt-1">{step.desc}</span>
+                  </div>
                 </div>
-              )}
-            </React.Fragment>
-          ))}
-        </motion.div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Industry Use Cases */}

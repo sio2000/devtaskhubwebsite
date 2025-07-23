@@ -43,6 +43,14 @@ const Header: React.FC = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // Αν δεν βρεθεί, δοκίμασε ξανά μετά από λίγο (για edge case)
+      setTimeout(() => {
+        const el2 = document.getElementById(sectionId);
+        if (el2) {
+          el2.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
     }
   };
 

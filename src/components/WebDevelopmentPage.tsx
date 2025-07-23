@@ -23,6 +23,7 @@ import hotelImg from '../assets/Hotel.png';
 import architectureImg from '../assets/architecture.png';
 import hydrogenImg from '../assets/hydrogen.png';
 import cryptoImg from '../assets/crypto.png';
+import cmdImg from '../assets/cmd.jpg';
 
 const floatingIcons = [
   { icon: <FaCode />, style: 'top-10 left-10 text-blue-400' },
@@ -75,7 +76,7 @@ const stats = [
 ];
 
 const unsplashHero = 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80';
-const unsplashTech = 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80';
+const unsplashTech = cmdImg;
 const unsplashWorkspace = 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80';
 
 // const unsplashWhyMe = require('../assets/code.jpg');
@@ -268,7 +269,7 @@ export default function WebDevelopmentPage() {
           <img src={codeImg} alt="Γιατί να επιλέξετε εμένα" className="rounded-3xl shadow-2xl object-cover w-full h-80 md:h-96" style={{objectPosition:'center'}} />
         </div>
         <div className="relative bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-10 flex flex-col items-center w-full md:w-1/2">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Γιατί να επιλέξετε εμένα;</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Γιατί να επιλέξετε εμάς;</h2>
           <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-2">Εξειδικευόμαστε στη δημιουργία μοντέρνων, γρήγορων και αποδοτικών ιστοσελίδων που προσαρμόζονται απόλυτα στις ανάγκες σας.</p>
           <p className="text-lg md:text-xl text-blue-700 max-w-2xl mx-auto font-semibold">Από το πρώτο brief μέχρι την τελική παράδοση, προσφέρουμε <span className='bg-gradient-to-r from-blue-200 to-purple-200 px-2 rounded'>ομαδική υποστήριξη</span>, <span className='bg-gradient-to-r from-blue-100 to-purple-100 px-2 rounded'>διαφάνεια</span> και <span className='bg-gradient-to-r from-blue-300 to-purple-300 px-2 rounded'>κορυφαία ποιότητα</span>.</p>
         </div>
@@ -354,35 +355,39 @@ export default function WebDevelopmentPage() {
         </div>
       </section>
       {/* Πορεία Υλοποίησης */}
-      <section className="max-w-7xl mx-auto py-24 px-4">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Πορεία Υλοποίησης</h2>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-4">
-          {[
-            { icon: <FaSearch className="text-blue-500 text-2xl" />, title: 'Ανάλυση', desc: 'Κατανοούμε τις ανάγκες και τους στόχους σας.' },
-            { icon: <FaPaintBrush className="text-purple-500 text-2xl" />, title: 'Σχεδίαση', desc: 'Δημιουργούμε wireframes και mockups.' },
-            { icon: <FaCode className="text-pink-500 text-2xl" />, title: 'Υλοποίηση', desc: 'Αναπτύσσουμε το site με σύγχρονες τεχνολογίες.' },
-            { icon: <FaRocket className="text-cyan-500 text-2xl" />, title: 'Παράδοση', desc: 'Παραδίδουμε και υποστηρίζουμε το έργο σας.' },
-          ].map((w, idx, arr) => (
-            <React.Fragment key={w.title}>
-              <div
-                className="bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-2xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center group hover:shadow-2xl transition-all duration-300 relative overflow-hidden min-w-[220px]"
-              >
-                <div className="mb-6 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-4 border-blue-200">
-                  {w.icon}
+      <section className="max-w-4xl mx-auto py-24 px-4">
+        <div className="relative bg-gradient-to-br from-blue-100 via-white to-purple-100/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-blue-100/40 p-10 flex flex-col items-center gap-10 overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-8 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Πορεία Υλοποίησης</h2>
+          <p className="text-lg text-gray-700 mb-10 max-w-xl text-center">Ακολουθούμε μια δομημένη διαδικασία για να διασφαλίσουμε την επιτυχία κάθε έργου web development.</p>
+          {/* Timeline */}
+          <div className="relative flex flex-col items-center w-full max-w-2xl mx-auto">
+            {[
+              { icon: <FaSearch className="text-blue-500 text-2xl" />, title: 'Ανάλυση', desc: 'Κατανοούμε τις ανάγκες και τους στόχους σας.' },
+              { icon: <FaPaintBrush className="text-purple-500 text-2xl" />, title: 'Σχεδίαση', desc: 'Δημιουργούμε wireframes και mockups.' },
+              { icon: <FaCode className="text-pink-500 text-2xl" />, title: 'Υλοποίηση', desc: 'Αναπτύσσουμε το site με σύγχρονες τεχνολογίες.' },
+              { icon: <FaRocket className="text-cyan-500 text-2xl" />, title: 'Παράδοση', desc: 'Παραδίδουμε και υποστηρίζουμε το έργο σας.' },
+            ].map((step, idx, arr) => (
+              <div key={step.title} className="flex items-center w-full mb-8 last:mb-0">
+                <div className="flex flex-col items-center mr-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center text-white text-2xl font-bold shadow-lg border-4 border-white">
+                    {idx + 1}
+                  </div>
+                  {idx < arr.length - 1 && (
+                    <div className="w-1 h-12 bg-gradient-to-b from-blue-300 to-purple-200 mx-auto"></div>
+                  )}
                 </div>
-                <h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-500 transition-colors duration-300 tracking-tight">
-                  {w.title}
-                </h4>
-                <p className="text-gray-600 mb-4 text-base leading-relaxed">{w.desc}</p>
+                <div className="flex-1 bg-white/80 rounded-2xl shadow-md border border-blue-100/40 px-6 py-5 flex flex-col md:flex-row items-center md:items-start gap-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner border-2 border-blue-200">
+                    {step.icon}
+                  </div>
+                  <div>
+                    <span className="text-base font-semibold text-blue-900 text-center md:text-left block">{step.title}</span>
+                    <span className="text-sm text-gray-600 text-center md:text-left block mt-1">{step.desc}</span>
+                  </div>
+                </div>
               </div>
-              {/* Small arrow between bricks except after the last */}
-              {idx < arr.length - 1 && (
-                <div className="flex justify-center items-center w-full md:w-auto my-2 md:my-0">
-                  <span className="text-blue-400 text-3xl md:text-4xl font-bold select-none">→</span>
-                </div>
-              )}
-            </React.Fragment>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
       {/* Τεχνολογίες */}
