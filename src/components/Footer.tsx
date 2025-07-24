@@ -5,7 +5,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useIsMobile';
-import { FaInstagram } from 'react-icons/fa';
+import { FaInstagram, FaFacebook } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   const { language } = useLanguage();
@@ -141,6 +141,15 @@ const Footer: React.FC = () => {
                 className="block hover:text-orange-300 transition-colors duration-300"
               >
                 DevTaskHub@gmail.com
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61578671912833"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors duration-300 mt-2"
+              >
+                <FaFacebook className="h-5 w-5" />
+                <span>Facebook</span>
               </a>
               <a
                 href="https://www.instagram.com/devtaskhub/"
