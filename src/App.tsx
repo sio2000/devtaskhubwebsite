@@ -37,8 +37,8 @@ function App() {
             <Route path="/" element={
               <>
                 <Helmet>
-                  <title>DevTaskHub | Κατασκευή Ιστοσελίδων & Εφαρμογών στη Θεσσαλονίκη</title>
-                  <meta name="description" content="Κατασκευή ιστοσελίδων, e-shop, mobile apps, AI και SEO από εξειδικευμένη ομάδα στη Θεσσαλονίκη. Responsive design, ταχύτητα, ασφάλεια, υποστήριξη." />
+                  <title>DevTaskHub | Κατασκευή Custom Ιστοσελίδων & Mobile Εφαρμογών</title>
+                  <meta name="description" content="Κατασκευή custom ιστοσελίδων, e-shop, mobile apps, AI και SEO από εξειδικευμένη ομάδα στη Θεσσαλονίκη. Responsive design, ταχύτητα, ασφάλεια, υποστήριξη." />
                 </Helmet>
                 <Hero />
                 <HomeShowcaseSection />
