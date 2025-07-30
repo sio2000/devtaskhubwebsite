@@ -232,7 +232,7 @@ const Contact: React.FC = () => {
           <FaInstagram className="h-5 w-5 text-pink-500 group-hover:text-pink-600 transition-colors" />
           <span>Instagram</span>
         </a>
-        <a href="https://www.facebook.com/profile.php?id=61578671912833" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-blue-600 text-lg font-semibold hover:text-blue-800 transition-colors group">
+        <a href="https://www.facebook.com/profile.php?id=61578746165941" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-blue-600 text-lg font-semibold hover:text-blue-800 transition-colors group">
           <FaFacebook className="h-5 w-5 text-blue-500 group-hover:text-blue-700 transition-colors" />
           <span>Facebook</span>
         </a>

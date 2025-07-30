@@ -143,7 +143,7 @@ const Footer: React.FC = () => {
                 DevTaskHub@gmail.com
               </a>
               <a
-                href="https://www.facebook.com/profile.php?id=61578671912833"
+                href="https://www.facebook.com/profile.php?id=61578746165941"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors duration-300 mt-2"
