@@ -5,7 +5,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useIsMobile';
-import { FaInstagram, FaFacebook } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaTiktok } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   const { language } = useLanguage();
@@ -159,6 +159,15 @@ const Footer: React.FC = () => {
               >
                 <FaInstagram className="h-5 w-5" />
                 <span>Instagram</span>
+              </a>
+              <a
+                href="https://www.tiktok.com/@devtaskhub"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors duration-300 mt-2"
+              >
+                <FaTiktok className="h-5 w-5" />
+                <span>TikTok</span>
               </a>
             </div>
           </div>

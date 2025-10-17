@@ -19,6 +19,20 @@ import video3Img from '../assets/video3.jpg';
 import video4Img from '../assets/video4.jpg';
 import phoneImg from '../assets/phone.jpg';
 import appsImg from '../assets/apps.jpg';
+// GetFit App Images
+import v1Img from '../assets/v1.png';
+import v2Img from '../assets/v2.png';
+import v3Img from '../assets/v3.png';
+import v4Img from '../assets/v4.png';
+import v5Img from '../assets/v5.png';
+import v6Img from '../assets/v6.png';
+import v7Img from '../assets/v7.png';
+import v8Img from '../assets/v8.png';
+import v9Img from '../assets/v9.png';
+import v10Img from '../assets/v10.png';
+import v11Img from '../assets/v11.png';
+import v12Img from '../assets/v12.png';
+import logoGymImg from '../assets/logoGym.png';
 
 const unsplashHero = smartphoneImg;
 const unsplashTeam = codeImg;
@@ -80,7 +94,36 @@ const useCases = [
 ];
 
 export default function MobileAppDevelopmentPage() {
+  const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
+  const [fullscreenAlt, setFullscreenAlt] = useState<string>('');
+  
   useEffect(() => { AOS.init({ duration: 900, once: true }); }, []);
+
+  const openFullscreen = (imageSrc: string, alt: string) => {
+    setFullscreenImage(imageSrc);
+    setFullscreenAlt(alt);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenImage(null);
+    setFullscreenAlt('');
+    document.body.style.overflow = 'unset';
+  };
+
+  // Close on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeFullscreen();
+      }
+    };
+
+    if (fullscreenImage) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [fullscreenImage]);
   return (
     <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900 font-sans">
       {/* Hero Section */}
@@ -250,51 +293,271 @@ export default function MobileAppDevelopmentPage() {
         </div>
       </section>
 
-      {/* Industry Use Cases */}
+      {/* Portfolio Showcase */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Χρήσεις & Κλάδοι</motion.h2>
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
-          {[
-            {
-              img: unsplashEcom,
-              title: 'E-commerce',
-              desc: 'Δημιουργία mobile e-shop για πωλήσεις προϊόντων, διαχείριση παραγγελιών, push notifications και ασφαλείς πληρωμές. Ιδανικό για επιχειρήσεις λιανικής και χονδρικής.'
-            },
-            {
-              img: unsplashHealth,
-              title: 'Υγεία & Wellness',
-              desc: 'Εφαρμογές για ραντεβού, παρακολούθηση υγείας, fitness tracking, τηλεϊατρική και διαχείριση πελατών σε κέντρα ευεξίας.'
-            },
-            {
-              img: unsplashEdu,
-              title: 'Εκπαίδευση',
-              desc: 'Mobile πλατφόρμες για e-learning, quizzes, διαχείριση μαθημάτων, live video, ειδοποιήσεις και διαδραστικό περιεχόμενο.'
-            },
-            {
-              img: unsplashOnDemand,
-              title: 'On-Demand Υπηρεσίες',
-              desc: 'Εφαρμογές για delivery, κρατήσεις, μεταφορές, υπηρεσίες κατ’ οίκον, με real-time tracking και πληρωμές.'
-            },
-            {
-              img: unsplashSocial,
-              title: 'Social Networking',
-              desc: 'Δημιουργία κοινωνικών δικτύων, chat, groups, διαμοιρασμός περιεχομένου, ειδοποιήσεις και διαχείριση προφίλ.'
-            },
-            {
-              img: unsplashUX,
-              title: 'Custom Εφαρμογές',
-              desc: 'Εξειδικευμένες λύσεις για startups, επιχειρήσεις, διασύνδεση με IoT, συστήματα ERP/CRM, ή οποιαδήποτε custom ανάγκη.'
-            }
-          ].map((u, idx) => (
-            <motion.div key={u.title} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }}>
-              <div className="mb-6 flex items-center justify-center w-32 h-32 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">
-                <img src={u.img} alt={u.title} className="w-full h-full object-cover" />
+        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Δείγματα Εργασίας Εφαρμογών</motion.h2>
+        
+        {/* GetFitSKG App Showcase */}
+        <motion.div 
+          className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-3xl shadow-2xl border border-blue-100/40 p-8 md:p-12 overflow-hidden"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          {/* Background decorative elements */}
+          <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-20 -left-20 w-32 h-32 bg-gradient-to-tr from-purple-200/30 to-blue-200/30 rounded-full blur-2xl"></div>
+          
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: App Info */}
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg border-2 border-blue-100">
+                    <img src={logoGymImg} alt="GetFit Logo" className="w-8 h-8 object-contain" />
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-blue-900">GetFit</h3>
+                </div>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  Μια ολοκληρωμένη εφαρμογή διαχείρισης γυμναστηρίων που αναπτύχθηκε από την DevTaskHub. 
+                  Η εφαρμογή προσφέρει πλήρη λύση για τη διαχείριση μελών, προγραμμάτων προπόνησης, 
+                  ραντεβού και πληρωμών.
+                </p>
               </div>
-              <h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">{u.title}</h4>
-              <p className="text-gray-600 mb-6 text-base leading-relaxed">{u.desc}</p>
+
+              {/* Features */}
+              <div className="space-y-4">
+                <h4 className="text-xl font-semibold text-blue-800 mb-4">Βασικά Χαρακτηριστικά:</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    'Διαχείριση Μελών',
+                    'Προγράμματα Προπόνησης',
+                    'Σύστημα Ραντεβού',
+                    'Πληρωμές Online',
+                    'Push Notifications',
+                    'Αναφορές & Στατιστικά'
+                  ].map((feature, idx) => (
+                    <motion.div 
+                      key={feature}
+                      className="flex items-center gap-3 bg-white/60 rounded-xl p-3 border border-blue-100"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                      <span className="text-gray-700 font-medium">{feature}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Platforms */}
+              <div className="space-y-4">
+                <h4 className="text-xl font-semibold text-blue-800 mb-4">Διαθέσιμη σε:</h4>
+                <div className="flex flex-wrap gap-4">
+                  {[
+                    { icon: <FaApple className="text-2xl" />, name: 'iOS App', color: 'from-gray-800 to-gray-600' },
+                    { icon: <FaAndroid className="text-2xl" />, name: 'Android App', color: 'from-green-500 to-green-600' },
+                    { icon: <FaCloud className="text-2xl" />, name: 'Web App', color: 'from-blue-500 to-blue-600' }
+                  ].map((platform, idx) => (
+                    <motion.div 
+                      key={platform.name}
+                      className={`flex items-center gap-3 bg-gradient-to-r ${platform.color} text-white rounded-xl px-4 py-3 shadow-lg`}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, delay: 0.5 + idx * 0.1 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {platform.icon}
+                      <span className="font-semibold">{platform.name}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <motion.a
+                href="https://www.getfitskg.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-500 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaRocket className="text-xl" />
+                Δείτε την Εφαρμογή
+              </motion.a>
+            </motion.div>
+
+            {/* Right: App Screenshots/Visual */}
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative bg-gradient-to-br from-blue-100 to-purple-100 rounded-3xl p-8 shadow-2xl">
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { img: v1Img, delay: 0 },
+                    { img: v2Img, delay: 0.5 },
+                    { img: v3Img, delay: 1 },
+                    { img: v4Img, delay: 1.5 },
+                    { img: v5Img, delay: 2 },
+                    { img: v6Img, delay: 2.5 },
+                    { img: v7Img, delay: 3 },
+                    { img: v8Img, delay: 3.5 },
+                    { img: v9Img, delay: 4 },
+                    { img: v10Img, delay: 4.5 },
+                    { img: v11Img, delay: 5 },
+                    { img: v12Img, delay: 5.5 }
+                  ].map((item, idx) => (
+                    <motion.div 
+                      key={idx}
+                      className="bg-white rounded-2xl p-2 shadow-lg overflow-hidden cursor-pointer"
+                      animate={{ 
+                        y: [0, -8, 0],
+                        rotate: [0, 2, 0, -2, 0]
+                      }}
+                      transition={{ 
+                        duration: 6, 
+                        repeat: Infinity, 
+                        ease: 'easeInOut',
+                        delay: item.delay
+                      }}
+                      whileHover={{ 
+                        scale: 1.1, 
+                        rotate: 0,
+                        zIndex: 10
+                      }}
+                      onClick={() => openFullscreen(item.img, `GetFit App Screen ${idx + 1}`)}
+                    >
+                      <img 
+                        src={item.img} 
+                        alt={`GetFit App Screen ${idx + 1}`}
+                        className="w-full h-24 object-cover rounded-xl"
+                      />
             </motion.div>
           ))}
+                </div>
+                
+                {/* Floating elements */}
+                <motion.div 
+                  className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                >
+                  <FaHeartbeat />
+                </motion.div>
+                <motion.div 
+                  className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <FaRocket />
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
+      </section>
+
+      {/* Featured App Screenshots */}
+      <section className="max-w-7xl mx-auto py-16 px-4">
+        <motion.h2 
+          className="text-2xl md:text-3xl font-bold text-blue-800 mb-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Επιλεγμένες Οθόνες της Εφαρμογής
+        </motion.h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* V1 Screenshot */}
+          <motion.div 
+            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05, y: -10 }}
+            onClick={() => openFullscreen(v1Img, "GetFit App - Welcome Screen")}
+          >
+            <div className="relative overflow-hidden">
+              <img 
+                src={v1Img} 
+                alt="GetFit App - Welcome Screen" 
+                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-lg font-bold mb-1">Καλώς ήρθες στο GetFit</h3>
+                <p className="text-sm opacity-90">Οθόνη υποδοχής χρήστη</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* V2 Screenshot */}
+          <motion.div 
+            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05, y: -10 }}
+            onClick={() => openFullscreen(v2Img, "GetFit App - Personal Training")}
+          >
+            <div className="relative overflow-hidden">
+              <img 
+                src={v2Img} 
+                alt="GetFit App - Personal Training" 
+                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-lg font-bold mb-1">Personal Training</h3>
+                <p className="text-sm opacity-90">Διαχείριση προσωπικών προπονήσεων</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* V7 Screenshot */}
+          <motion.div 
+            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05, y: -10 }}
+            onClick={() => openFullscreen(v7Img, "GetFit App - Workout Plans")}
+          >
+            <div className="relative overflow-hidden">
+              <img 
+                src={v7Img} 
+                alt="GetFit App - Workout Plans" 
+                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-lg font-bold mb-1">Προγράμματα Προπόνησης</h3>
+                <p className="text-sm opacity-90">Διαθέσιμα προγράμματα γυμναστικής</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
       </section>
 
       {/* Final CTA Section */}
@@ -304,6 +567,44 @@ export default function MobileAppDevelopmentPage() {
           <motion.button className="inline-block px-12 py-5 bg-gradient-to-r from-blue-600 to-purple-400 text-white rounded-full font-bold text-xl shadow-3xl border-2 border-transparent hover:border-blue-400 hover:shadow-[0_0_32px_0_#a78bfa] focus:outline-none focus:ring-2 focus:ring-blue-400 animate-fade-in flex items-center gap-2 relative overflow-hidden mt-6" whileHover={{ scale: 1.08, boxShadow: '0 0 32px 0 #a78bfa', filter: 'brightness(1.1)', borderColor: '#a78bfa' }} whileTap={{ scale: 0.97 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => { window.location.href = '/contactme'; }}><span className="relative z-10">Ζήτησε Προσφορά</span></motion.button>
         </motion.div>
       </section>
+
+      {/* Fullscreen Image Modal */}
+      {fullscreenImage && (
+        <motion.div 
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={closeFullscreen}
+        >
+          <motion.div 
+            className="relative max-w-4xl max-h-full"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img 
+              src={fullscreenImage} 
+              alt={fullscreenAlt}
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+            <button
+              onClick={closeFullscreen}
+              className="absolute -top-4 -right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-100 transition-colors duration-200 shadow-lg"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <div className="absolute bottom-4 left-4 right-4 text-center">
+              <p className="text-white text-lg font-medium bg-black/50 rounded-lg px-4 py-2 backdrop-blur-sm">
+                {fullscreenAlt}
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 } 

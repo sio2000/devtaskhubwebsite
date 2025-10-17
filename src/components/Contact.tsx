@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Send, Linkedin, Github, CheckCircle } from 'lucide
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
-import { FaLinkedin, FaGithub, FaEnvelope, FaUserCircle, FaMapMarkerAlt, FaPhoneAlt, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaUserCircle, FaMapMarkerAlt, FaPhoneAlt, FaInstagram, FaFacebook, FaTiktok } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -235,6 +235,10 @@ const Contact: React.FC = () => {
         <a href="https://www.facebook.com/profile.php?id=61578746165941" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-blue-600 text-lg font-semibold hover:text-blue-800 transition-colors group">
           <FaFacebook className="h-5 w-5 text-blue-500 group-hover:text-blue-700 transition-colors" />
           <span>Facebook</span>
+        </a>
+        <a href="https://www.tiktok.com/@devtaskhub" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-black text-lg font-semibold hover:text-gray-700 transition-colors group">
+          <FaTiktok className="h-5 w-5 text-black group-hover:text-gray-700 transition-colors" />
+          <span>TikTok</span>
         </a>
         <div className="flex items-center gap-4 text-red-700 text-lg font-semibold">
           <FaMapMarkerAlt className="h-5 w-5 text-red-500" />
