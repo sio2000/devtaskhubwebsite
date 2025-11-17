@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaVideo, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad } from 'react-icons/fa';
+import { FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad } from 'react-icons/fa';
 
 export interface Service {
   slug: string;
@@ -42,14 +42,6 @@ const servicesData: Service[] = [
     description: 'Strategic and daily management of profiles on Facebook, Instagram, LinkedIn, and more.',
     icon: FaUsers,
     breadcrumbs: ['Services', 'Social Media Management']
-  },
-  {
-    slug: 'video-animation-production',
-    title: 'Video & Animation Production',
-    shortDescription: 'Videos & animations for promo, education, or ads.',
-    description: 'Creation and editing of videos and animations for promotional, educational, or commercial use.',
-    icon: FaVideo,
-    breadcrumbs: ['Services', 'Video & Animation Production']
   },
   {
     slug: 'seo-website-optimization',

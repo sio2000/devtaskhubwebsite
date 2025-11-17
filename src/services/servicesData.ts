@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaVideo, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad } from 'react-icons/fa';
+import { FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad } from 'react-icons/fa';
 
 export interface Service {
   slug: string;
@@ -137,26 +137,6 @@ export const servicesData: Service[] = [
     },
     visual: 'social-icons',
     ctaText: { el: 'Ζητήστε Προσφορά' },
-  },
-  {
-    slug: 'video-animation-production',
-    title: {
-      el: 'Παραγωγή Video & Animation',
-      en: 'Video & Animation Production'
-    },
-    shortDescription: {
-      el: 'Βίντεο & animations για προώθηση, εκπαίδευση ή διαφήμιση.',
-      en: 'Videos & animations for promo, education, or ads.'
-    },
-    description: {
-      el: 'Δημιουργία και επεξεργασία βίντεο και animations για προωθητική, εκπαιδευτική ή εμπορική χρήση.',
-      en: 'Creation and editing of videos and animations for promotional, educational, or commercial use.'
-    },
-    icon: FaVideo,
-    breadcrumbs: {
-      el: ['Υπηρεσίες', 'Παραγωγή Video & Animation'],
-      en: ['Services', 'Video & Animation Production']
-    }
   },
   {
     slug: 'seo-website-optimization',

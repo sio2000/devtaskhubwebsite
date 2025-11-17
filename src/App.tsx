@@ -21,7 +21,6 @@ import UXUIDesignPage from './components/UXUIDesignPage';
 import AIIntegrationApplicationsPage from './components/AIIntegrationApplicationsPage';
 import EcommerceDevelopmentPage from './components/EcommerceDevelopmentPage';
 import GameDevelopmentPage from './components/GameDevelopmentPage';
-import VideoAnimationProductionPage from './components/VideoAnimationProductionPage';
 import DatabaseCloudInfrastructurePage from './components/DatabaseCloudInfrastructurePage';
 import { Helmet } from 'react-helmet';
 // Προσθήκη placeholders για όλες τις υπηρεσίες
@@ -86,15 +85,6 @@ function App() {
                   <meta name="description" content="Διαχείριση social media, δημιουργία περιεχομένου και στρατηγική για επιχειρήσεις. DevTaskHub στη Θεσσαλονίκη." />
                 </Helmet>
                 <SocialMediaManagementPage />
-              </>
-            } />
-            <Route path="/services/video-animation-production" element={
-              <>
-                <Helmet>
-                  <title>Video & Animation Production | DevTaskHub Θεσσαλονίκη</title>
-                  <meta name="description" content="Παραγωγή επαγγελματικών βίντεο και animations για προώθηση, εκπαίδευση και διαφήμιση. DevTaskHub στη Θεσσαλονίκη." />
-                </Helmet>
-                <VideoAnimationProductionPage />
               </>
             } />
             <Route path="/services/seo-website-optimization" element={

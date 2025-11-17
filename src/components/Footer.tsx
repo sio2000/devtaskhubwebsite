@@ -32,7 +32,6 @@ const Footer: React.FC = () => {
     { label: 'E-shop & Ηλεκτρονικό Εμπόριο', slug: 'ecommerce-development' },
     { label: 'SEO – Βελτιστοποίηση Ιστοσελίδων', slug: 'seo-website-optimization' },
     { label: 'UX/UI Design', slug: 'ux-ui-design' },
-    { label: 'Βίντεο & Animation', slug: 'video-animation-production' },
     { label: 'Διαχείριση Social Media', slug: 'social-media-management' },
     { label: 'Chatbots & AI Agents', slug: 'chatbots-ai-agents' },
     { label: 'AI Ενσωμάτωση σε Εφαρμογές', slug: 'ai-integration-applications' },

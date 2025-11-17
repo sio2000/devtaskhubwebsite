@@ -4,7 +4,7 @@ import { servicesData } from '../services/servicesData';
 import { useLanguage } from '../hooks/useLanguage';
 import { useIsMobile } from '../hooks/useIsMobile';
 import {
-  FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaVideo, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad
+  FaGlobe, FaMobileAlt, FaRobot, FaUsers, FaSearch, FaPhotoVideo, FaPalette, FaDatabase, FaBrain, FaShoppingCart, FaGamepad
 } from 'react-icons/fa';
 
 const iconColorMap: Record<string, string> = {
@@ -12,7 +12,6 @@ const iconColorMap: Record<string, string> = {
   'mobile-app-development': 'text-violet-400',
   'chatbots-ai-agents': 'text-pink-400',
   'social-media-management': 'text-emerald-400',
-  'video-animation-production': 'text-orange-300',
   'seo-website-optimization': 'text-yellow-300',
   'multimedia-content-creation': 'text-fuchsia-400',
   'ux-ui-design': 'text-cyan-400',
@@ -27,7 +26,6 @@ const iconMap: Record<string, React.ElementType> = {
   'mobile-app-development': FaMobileAlt,
   'chatbots-ai-agents': FaRobot,
   'social-media-management': FaUsers,
-  'video-animation-production': FaVideo,
   'seo-website-optimization': FaSearch,
   'multimedia-content-creation': FaPhotoVideo,
   'ux-ui-design': FaPalette,
