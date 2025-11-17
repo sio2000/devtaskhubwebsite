@@ -47,7 +47,18 @@ const Services: React.FC = () => {
   const { language } = useLanguage();
   const isMobile = useIsMobile();
   // Φιλτράρω το servicesData ώστε να μην εμφανίζεται το multimedia-content-creation
-  const filteredServices = servicesData.filter(service => service.slug !== 'multimedia-content-creation');
+  // Στο mobile, αφαιρούμε επίσης: ai-integration-applications, seo-website-optimization, ux-ui-design
+  const filteredServices = servicesData.filter(service => {
+    if (service.slug === 'multimedia-content-creation') return false;
+    if (isMobile) {
+      if (service.slug === 'ai-integration-applications' || 
+          service.slug === 'seo-website-optimization' || 
+          service.slug === 'ux-ui-design') {
+        return false;
+      }
+    }
+    return true;
+  });
   return (
     <section
       id="services"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Smartphone, Monitor, BarChart3, Gamepad2 } from 'lucide-react';
+import { ExternalLink, Smartphone, Monitor, BarChart3, Gamepad2, Heart } from 'lucide-react';
 import { FaApple, FaAndroid, FaCloud, FaRocket, FaHeartbeat } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
@@ -9,6 +9,7 @@ import hydrogenImg from '../assets/hydrogen.png';
 import videoImg from '../assets/video.jpg';
 import cryptoImg from '../assets/crypto.png';
 import hotelImg from '../assets/Hotel.png';
+import clinicImg from '../assets/clinic.png';
 import { useIsMobile } from '../hooks/useIsMobile';
 // GetFit App Images
 import v1Img from '../assets/v1.png';
@@ -60,13 +61,23 @@ const Portfolio: React.FC = () => {
 
   const projects = [
     {
+      key: 'clinic',
+      icon: Heart,
+      image: clinicImg,
+      technologies: ['React', 'Telemedicine', 'Healthcare', 'Booking'],
+      gradient: 'from-red-500 to-pink-600',
+      title: 'Διαδικτυακό Ιατρείο Γονέων και Εφήβων',
+      description: 'Σύγχρονη πλατφόρμα τηλεϊατρικής που παρέχει διαδικτυακές συμβουλευτικές υπηρεσίες για γονείς και εφήβους. Το σύστημα προσφέρει online ραντεβού, ασφαλή επικοινωνία με ιατρούς, διαχείριση ιατρικών εγγράφων και πρόσβαση σε εκπαιδευτικό υλικό για θέματα υγείας, εφηβείας και οικογενειακής δυναμικής.',
+      url: 'https://onlineparentteenclinic.com/'
+    },
+    {
       key: 'architecture',
       icon: Monitor,
       image: architectureImg,
       technologies: ['React', 'Tailwind', 'SEO'],
       gradient: 'from-blue-500 to-purple-600',
       title: 'Αρχιτεκτονικό & Κατασκευαστικό Γραφείο',
-      description: 'Σύγχρονη παρουσίαση υπηρεσιών και portfolio για τεχνικό γραφείο.',
+      description: 'Επαγγελματική ιστοσελίδα για αρχιτεκτονικό και κατασκευαστικό γραφείο με σύγχρονο design, portfolio έργων, παρουσίαση υπηρεσιών και βελτιστοποίηση για SEO. Η πλατφόρμα επιτρέπει την αποτελεσματική παρουσίαση των τεχνικών έργων και την επικοινωνία με πελάτες.',
       url: 'https://in-mavridis.gr/'
     },
     {
@@ -76,7 +87,7 @@ const Portfolio: React.FC = () => {
       technologies: ['Next.js', 'Booking', 'CMS'],
       gradient: 'from-green-500 to-teal-600',
       title: 'Κέντρο Ευεξίας',
-      description: 'Ιστοσελίδα για wellness center με online κρατήσεις και δυναμικό περιεχόμενο.',
+      description: 'Πλήρης ψηφιακή πλατφόρμα για κέντρο ευεξίας με σύστημα online κρατήσεων, διαχείριση περιεχομένου (CMS), παρουσίαση υπηρεσιών wellness και ενσωματωμένο booking system. Η λύση προσφέρει seamless εμπειρία για τους πελάτες και αποτελεσματική διαχείριση για το κέντρο.',
       url: 'https://hydrogenlife.eu/'
     },
     {
@@ -86,7 +97,7 @@ const Portfolio: React.FC = () => {
       technologies: ['React', 'Gallery', 'Booking'],
       gradient: 'from-blue-400 to-indigo-500',
       title: 'Ξενοδοχείο',
-      description: 'Προωθητικό site ξενοδοχείου με gallery και φόρμα επικοινωνίας.',
+      description: 'Ελκυστική ιστοσελίδα ξενοδοχείου με interactive photo gallery, σύστημα online κρατήσεων, παρουσίαση δωματίων και υπηρεσιών, και responsive design. Η πλατφόρμα δημιουργήθηκε για να προσελκύει επισκέπτες και να διευκολύνει τις κρατήσεις.',
       url: 'https://684ad438cfcdad7a5e3a8db8--serenity-hotel-lux.netlify.app/'
     },
     {
@@ -96,7 +107,7 @@ const Portfolio: React.FC = () => {
       technologies: ['React', 'Landing', 'Animation'],
       gradient: 'from-yellow-500 to-pink-500',
       title: 'Προώθηση Custom CryptoCoin',
-      description: 'Landing page για την προώθηση custom κρυπτονομίσματος.',
+      description: 'Δυναμική landing page για την προώθηση custom κρυπτονομίσματος με σύγχρονες animations, interactive elements, και conversion-optimized design. Η σελίδα παρουσιάζει το project με εντυπωσιακό τρόπο και ενθαρρύνει τους επισκέπτες να συμμετάσχουν.',
       url: 'https://panitoscryptocoin.com/'
     }
   ];
@@ -272,23 +283,33 @@ const Portfolio: React.FC = () => {
                 <h4 className="text-xl font-semibold text-blue-800 mb-4">Διαθέσιμη σε:</h4>
                 <div className="flex flex-wrap gap-4">
                   {[
-                    { icon: <FaApple className="text-2xl" />, name: 'iOS App', color: 'from-gray-800 to-gray-600' },
-                    { icon: <FaAndroid className="text-2xl" />, name: 'Android App', color: 'from-green-500 to-green-600' },
-                    { icon: <FaCloud className="text-2xl" />, name: 'Web App', color: 'from-blue-500 to-blue-600' }
-                  ].map((platform, idx) => (
-                    <motion.div 
-                      key={platform.name}
-                      className={`flex items-center gap-3 bg-gradient-to-r ${platform.color} text-white rounded-xl px-4 py-3 shadow-lg`}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.5 + idx * 0.1 }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      {platform.icon}
-                      <span className="font-semibold">{platform.name}</span>
-                    </motion.div>
-                  ))}
+                    { icon: <FaApple className="text-2xl" />, name: 'iOS App', color: 'from-gray-800 to-gray-600', url: 'https://apps.apple.com/us/app/getfit-skg/id6753928093' },
+                    { icon: <FaAndroid className="text-2xl" />, name: 'Android App', color: 'from-green-500 to-green-600', url: null },
+                    { icon: <FaCloud className="text-2xl" />, name: 'Web App', color: 'from-blue-500 to-blue-600', url: null }
+                  ].map((platform, idx) => {
+                    const Component = platform.url ? motion.a : motion.div;
+                    const props = platform.url ? {
+                      href: platform.url,
+                      target: '_blank',
+                      rel: 'noopener noreferrer'
+                    } : {};
+                    
+                    return (
+                      <Component 
+                        key={platform.name}
+                        className={`flex items-center gap-3 bg-gradient-to-r ${platform.color} text-white rounded-xl px-4 py-3 shadow-lg cursor-pointer`}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 0.5 + idx * 0.1 }}
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.05 }}
+                        {...props}
+                      >
+                        {platform.icon}
+                        <span className="font-semibold">{platform.name}</span>
+                      </Component>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -378,93 +399,6 @@ const Portfolio: React.FC = () => {
             </motion.div>
           </div>
         </motion.div>
-      </section>
-
-      {/* Featured App Screenshots */}
-      <section className="max-w-7xl mx-auto py-16 px-4">
-        <motion.h2 
-          className="text-2xl md:text-3xl font-bold text-blue-800 mb-8 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Επιλεγμένες Οθόνες της Εφαρμογής
-        </motion.h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* V1 Screenshot */}
-          <motion.div 
-            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            onClick={() => openFullscreen(v1Img, "GetFit App - Welcome Screen")}
-          >
-            <div className="relative overflow-hidden">
-              <img 
-                src={v1Img} 
-                alt="GetFit App - Welcome Screen" 
-                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-lg font-bold mb-1">Καλώς ήρθες στο GetFit</h3>
-                <p className="text-sm opacity-90">Οθόνη υποδοχής χρήστη</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* V2 Screenshot */}
-          <motion.div 
-            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            onClick={() => openFullscreen(v2Img, "GetFit App - Personal Training")}
-          >
-            <div className="relative overflow-hidden">
-              <img 
-                src={v2Img} 
-                alt="GetFit App - Personal Training" 
-                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-lg font-bold mb-1">Personal Training</h3>
-                <p className="text-sm opacity-90">Διαχείριση προσωπικών προπονήσεων</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* V7 Screenshot */}
-          <motion.div 
-            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            onClick={() => openFullscreen(v7Img, "GetFit App - Workout Plans")}
-          >
-            <div className="relative overflow-hidden">
-              <img 
-                src={v7Img} 
-                alt="GetFit App - Workout Plans" 
-                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-lg font-bold mb-1">Προγράμματα Προπόνησης</h3>
-                <p className="text-sm opacity-90">Διαθέσιμα προγράμματα γυμναστικής</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
       </section>
 
       {/* Fullscreen Image Modal */}

@@ -12,6 +12,7 @@ import 'aos/dist/aos.css';
 // Εισαγωγές εικόνων/εικονιδίων αν χρειάζεται
 import cartImg from '../assets/apps.jpg';
 import appsImg from '../assets/e-shop.jpg';
+import clinicImg from '../assets/clinic.png';
 
 function playSound(src: string) {
   if (!src) return;
@@ -75,6 +76,7 @@ const uxFocus = [
 ];
 
 const clients = [
+  { name: 'Διαδικτυακό Ιατρείο Γονέων και Εφήβων', url: 'https://onlineparentteenclinic.com/', img: clinicImg, desc: 'Πλατφόρμα τηλεϊατρικής με online ραντεβού & διαχείριση.' },
   { name: 'HydrogenLife', url: 'https://hydrogenlife.eu/', img: '/src/assets/hydrogen.png', desc: 'E-shop wellness με online κρατήσεις.' },
   { name: 'Serenity Hotel', url: 'https://684ad438cfcdad7a5e3a8db8--serenity-hotel-lux.netlify.app/', img: '/src/assets/hotel.png', desc: 'Online κρατήσεις & διαχείριση.' },
   { name: 'PanitosCrypto', url: 'https://panitoscryptocoin.com/', img: '/src/assets/crypto.png', desc: 'Προώθηση & πωλήσεις crypto.' },
@@ -160,9 +162,9 @@ export default function EcommerceDevelopmentPage() {
         </div>
       </section>
 
-      {/* Τι Προσφέρω */}
+      {/* Τι Προσφέρουμε */}
       <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Τι Προσφέρω</motion.h2>
+        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Τι Προσφέρουμε</motion.h2>
         <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
           {offers.map((o, idx) => (
             <motion.div key={o.title} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => playSound(clickSfx)}><div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">{o.icon}</div><h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">{o.title}</h4><p className="text-gray-600 mb-6 text-base leading-relaxed">{o.desc}</p><motion.div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-focus:border-blue-400 transition-all duration-300" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} /></motion.div>

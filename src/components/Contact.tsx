@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Send, Linkedin, Github, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, Linkedin, Github, CheckCircle, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
@@ -13,6 +13,7 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    service: '',
     subject: '',
     message: ''
   });
@@ -30,7 +31,7 @@ const Contact: React.FC = () => {
     return !Object.values(newErrors).some(Boolean);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: false });
   };
@@ -40,7 +41,8 @@ const Contact: React.FC = () => {
     if (!validate()) return;
     // Δημιουργώ το mailto link
     const subject = encodeURIComponent(formData.subject || 'Επικοινωνία μέσω DevTaskHub');
-    const body = encodeURIComponent(`Όνομα: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
+    const serviceText = formData.service ? `Υπηρεσία: ${formData.service}\n` : '';
+    const body = encodeURIComponent(`Όνομα: ${formData.name}\nEmail: ${formData.email}\n${serviceText}\n${formData.message}`);
     window.location.href = `mailto:Devtaskhub@gmail.com?subject=${subject}&body=${body}`;
   };
 
@@ -129,6 +131,9 @@ const Contact: React.FC = () => {
       >
         {/* Όνομα */}
         <div className="relative">
+          <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+            Όνομα <span className="text-red-500">*</span>
+          </label>
           <input
                 type="text"
                 id="name"
@@ -136,17 +141,17 @@ const Contact: React.FC = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-            className={`peer w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-transparent placeholder-transparent ${errors.name ? 'border-red-400' : 'border-gray-300'}`}
-            placeholder="Όνομα"
+            className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white ${errors.name ? 'border-red-400 focus:border-red-400 focus:ring-red-400' : 'border-gray-300'}`}
+            placeholder="Εισάγετε το όνομά σας"
             autoComplete="off"
           />
-          <label htmlFor="name" className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm bg-white/80 px-1 rounded pointer-events-none">
-            Όνομα
-                  </label>
-          {errors.name && <span className="text-xs text-red-500 absolute right-2 top-2">Απαιτείται</span>}
+          {errors.name && <span className="text-xs text-red-500 mt-1 block">Το όνομα είναι υποχρεωτικό</span>}
         </div>
         {/* Email */}
         <div className="relative">
+          <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+            Email <span className="text-red-500">*</span>
+          </label>
           <input
                 type="email"
                 id="email"
@@ -154,33 +159,56 @@ const Contact: React.FC = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-            className={`peer w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-transparent placeholder-transparent ${errors.email ? 'border-red-400' : 'border-gray-300'}`}
-            placeholder="Email"
+            className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white ${errors.email ? 'border-red-400 focus:border-red-400 focus:ring-red-400' : 'border-gray-300'}`}
+            placeholder="example@email.com"
             autoComplete="off"
           />
-          <label htmlFor="email" className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm bg-white/80 px-1 rounded pointer-events-none">
-            Email
+          {errors.email && <span className="text-xs text-red-500 mt-1 block">Εισάγετε έγκυρο email</span>}
+        </div>
+        {/* Υπηρεσία */}
+        <div className="relative">
+          <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
+            Υπηρεσία
           </label>
-          {errors.email && <span className="text-xs text-red-500 absolute right-2 top-2">Έγκυρο email</span>}
+          <div className="relative">
+            <select
+              id="service"
+              name="service"
+              value={formData.service}
+              onChange={handleChange}
+              className="w-full px-4 py-3 pr-10 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white border-gray-300 appearance-none cursor-pointer text-gray-700"
+            >
+              <option value="">Επιλέξτε υπηρεσία (προαιρετικό)</option>
+              <option value="Ιστοσελίδα">Ιστοσελίδα</option>
+              <option value="Εφαρμογή iOS & Android">Εφαρμογή iOS & Android</option>
+              <option value="e-shop">e-shop</option>
+              <option value="AI">AI</option>
+              <option value="Social Media">Social Media</option>
+            </select>
+            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+          </div>
         </div>
         {/* Θέμα */}
         <div className="relative">
+          <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+            Θέμα
+          </label>
           <input
             type="text"
             id="subject"
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className="peer w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-transparent placeholder-transparent border-gray-300"
-            placeholder="Θέμα (προαιρετικό)"
+            className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white border-gray-300"
+            placeholder="Προαιρετικό θέμα για το μήνυμά σας"
             autoComplete="off"
           />
-          <label htmlFor="subject" className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm bg-white/80 px-1 rounded pointer-events-none">
-            Θέμα (προαιρετικό)
-                  </label>
         </div>
         {/* Μήνυμα */}
         <div className="relative">
+          <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+            Μήνυμα <span className="text-red-500">*</span>
+          </label>
           <textarea
                 id="message"
                 name="message"
@@ -188,13 +216,10 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
                 required
                 rows={5}
-            className={`peer w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-transparent placeholder-transparent resize-none ${errors.message ? 'border-red-400' : 'border-gray-300'}`}
-            placeholder="Μήνυμα"
+            className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white resize-none ${errors.message ? 'border-red-400 focus:border-red-400 focus:ring-red-400' : 'border-gray-300'}`}
+            placeholder="Γράψτε το μήνυμά σας εδώ..."
           />
-          <label htmlFor="message" className="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm bg-white/80 px-1 rounded pointer-events-none">
-            Μήνυμα
-          </label>
-          {errors.message && <span className="text-xs text-red-500 absolute right-2 top-2">Απαιτείται</span>}
+          {errors.message && <span className="text-xs text-red-500 mt-1 block">Το μήνυμα είναι υποχρεωτικό</span>}
         </div>
             <motion.button
               type="submit"

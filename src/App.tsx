@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Services from './components/Services';
 import About from './components/About';
 import Portfolio from './components/Portfolio';
+import ChatbotSection from './components/ChatbotSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ServiceDetails from './components/ServiceDetails';
@@ -45,6 +46,7 @@ function App() {
                 <Services />
                 <About />
                 <Portfolio />
+                <ChatbotSection />
                 <Contact />
               </>
             } />

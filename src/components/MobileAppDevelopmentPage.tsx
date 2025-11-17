@@ -33,6 +33,14 @@ import v10Img from '../assets/v10.png';
 import v11Img from '../assets/v11.png';
 import v12Img from '../assets/v12.png';
 import logoGymImg from '../assets/logoGym.png';
+// UI/UX Samples Images
+import UIBookReadingApp from '../assets/UIBookReadingApp.png';
+import UIcryptowallet from '../assets/UIcryptowallet.png';
+import UIDatingApp from '../assets/UIDatingApp.png';
+import UIrestaurant from '../assets/UIrestaurant.png';
+import UIsamples from '../assets/UIsamples.png';
+import UIsmarthome from '../assets/UIsmarthome.png';
+import UItravellerapp from '../assets/UItravellerapp.png';
 
 const unsplashHero = smartphoneImg;
 const unsplashTeam = codeImg;
@@ -96,6 +104,7 @@ const useCases = [
 export default function MobileAppDevelopmentPage() {
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
   const [fullscreenAlt, setFullscreenAlt] = useState<string>('');
+  const [modalImg, setModalImg] = useState<string | null>(null);
   
   useEffect(() => { AOS.init({ duration: 900, once: true }); }, []);
 
@@ -116,14 +125,15 @@ export default function MobileAppDevelopmentPage() {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         closeFullscreen();
+        setModalImg(null);
       }
     };
 
-    if (fullscreenImage) {
+    if (fullscreenImage || modalImg) {
       document.addEventListener('keydown', handleEscape);
       return () => document.removeEventListener('keydown', handleEscape);
     }
-  }, [fullscreenImage]);
+  }, [fullscreenImage, modalImg]);
   return (
     <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900 font-sans">
       {/* Hero Section */}
@@ -245,14 +255,86 @@ export default function MobileAppDevelopmentPage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="max-w-7xl mx-auto py-24 px-4">
-        <motion.h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Γιατί να μας επιλέξετε</motion.h2>
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}>
-          {advantages.map((a, idx) => (
-            <motion.div key={a.title} className="group bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-blue-100/40 p-10 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-200 relative overflow-hidden" initial={{ opacity: 0, y: 40, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} whileHover={{ scale: 1.08, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.25)' }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.07 }} onMouseEnter={() => playSound(hoverSfx)} onClick={() => playSound(clickSfx)}><div className="mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border-4 border-blue-200 group-hover:border-purple-300">{a.icon}</div><h4 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight">{a.title}</h4><p className="text-gray-600 mb-6 text-base leading-relaxed">{a.desc}</p><motion.div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-transparent group-hover:border-blue-400 group-focus:border-blue-400 transition-all duration-300" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} /></motion.div>
-          ))}
-        </motion.div>
+      {/* UI/UX Samples Section */}
+      <section id="uiux-samples" className="max-w-7xl mx-auto py-24 px-2 sm:px-4">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">Δείγματα UI/UX Εφαρμογών</h2>
+        <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-10">Δείτε μερικά παραδείγματα σύγχρονου UI/UX design για εφαρμογές που καλύπτουν διαφορετικές ανάγκες και κλάδους. Κάθε δείγμα συνοδεύεται από περιγραφή και το αντίστοιχο γραφικό.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          {/* Finance App (UIsamples) */}
+          <div className="bg-white/90 rounded-3xl shadow-xl border border-blue-100/40 flex flex-col items-center text-center overflow-hidden">
+            <img src={UIsamples} alt="Finance App" className="w-full h-56 object-cover object-top cursor-pointer transition-transform duration-200 hover:scale-105" onClick={() => setModalImg(UIsamples)} />
+            <div className="p-6 md:p-8 flex flex-col flex-1">
+              <h4 className="text-xl font-bold text-blue-900 mb-2">Εφαρμογή Οικονομικών</h4>
+              <p className="text-gray-600 mb-4 text-base leading-relaxed">Σύγχρονο mobile UI για παρακολούθηση προσωπικών οικονομικών. Περιλαμβάνει dashboard με γραφήματα, λίστα συναλλαγών, μπάρα προόδου προϋπολογισμού και κουμπί για προσθήκη εξόδων. Καθαρό light θέμα με τόνους teal και λευκού.</p>
+            </div>
+          </div>
+          {/* Food Delivery App (UIrestaurant) */}
+          <div className="bg-white/90 rounded-3xl shadow-xl border border-orange-100/40 flex flex-col items-center text-center overflow-hidden">
+            <img src={UIrestaurant} alt="Food Delivery App" className="w-full h-56 object-cover object-top cursor-pointer transition-transform duration-200 hover:scale-105" onClick={() => setModalImg(UIrestaurant)} />
+            <div className="p-6 md:p-8 flex flex-col flex-1">
+              <h4 className="text-xl font-bold text-orange-700 mb-2">Εφαρμογή Παραγγελίας Φαγητού</h4>
+              <p className="text-gray-600 mb-4 text-base leading-relaxed">Φιλικό UI για παραγγελία φαγητού. Αρχική με εστιατόρια, δημοφιλή πιάτα, αναζήτηση και φίλτρα. Ζωντανά χρώματα (πορτοκαλί, κόκκινο), καθαρές εικόνες φαγητού και μοντέρνα εικονίδια.</p>
+            </div>
+          </div>
+          {/* Travel Planner App (UItravellerapp) */}
+          <div className="bg-white/90 rounded-3xl shadow-xl border border-blue-100/40 flex flex-col items-center text-center overflow-hidden">
+            <img src={UItravellerapp} alt="Travel Planner App" className="w-full h-56 object-cover object-top cursor-pointer transition-transform duration-200 hover:scale-105" onClick={() => setModalImg(UItravellerapp)} />
+            <div className="p-6 md:p-8 flex flex-col flex-1">
+              <h4 className="text-xl font-bold text-blue-900 mb-2">Εφαρμογή Ταξιδιωτικού Πλάνου</h4>
+              <p className="text-gray-600 mb-4 text-base leading-relaxed">Όμορφο UI για ταξιδιωτικό πλάνο. Επισκόπηση ταξιδιού, κάρτες ημερήσιου προγράμματος, ενσωμάτωση πρόγνωσης καιρού και χάρτες. Μινιμαλιστικό στυλ με μπλε και μπεζ τόνους.</p>
+            </div>
+          </div>
+          {/* Crypto Wallet App (UIcryptowallet) */}
+          <div className="bg-white/90 rounded-3xl shadow-xl border border-blue-200/40 flex flex-col items-center text-center overflow-hidden">
+            <img src={UIcryptowallet} alt="Crypto Wallet App" className="w-full h-56 object-cover object-top cursor-pointer transition-transform duration-200 hover:scale-105" onClick={() => setModalImg(UIcryptowallet)} />
+            <div className="p-6 md:p-8 flex flex-col flex-1">
+              <h4 className="text-xl font-bold text-blue-800 mb-2">Crypto Wallet App</h4>
+              <p className="text-gray-600 mb-4 text-base leading-relaxed">Φουτουριστικό UI για crypto wallet. Dashboard υπολοίπου, πρόσφατες συναλλαγές, γραφήματα αξίας νομισμάτων και διασύνδεση αποστολής/λήψης. Dark θέμα με ηλεκτρικό μπλε και μοντέρνα τυπογραφία.</p>
+            </div>
+          </div>
+          {/* Smart Home Control App (UIsmarthome) */}
+          <div className="bg-white/90 rounded-3xl shadow-xl border border-purple-100/40 flex flex-col items-center text-center overflow-hidden">
+            <img src={UIsmarthome} alt="Smart Home App" className="w-full h-56 object-cover object-top cursor-pointer transition-transform duration-200 hover:scale-105" onClick={() => setModalImg(UIsmarthome)} />
+            <div className="p-6 md:p-8 flex flex-col flex-1">
+              <h4 className="text-xl font-bold text-purple-800 mb-2">Εφαρμογή Έξυπνου Σπιτιού</h4>
+              <p className="text-gray-600 mb-4 text-base leading-relaxed">Υψηλής τεχνολογίας UI για έλεγχο smart home. Διακόπτες για φώτα, θερμοκρασία, κάμερες και συσκευές. Sleek gradients, glassmorphism και εικονίδια για εύκολο χειρισμό.</p>
+            </div>
+          </div>
+          {/* Dating App (UIDatingApp) */}
+          <div className="bg-white/90 rounded-3xl shadow-xl border border-pink-100/40 flex flex-col items-center text-center overflow-hidden">
+            <img src={UIDatingApp} alt="Dating App" className="w-full h-56 object-cover object-top cursor-pointer transition-transform duration-200 hover:scale-105" onClick={() => setModalImg(UIDatingApp)} />
+            <div className="p-6 md:p-8 flex flex-col flex-1">
+              <h4 className="text-xl font-bold text-pink-700 mb-2">Εφαρμογή Γνωριμιών</h4>
+              <p className="text-gray-600 mb-4 text-base leading-relaxed">Στιλάτο UI για dating app. Κάρτες προφίλ με swipe, feed, μηνύματα και φίλτρα. Παιχνιδιάρικα ροζ, μωβ και λευκά με στρογγυλεμένα στοιχεία.</p>
+            </div>
+          </div>
+          {/* Book Reading App (UIBookReadingApp) */}
+          <div className="bg-white/90 rounded-3xl shadow-xl border border-yellow-100/40 flex flex-col items-center text-center overflow-hidden">
+            <img src={UIBookReadingApp} alt="Book Reading App" className="w-full h-56 object-cover object-top cursor-pointer transition-transform duration-200 hover:scale-105" onClick={() => setModalImg(UIBookReadingApp)} />
+            <div className="p-6 md:p-8 flex flex-col flex-1">
+              <h4 className="text-xl font-bold text-yellow-800 mb-2">Εφαρμογή Ανάγνωσης Βιβλίων</h4>
+              <p className="text-gray-600 mb-4 text-base leading-relaxed">Ζεστό και κομψό UI για eBook reader. Βιβλιοθήκη, πρόοδος ανάγνωσης, ρυθμίσεις γραμματοσειράς και night mode. Θερμοί τόνοι (κρεμ, καφέ) και serif γραμματοσειρές.</p>
+            </div>
+          </div>
+        </div>
+        {/* Modal για full size εικόνα */}
+        {modalImg && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setModalImg(null)}>
+            <div className="relative max-w-full max-h-full flex items-center justify-center" onClick={e => e.stopPropagation()}>
+              <button
+                className="absolute top-2 right-2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 shadow-lg text-2xl z-10 focus:outline-none"
+                aria-label="Κλείσιμο"
+                onClick={() => setModalImg(null)}
+              >✕</button>
+              <img
+                src={modalImg}
+                alt="UI Sample Full Size"
+                className="max-h-[80vh] max-w-[90vw] rounded-2xl shadow-2xl border-4 border-white object-contain"
+                style={{ background: 'white' }}
+              />
+            </div>
+          </div>
+        )}
       </section>
 
       {/* App Development Process */}
@@ -470,94 +552,6 @@ export default function MobileAppDevelopmentPage() {
             </motion.div>
           </div>
         </motion.div>
-      </section>
-
-      {/* Featured App Screenshots */}
-      <section className="max-w-7xl mx-auto py-16 px-4">
-        <motion.h2 
-          className="text-2xl md:text-3xl font-bold text-blue-800 mb-8 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Επιλεγμένες Οθόνες της Εφαρμογής
-        </motion.h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* V1 Screenshot */}
-          <motion.div 
-            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            onClick={() => openFullscreen(v1Img, "GetFit App - Welcome Screen")}
-          >
-            <div className="relative overflow-hidden">
-              <img 
-                src={v1Img} 
-                alt="GetFit App - Welcome Screen" 
-                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-lg font-bold mb-1">Καλώς ήρθες στο GetFit</h3>
-                <p className="text-sm opacity-90">Οθόνη υποδοχής χρήστη</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* V2 Screenshot */}
-          <motion.div 
-            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            onClick={() => openFullscreen(v2Img, "GetFit App - Personal Training")}
-          >
-            <div className="relative overflow-hidden">
-              <img 
-                src={v2Img} 
-                alt="GetFit App - Personal Training" 
-                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-lg font-bold mb-1">Personal Training</h3>
-                <p className="text-sm opacity-90">Διαχείριση προσωπικών προπονήσεων</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* V7 Screenshot */}
-          <motion.div 
-            className="group relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            onClick={() => openFullscreen(v7Img, "GetFit App - Workout Plans")}
-          >
-            <div className="relative overflow-hidden">
-              <img 
-                src={v7Img} 
-                alt="GetFit App - Workout Plans" 
-                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-lg font-bold mb-1">Προγράμματα Προπόνησης</h3>
-                <p className="text-sm opacity-90">Διαθέσιμα προγράμματα γυμναστικής</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
       </section>
 
       {/* Final CTA Section */}
