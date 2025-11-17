@@ -34,10 +34,10 @@
 
 ```bash
 # Clone το repository
-git clone https://github.com/sio2000/devdevedv.git
+git clone https://github.com/sio2000/devtaskhubwebsite.git
 
 # Μεταβείτε στον φάκελο
-cd devdevedv
+cd devtaskhubwebsite
 
 # Εγκαταστήστε τα dependencies
 npm install
