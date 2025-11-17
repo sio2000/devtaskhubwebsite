@@ -7,9 +7,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+
+# Production
+dist/
+dist-ssr/
+build/
 *.local
 
 # Environment variables
@@ -22,13 +33,24 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
 
 # Video files (too large for GitHub)
 *.mp4
@@ -39,11 +61,19 @@ dist-ssr
 *.flv
 *.webm
 
-# OS specific files
-Thumbs.db
-ehthumbs.db
-Desktop.ini
+# Large image files (optional - uncomment if needed)
+# *.psd
+# *.ai
 
 # Cache
-.cache
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/
+
+# Misc
+*.pem
+.bolt/
 .eslintcache
+.stylelintcache

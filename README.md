@@ -115,6 +115,8 @@ devdevedv/
 
 MIT License
 
+Copyright © 2025 DevTaskHub. All rights reserved.
+
 ## 👥 Contact
 
 Για περισσότερες πληροφορίες, επισκεφτείτε τη σελίδα [Επικοινωνίας](/contact) ή επικοινωνήστε με την ομάδα DevTaskHub.

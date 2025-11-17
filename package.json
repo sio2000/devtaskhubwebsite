@@ -1,8 +1,24 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "devdevedv",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Modern portfolio website for DevTaskHub - Full-Stack Developers based in Thessaloniki",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sio2000/devdevedv.git"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "vite",
+    "portfolio",
+    "web-development",
+    "devtaskhub",
+    "thessaloniki"
+  ],
+  "author": "DevTaskHub",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
