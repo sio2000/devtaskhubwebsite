@@ -507,21 +507,12 @@ export default function MobileAppDevelopmentPage() {
                     <motion.div 
                       key={idx}
                       className="bg-white rounded-2xl p-2 shadow-lg overflow-hidden cursor-pointer"
-                      animate={{ 
-                        y: [0, -8, 0],
-                        rotate: [0, 2, 0, -2, 0]
-                      }}
-                      transition={{ 
-                        duration: 6, 
-                        repeat: Infinity, 
-                        ease: 'easeInOut',
-                        delay: item.delay
-                      }}
                       whileHover={{ 
                         scale: 1.1, 
                         rotate: 0,
                         zIndex: 10
                       }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => openFullscreen(item.img, `GetFit App Screen ${idx + 1}`)}
                     >
                       <img 
@@ -533,21 +524,13 @@ export default function MobileAppDevelopmentPage() {
           ))}
                 </div>
                 
-                {/* Floating elements */}
-                <motion.div 
-                  className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                >
+                {/* Static decorative elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
                   <FaHeartbeat />
-                </motion.div>
-                <motion.div 
-                  className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                >
+                </div>
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
                   <FaRocket />
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           </div>

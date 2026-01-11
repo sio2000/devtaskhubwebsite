@@ -179,11 +179,12 @@ const Contact: React.FC = () => {
               className="w-full px-4 py-3 pr-10 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white border-gray-300 appearance-none cursor-pointer text-gray-700"
             >
               <option value="">Επιλέξτε υπηρεσία (προαιρετικό)</option>
-              <option value="Ιστοσελίδα">Ιστοσελίδα</option>
+              <option value="Κατασκευή Ιστοσελίδων">Κατασκευή Ιστοσελίδων</option>
               <option value="Εφαρμογή iOS & Android">Εφαρμογή iOS & Android</option>
               <option value="e-shop">e-shop</option>
               <option value="AI">AI</option>
               <option value="Social Media">Social Media</option>
+              <option value="Άλλο..">Άλλο..</option>
             </select>
             <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
           </div>

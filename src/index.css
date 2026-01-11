@@ -5,3 +5,39 @@
 body {
   font-family: 'Poppins', 'Open Sans', 'Roboto', Arial, Helvetica, sans-serif;
 }
+
+/* Premium Glassmorphism */
+@layer utilities {
+  .glass-luxury {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  .glass-luxury-strong {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  
+  .text-shadow-luxury {
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), 0 4px 40px rgba(0, 0, 0, 0.2);
+  }
+  
+  .text-shadow-premium {
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 8px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(139, 92, 246, 0.2);
+  }
+  
+  .gradient-mesh {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(20, 184, 166, 0.1) 100%);
+  }
+  
+  .premium-gradient-text {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #e0f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

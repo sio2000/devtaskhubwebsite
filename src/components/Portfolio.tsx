@@ -285,7 +285,7 @@ const Portfolio: React.FC = () => {
                   {[
                     { icon: <FaApple className="text-2xl" />, name: 'iOS App', color: 'from-gray-800 to-gray-600', url: 'https://apps.apple.com/us/app/getfit-skg/id6753928093' },
                     { icon: <FaAndroid className="text-2xl" />, name: 'Android App', color: 'from-green-500 to-green-600', url: null },
-                    { icon: <FaCloud className="text-2xl" />, name: 'Web App', color: 'from-blue-500 to-blue-600', url: null }
+                    { icon: <FaCloud className="text-2xl" />, name: 'Web App', color: 'from-blue-500 to-blue-600', url: 'https://getfitskg.com/' }
                   ].map((platform, idx) => {
                     const Component = platform.url ? motion.a : motion.div;
                     const props = platform.url ? {
@@ -354,21 +354,12 @@ const Portfolio: React.FC = () => {
                     <motion.div 
                       key={idx}
                       className="bg-white rounded-2xl p-2 shadow-lg overflow-hidden cursor-pointer"
-                      animate={{ 
-                        y: [0, -8, 0],
-                        rotate: [0, 2, 0, -2, 0]
-                      }}
-                      transition={{ 
-                        duration: 6, 
-                        repeat: Infinity, 
-                        ease: 'easeInOut',
-                        delay: item.delay
-                      }}
                       whileHover={{ 
                         scale: 1.1, 
                         rotate: 0,
                         zIndex: 10
                       }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => openFullscreen(item.img, `GetFit App Screen ${idx + 1}`)}
                     >
                       <img 
@@ -380,21 +371,13 @@ const Portfolio: React.FC = () => {
                   ))}
                 </div>
                 
-                {/* Floating elements */}
-                <motion.div 
-                  className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                >
+                {/* Static decorative elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
                   <FaHeartbeat />
-                </motion.div>
-                <motion.div 
-                  className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                >
+                </div>
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
                   <FaRocket />
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           </div>

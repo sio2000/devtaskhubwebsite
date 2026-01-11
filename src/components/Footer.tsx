@@ -175,7 +175,7 @@ const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="border-t border-gray-700 mt-8 pt-8 text-center relative">
           <p className="text-gray-400 flex items-center justify-center space-x-2 mb-4">
-            <span>© 2024 DevTaskHub - Theocharis Siozos. {t.footer.rights}</span>
+            <span>© 2025 DevTaskHub. {t.footer.rights}</span>
           </p>
           {/* Scroll to Top Button: ΜΟΝΟ σε desktop */}
           {!isMobile && (

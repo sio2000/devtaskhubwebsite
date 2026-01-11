@@ -66,12 +66,14 @@ export const translations = {
       description: 'Με πάθος για την τεχνολογία και χρόνια εμπειρία στην ανάπτυξη λογισμικού, δημιουργούμε ψηφιακές λύσεις που συνδυάζουν καινοτομία με λειτουργικότητα. Εδρεύουμε στη Θεσσαλονίκη και συνεργαζόμαστε με πελάτες από όλη την Ελλάδα και το εξωτερικό.',
       experience: 'Εξειδίκευση',
       experienceItems: [
-        'Modern JavaScript/TypeScript & React',
-        'Backend Development (Node.js, Python)',
-        'Mobile Development (React Native, Flutter)',
-        'AI/ML Integration & Chatbots',
-        'Cloud Infrastructure (AWS, Azure)',
-        'Database Design & Optimization'
+        'Κατασκευή Ιστοσελίδων',
+        'Δημιουργία iOS & Android εφαρμογών',
+        'e-Shop',
+        'Αυτοματοποιήσεις',
+        'AI Chatbots',
+        'Social Media Management',
+        'Game Development',
+        'SEO'
       ]
     },
     // Portfolio

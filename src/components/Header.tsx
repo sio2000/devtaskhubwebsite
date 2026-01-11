@@ -124,7 +124,7 @@ const Header: React.FC = () => {
                         transition={{ duration: 0.5, delay: (index + 0.5) * 0.1 }}
                         whileHover={{ scale: 1.05 }}
                       >
-                        Δείγματα App
+                        Δείγματα Mobile App
                         <motion.div
                           className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 origin-left"
                           initial={{ scaleX: 0 }}
@@ -133,6 +133,38 @@ const Header: React.FC = () => {
                         />
                       </motion.button>
                     </React.Fragment>
+                  );
+                }
+                // Contact Button - Premium CTA Styling
+                if (key === 'contact') {
+                  return (
+                    <motion.button
+                      key={key}
+                      onClick={() => scrollToSection(key === 'home' ? 'hero' : key)}
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 relative group overflow-hidden shadow-lg hover:shadow-xl"
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        animate={{
+                          backgroundPosition: ['0% 50%', '100% 50%'],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          repeatType: 'reverse',
+                          ease: 'linear',
+                        }}
+                        style={{
+                          backgroundSize: '200% 100%',
+                        }}
+                      />
+                      <span className="relative z-10">{label}</span>
+                    </motion.button>
                   );
                 }
                 return (
@@ -238,9 +270,41 @@ const Header: React.FC = () => {
                           transition={{ duration: 0.3, delay: (index + 0.5) * 0.1 }}
                           whileHover={{ x: 5 }}
                         >
-                          Δείγματα App
+                          Δείγματα Mobile App
                         </motion.button>
                       </React.Fragment>
+                    );
+                  }
+                  // Contact Button - Mobile - Premium CTA Styling
+                  if (key === 'contact') {
+                    return (
+                      <motion.button
+                        key={key}
+                        onClick={() => scrollToSection(key === 'home' ? 'hero' : key)}
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-xl text-base font-semibold w-full text-center transition-all duration-300 shadow-lg hover:shadow-xl mt-2"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-xl"
+                          animate={{
+                            backgroundPosition: ['0% 50%', '100% 50%'],
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            repeatType: 'reverse',
+                            ease: 'linear',
+                          }}
+                          style={{
+                            backgroundSize: '200% 100%',
+                          }}
+                        />
+                        <span className="relative z-10">{label}</span>
+                      </motion.button>
                     );
                   }
                   return (
